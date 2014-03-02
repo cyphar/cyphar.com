@@ -160,7 +160,7 @@ article.main > h5, article.main > h6 {
 	font-weight: bolder;
 }
 
-article.main > h1 {font-size: 2em;    margin: 0.67em 0}
+article.main > h1 {font-size: 2em;	margin: 0.67em 0}
 article.main > h2 {font-size: 1.5em;  margin: 0.75em 0}
 article.main > h3 {font-size: 1.17em; margin: 0.83em 0}
 article.main > h4 {font-size: 0.96em; margin: 1.24em 0}
@@ -200,12 +200,12 @@ article.main > dl > dd {
 
 /* footer */
 html {
-    position: relative;
-    min-height: 100%;
+	position: relative;
+	min-height: 100%;
 }
 
 body {
-    margin-bottom: 85px;
+	margin-bottom: 85px;
 }
 
 footer {
@@ -215,12 +215,12 @@ footer {
 	background-color: #dedede;
 	padding: 15px 0 10px 0;
 
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 60px;
-    width: 100%;
-    overflow: hidden;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	overflow: hidden;
 }
 
 footer > p {
