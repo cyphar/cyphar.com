@@ -25,14 +25,15 @@ def security():
 def _favicon():
 	return flask.send_from_directory(os.path.join(app.root_path, "static"), "favicon.ico")
 
-def run_server(host, port):
-	app.debug = True
+def run_server(host, port, debug):
+	app.debug = debug
 	app.run(host=host, port=port)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Start a flask server, running the 'cyphar.com' website.")
 	parser.add_argument("-p", "--port", type=int, default=8888)
 	parser.add_argument("-H", "--host", type=str, default="0.0.0.0")
+	parser.add_argument("-D", "--debug", action='store_const', const=True, default=False)
 	args = parser.parse_args()
 
-	run_server(args.host, args.port)
+	run_server(args.host, args.port, args.debug)
