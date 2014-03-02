@@ -44,6 +44,11 @@ b {
 	font-weight: bold;
 }
 
+small {
+	font-size: 12px;
+	font-weight: normal;
+}
+
 /* header title */
 header {
 	overflow: hidden;
