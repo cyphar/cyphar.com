@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<meta charset="utf-8" />
+<head>
+<title>Cyphar</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general.css') }}" />
+<!--[if !IE 7]>
+	<style type="text/css">
+		.wrapper {
+			display: table;
+			height: 100%;
+		}
+	</style>
+<![endif]-->
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<h1 class="mono">
+				<span class="path">~</span>
+				<span class="prompt">#</span>
+				<span class="command">./cyphar.sh</span><span class="cursor">_</span>
+			</h1>
+			<nav>
+				<li><a href="{{ url_for('home') }}">Home</a></li>
+				<li><a href="{{ url_for('projects') }}">Projects</a></li>
+				<li><a href="{{ url_for('security') }}">Security</a></li>
+			</nav>
+		</header>
+
+		<article class="main">
+			{% block body %}{% endblock %}
+		</article>
+	</div>
+	<footer>
+		<p>
+			<a href="{{ url_for('home') }}">Home</a> |
+			<a href="{{ url_for('projects') }}">Projects</a> |
+			<a href="{{ url_for('security') }}">Security</a>
+		</p>
+		<p>Copyright &copy; Cyphar 2014. All wrongs reserved.</p>
+	</footer>
+</body>
+</html>
