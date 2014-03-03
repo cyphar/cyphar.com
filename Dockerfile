@@ -1,9 +1,9 @@
 ###############################################
 # Dockerfile for the cyphar.com flask server. #
-# Based on ubuntu 13.04                       #
+# Based on ubuntu 13.10                       #
 ###############################################
 
-FROM ubuntu:13.04
+FROM ubuntu:13.10
 MAINTAINER "cyphar <cyphar@cyphar.com>"
 
 ##################
@@ -18,9 +18,8 @@ RUN apt-get upgrade -y
 # Install cyphar.com server dependencies. #
 ###########################################
 
-# Install python3 and pillow.
-RUN apt-get install -y python3 python3-pip
-RUN pip3 install Flask
+# Install python3 and flask.
+RUN apt-get install -y python3 python3-flask
 
 #####################################
 # Install and configure cyphar.com. #
