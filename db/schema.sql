@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS tbl_projects (
 	description TEXT
 );
 
-CREATE TABLE IF NOT EXISTS tbl_acks (
+CREATE TABLE IF NOT EXISTS tbl_kudos (
 	priority INTEGER NOT NULL,
 	ack TEXT NOT NULL,
 	vuln TEXT,

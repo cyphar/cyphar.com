@@ -2,4 +2,4 @@
 
 DROP TABLE IF EXISTS tbl_contact;
 DROP TABLE IF EXISTS tbl_projects;
-DROP TABLE IF EXISTS tbl_ack;
+DROP TABLE IF EXISTS tbl_kudos;
