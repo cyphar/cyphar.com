@@ -27,6 +27,9 @@ def initdb(fname):
 		with open(getpath("schema.sql")) as f:
 			sql += f.read()
 
+		with open(getpath("data.sql")) as f:
+			sql += f.read()
+
 		conn.executescript(sql)
 		conn.commit()
 
