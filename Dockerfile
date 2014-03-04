@@ -32,6 +32,9 @@ WORKDIR /srv/cyphar.com
 # Copy over the cyphar.com app source.
 ADD . /srv/cyphar.com
 
+# Generate database
+RUN python3 db/initdb.py -d cyphar.db
+
 # Set up cyphar.com and port config.
 EXPOSE 80
-CMD ["python3", "cyphar.py", "-H0.0.0.0", "-p80"]
+CMD ["python3", "cyphar.py", "-H0.0.0.0", "-p80", "-d", "cyphar.db"]
