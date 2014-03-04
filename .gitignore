@@ -1,3 +1,6 @@
 # Swap files
 *.swo
 *.swp
+
+# Database files
+*.db
