@@ -21,7 +21,7 @@ The following is a list of the most notable projects I have worked on or contrib
 
 	{% if project.description %}
 	<dd>
-		<p>{{ project.description }}</p>
+		<p>{{ project.description|safe }}</p>
 	</dd>
 	{% endif %}
 {% endfor %}
