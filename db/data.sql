@@ -37,4 +37,4 @@ INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (10, "Grok 
 -- COMPETITIONS --
 ------------------
 
-INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (10, "K17 CTF - 2013", "4th overall", "https://ctf.k17.org/scores", "");
+INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (10, "K17 CTF - 2013", "4th Overall", "https://ctf.k17.org/scores", "A competition which contained challenges pertaining to web applications, reverse engineering and exploitation, cryptography, network and memory forensics and unix exploitation. I was mostly involved in the reverse engineering, cryptograpgy and unix exploitation aspects of the competition and assisted the members working on the web application.");
