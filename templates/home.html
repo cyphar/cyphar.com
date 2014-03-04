@@ -26,10 +26,13 @@
 <p>Otherwise, here are my relevant links:</p>
 
 <ul class="dots">
-<li><a href="https://github.com/cyphar">GitHub</a></li>
-<li><a href="https://bitbucket.org/cyphar">Bitbucket</a></li>
-<li><a href="https://twitter.com/thecyphar">Twitter</a></li>
-<li><a href="https://www.linkedin.com/profile/view?id=327408242">LinkedIn</a></li>
+{% for contact in g.contacts %}
+	{% if contact.url %}
+		<li><a href="{{ contact.url }}">{{ contact.contact }}</a></li>
+	{% else %}
+		<li><a>{{ contact.contact }}</a></li>
+	{% endif %}
+{% endfor %}
 </ul>
 
 {% endblock %}
