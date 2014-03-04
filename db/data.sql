@@ -31,4 +31,10 @@ INSERT INTO tbl_projects (priority, project, language, url, description) VALUES 
 -- KUDOS --
 -----------
 
-INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (20, "Grok Learning", "Sandbox Bypass", "https://groklearning.com/security", "Due to a misconfiguration in the testing machine's firewall, the sandbox could access the internet. This allowed for the disclosure of test data (as well as possible exploitation vectors).");
+INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (10, "Grok Learning", "Sandbox Bypass", "https://groklearning.com/security", "Due to a misconfiguration in the testing machine's firewall, the sandbox could access the internet. This allowed for the disclosure of test data (as well as possible exploitation vectors).");
+
+------------------
+-- COMPETITIONS --
+------------------
+
+INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (10, "K17 CTF - 2013", "4th overall", "https://ctf.k17.org/scores", "");

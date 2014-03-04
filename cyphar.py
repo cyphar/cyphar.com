@@ -47,6 +47,7 @@ def security():
 	conn = getdb()
 
 	flask.g.kudos = db.api.Kudos.findall(conn)
+	flask.g.comps = db.api.Competition.findall(conn)
 	return flask.render_template("security.html")
 
 @app.route("/favicon.ico")

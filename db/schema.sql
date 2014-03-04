@@ -25,3 +25,12 @@ CREATE TABLE IF NOT EXISTS tbl_kudos (
 	url TEXT,
 	description TEXT
 );
+
+CREATE TABLE IF NOT EXISTS tbl_competitions (
+	cid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	priority INTEGER NOT NULL,
+	comp TEXT NOT NULL,
+	rank TEXT,
+	url TEXT,
+	description TEXT
+);
