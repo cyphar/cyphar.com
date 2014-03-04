@@ -4,3 +4,7 @@
 
 # Database files
 *.db
+
+# Python stuff
+*.pyc
+__pycache__
