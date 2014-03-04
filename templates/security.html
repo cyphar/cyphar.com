@@ -5,9 +5,26 @@
 <p>Over the past few years, as an avid security researcher, I have received acknowledgements from the following leading firms
 for the discovery, responsible disclosure and collaboration in the fixing of security issues.</p>
 
-<ul class="dots">
-<li><a href="https://groklearning.com/security">Grok Learning</a></li>
-<li>Team placed 4th overall in the <a href="https://ctf.k17.org/scores">2013 K17 CTF</a></li>
-</ul>
+<dl>
+{% for ack in g.kudos %}
+	<dt>
+		{% if ack.url %}
+			<a href="{{ ack.url }}">{{ ack.ack }}</a>
+		{% else %}
+			<a>{{ ack.ack }}</a>
+		{% endif %}
+
+		{% if ack.vuln %}
+			<small>{{ ack.vuln }}</small>
+		{% endif %}
+	</dt>
+
+	{% if ack.description %}
+	<dd>
+		<p>{{ ack.description }}</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
 
 {% endblock %}
