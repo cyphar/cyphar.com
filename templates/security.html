@@ -21,7 +21,7 @@ for the discovery, responsible disclosure and collaboration in the fixing of sec
 
 	{% if ack.description %}
 	<dd>
-		<p>{{ ack.description }}</p>
+		<p>{{ ack.description|safe }}</p>
 	</dd>
 	{% endif %}
 {% endfor %}
@@ -47,7 +47,7 @@ The following are some notable compeitions which I have taken part in</p>
 
 	{% if comp.description %}
 	<dd>
-		<p>{{ comp.description }}</p>
+		<p>{{ comp.description|safe }}</p>
 	</dd>
 	{% endif %}
 {% endfor %}
