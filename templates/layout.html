@@ -1,8 +1,16 @@
 <!doctype html>
-<html>
+<html lang="en">
+
+{% block meta %}
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="{% block description %}Aleksa Sarai [cyphar] (n): A Programmer, Security Researcher, Linux and Science Enthusiast and Atheist.{% endblock %}" />
+<meta name="author" content="{% block author %}Aleksa Sarai{% endblock %}" />
+{% endblock %}
+
 <head>
-<title>Cyphar</title>
+<title>{% block title %}Page{% endblock %} | Cyphar</title>
+{% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general.css') }}" />
 <!--[if !IE 7]>
@@ -13,6 +21,7 @@
 		}
 	</style>
 <![endif]-->
+{% endblock %}
 </head>
 <body>
 	<div class="wrapper">
