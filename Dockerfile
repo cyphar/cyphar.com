@@ -26,15 +26,15 @@ RUN apt-get install -y python3 python3-flask
 #####################################
 
 # Set up cyphar.com server directory.
-RUN mkdir -p /srv/cyphar.com
-WORKDIR /srv/cyphar.com
+RUN mkdir -p /srv/www /srv/db
+WORKDIR /srv/www
 
 # Copy over the cyphar.com app source.
-ADD . /srv/cyphar.com
+ADD . /srv/www
 
 # Generate database
-RUN python3 db/initdb.py -d cyphar.db
+RUN python3 db/initdb.py -d /srv/db/cyphar.db
 
 # Set up cyphar.com and port config.
 EXPOSE 80
-CMD ["python3", "cyphar.py", "-H0.0.0.0", "-p80", "-d", "cyphar.db"]
+CMD ["python3", "cyphar.py", "-H0.0.0.0", "-p80", "-d", "/srv/db/cyphar.db"]
