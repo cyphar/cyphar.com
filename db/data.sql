@@ -8,7 +8,7 @@
 INSERT INTO tbl_contacts (priority, contact, url) VALUES (30, "GitHub", "https://github.com/cyphar");
 INSERT INTO tbl_contacts (priority, contact, url) VALUES (20, "Bitbucket", "https://bitbucket.org/cyphar");
 INSERT INTO tbl_contacts (priority, contact, url) VALUES (10, "Twitter", "https://twitter.com/thecyphar");
-INSERT INTO tbl_contacts (priority, contact, url) VALUES (-10, "LinkedIn", "https://www.linkedin.com/profile/view?id=327408242");
+INSERT INTO tbl_contacts (priority, contact, url) VALUES (-10, "LinkedIn", "https://www.linkedin.com/in/cyphar");
 
 --------------
 -- PROJECTS --
@@ -17,7 +17,7 @@ INSERT INTO tbl_contacts (priority, contact, url) VALUES (-10, "LinkedIn", "http
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (120, "dotRush", "Java", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush", "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (110, "ninjabot", "Python", "https://github.com/ackwell/ninjabot", "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (100, "rawline", "C", "https://github.com/cyphar/rawline", "The small and self-contained line-editing library. Written in less than 1000 lines of ANSI C and can easily be included in any project.");
-INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (90, "magnesium", "Python", "https://github.com/cyphar/magnesium", "<b>(WIP)</b> Explosive messaging -- decentralised, zero-configuration LAN chat system for enterprise.");
+INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (90, "magnesium", NULL, "https://github.com/cyphar/magnesium", "<b>(WIP)</b> Explosive messaging -- decentralised, zero-configuration LAN chat system for enterprise.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (80, "perfectgift", "Python + SQL", "https://github.com/cyphar/perfectgift", "A tornado webapp, written by Group 4 at the NCSS Summer School 2014 all-nighter. Get the perfect gift for your friends, with this innovative wishlist app.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (70, "epyc", "Python", "https://github.com/cyphar/epyc", "A python templating language (written for <a href='https://github.com/cyphar/perfectgift'>perfectgift</a>).");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (60, "synge", "C", "https://github.com/cyphar/synge", "Very powerful scientific calculation engine. Supports variables, short-cutting conditions and recursive expressions.");
