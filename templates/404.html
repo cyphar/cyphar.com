@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Page not Found{% endblock %}
+{% block body %}
+
+<h1>Page not Found</h1>
+<p>This is not the page you're looking for. You could always try <a href="javascript:window.history.back()">going back</a> and trying again,
+or you can <a href="{{ url_for('home') }}">escape to safety</a>.</p>
+
+{% endblock %}

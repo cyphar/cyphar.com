@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}Authentication Required{% endblock %}
+{% block body %}
+
+<h1>Authentication Required</h1>
+<p>You don't seem to be logged in. You can <a href="javascript:location.reload(true)">try again</a> or <a href="{{ url_for('home') }}">escape to safety</a>.</p>
+
+{% endblock %}
