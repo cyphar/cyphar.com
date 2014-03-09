@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Gone{% endblock %}
+{% block body %}
+
+<h1>Gone (Fishing)</h1>
+<p>The page you are looking for has been dumped into the local blackhole, <code>/dev/null</code>.
+Unless you want to covet Cthulu in order to recover it, you'd better <a href="javascript:window.history.back()">go back</a> or <a href="{{ url_for('home') }}">escape to safety</a>.</p>
+
+{% endblock %}
