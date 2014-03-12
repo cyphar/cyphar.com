@@ -49,6 +49,11 @@ small {
 	font-weight: normal;
 }
 
+li.spacer {
+	list-style: none;
+	padding: 8px !important;
+}
+
 /* header title */
 header {
 	overflow: hidden;
@@ -79,10 +84,11 @@ header > h1 > .cursor {
 
 	-webkit-animation: blink 1.5s steps(1, end) infinite;
 	   -moz-animation: blink 1.5s steps(1, end) infinite;
+	     -o-animation: blink 1.5s steps(1, end) infinite;
 	        animation: blink 1.5s steps(1, end) infinite;
 }
 
-@keyframes blink {
+@-webkit-keyframes blink {
 	0%  {opacity: 1}
 	50% {opacity: 0}
 }
@@ -92,7 +98,12 @@ header > h1 > .cursor {
 	50% {opacity: 0}
 }
 
-@-webkit-keyframes blink {
+@-o-keyframes blink {
+	0%  {opacity: 1}
+	50% {opacity: 0}
+}
+
+@keyframes blink {
 	0%  {opacity: 1}
 	50% {opacity: 0}
 }
@@ -106,7 +117,7 @@ header > nav {
 	float: right;
 }
 
-header > nav > li {
+header > nav > a {
 	float: none;
 	display: inline-block;
 	background: inherit;
@@ -114,21 +125,21 @@ header > nav > li {
 	padding: 15px 0 10px 0;
 }
 
-header > nav > li:hover {
+header > nav > a:hover {
 	background: #1d1d1d;
 }
 
-header > nav > li:hover > a {
+header > nav > a:hover {
 	color: #7d7d7d;
 	text-decoration: none;
 }
 
-header > nav > li:active > a {
+header > nav > a:active {
 	color: #f9f9f9;
 	text-decoration: none;
 }
 
-header > nav > li > a {
+header > nav > a {
 	font-family: monospace;
 	font-size: 16px;
 	font-weight: bold;
