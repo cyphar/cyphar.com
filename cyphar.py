@@ -50,6 +50,18 @@ def security():
 	flask.g.comps = db.api.Competition.findall(conn)
 	return flask.render_template("security.html")
 
+@app.route("/src/")
+@app.route("/src/<project>")
+def src(project=None):
+	conn = getdb()
+
+	redir = db.api.Redirect.find(conn, project)
+
+	if not redir:
+		flask.abort(404)
+
+	return flask.redirect(redir.url, code=302)
+
 @app.route("/favicon.ico")
 def _favicon():
 	return flask.send_from_directory(os.path.join(app.root_path, "static"), "favicon.ico")

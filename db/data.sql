@@ -14,8 +14,8 @@ INSERT INTO tbl_contacts (priority, contact, url) VALUES (-10, "LinkedIn", "http
 -- PROJECTS --
 --------------
 
-INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (120, "dotRush", "Java", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush", "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd.");
-INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (110, "ninjabot", "Python", "https://github.com/ackwell/ninjabot", "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core.");
+INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (120, "dotRush", "Java", "/src/dotrush", "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd.");
+INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (110, "ninjabot", "Python", "/src/ninjabot", "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (100, "rawline", "C", "/src/rawline", "The small and self-contained line-editing library. Written in less than 1000 lines of ANSI C and can easily be included in any project.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (80, "perfectgift", "Python + SQL", "/src/perfectgift", "A tornado webapp, written by Group 4 at the NCSS Summer School 2014 all-nighter. Get the perfect gift for your friends, with this innovative wishlist app.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (70, "epyc", "Python", "/src/epyc", "A python templating language (written for <a href='/src/perfectgift'>perfectgift</a>).");
@@ -39,3 +39,20 @@ INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (10, "Grok 
 
 INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (10, "K17 CTF - 2013", "4th Overall", "https://ctf.k17.org/scores", "A competition which contained challenges pertaining to web applications, reverse engineering and exploitation, cryptography, network and memory forensics and unix exploitation. I was mostly involved in the reverse engineering, cryptography and unix exploitation aspects of the competition and assisted the members working on the web application.");
 INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (0, "PHDays CTF IV Quals - 2014", NULL, "http://quals.phdays.ru/", "This competition contained a grab-bag of many different aspects of information security, the most interesting of which was a MMORPG for the contestants (where hacking the game was rewarded with CTF points). I was mostly involved in the escaping of sandboxes and information gathering aspects of the competition. I also assisted team members working on the cryptography challenges.");
+
+---------------
+-- REDIRECTS --
+---------------
+
+INSERT INTO tbl_redirects (priority, key, url) VALUES (100, NULL, "https://github.com/cyphar");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "dotrush", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ninjabot", "https://github.com/ackwell/ninjabot");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "rawline", "https://github.com/cyphar/rawline");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "perfectgift", "https://github.com/cyphar/perfectgift");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "epyc", "https://github.com/cyphar/epyc");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "synge", "https://github.com/cyphar/synge");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "copper", "https://github.com/cyphar/copper");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ttu", "https://github.com/cyphar/ttu");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "tic-tac-toe", "https://github.com/cyphar/tic-tac-toe");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ascii-snake", "https://github.com/cyphar/ascii-snake");
+INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "moss", "https://github.com/cyphar/moss");
