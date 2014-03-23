@@ -6,6 +6,7 @@ TBL_CONTACTS = "tbl_contacts"
 TBL_PROJECTS = "tbl_projects"
 TBL_KUDOS = "tbl_kudos"
 TBL_COMPS = "tbl_competitions"
+TBL_REDIRECTS = "tbl_redirects"
 
 def getdb(fname):
 	"Obtain a connection to the database."
@@ -151,4 +152,51 @@ class Competition(object):
 		"Save (update) the compnowledgement to the database."
 
 		conn.execute("UPDATE %s SET priority=?, comp=?, rank=?, url=?, description=? WHERE cid=?" % TBL_COMPS, (self.priority, self.comp, self.rank, self.url, self.description, self.cid))
+		conn.commit()
+
+class Redirect(object):
+	"Redirects (name => url)."
+
+	def __init__(self, rid, priority, key, url):
+		self.rid = rid
+		self.priority = priority
+		self.key = key
+		self.url = url
+
+	@classmethod
+	def findall(cls, conn):
+		"Find all redirects in the database."
+
+		cur = conn.execute("SELECT rid, priority, key, url FROM %s GROUP BY key ORDER BY priority DESC" % TBL_REDIRECTS)
+		return [cls(item["rid"], item["priority"], item["key"], item["url"]) for item in cur.fetchall()]
+
+	@classmethod
+	def find(cls, conn, key):
+		"Find the redirect in the database which matches the key."
+
+		if key:
+			cur = conn.execute("SELECT rid, priority, key, url FROM %s WHERE key=? GROUP BY key ORDER BY priority DESC, rid DESC LIMIT 1" % TBL_REDIRECTS, (key,))
+		else:
+			cur = conn.execute("SELECT rid, priority, key, url FROM %s WHERE key IS NULL GROUP BY key ORDER BY priority DESC, rid DESC LIMIT 1" % TBL_REDIRECTS)
+
+		item = cur.fetchone()
+
+		if not item:
+			return None
+		return cls(item["rid"], item["priority"], item["key"], item["url"])
+
+	@classmethod
+	def create(cls, conn, priority, key, url):
+		"Create a new redirect and store it in the database."
+
+		conn.execute("INSERT INTO %s (priority, url, key) VALUES (?, ?, ?)" % TBL_REDIRECTS, (priority, key, url))
+		conn.commit()
+
+		cid = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+		return cls(cid, priority, key, url)
+
+	def save(self, conn):
+		"Save (update) the redirect to the database."
+
+		conn.execute("UPDATE %s SET priority=?, key=?, url=? WHERE rid=?" % TBL_REDIRECTS, (self.priority, self.key, self.url, self.rid))
 		conn.commit()
