@@ -20,6 +20,9 @@
  * SOFTWARE.
  */
 
+/* fonts */
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+
 /* global css rules */
 body {
 	font-family: Helvetica, sans-serif;
@@ -43,7 +46,7 @@ a:active {
 }
 
 code {
-	font-family: monospace;
+	font-family: 'Droid Sans Mono', monospace;
 	font-size: 12px;
 	white-space: nowrap;
 
@@ -84,7 +87,7 @@ header {
 }
 
 header > h1 {
-	font-family: monospace;
+	font-family: 'Droid Sans Mono', monospace;
 	font-size: 24px;
 	font-weight: 400;
 	float: left;
@@ -162,7 +165,7 @@ header > nav > a:active {
 }
 
 header > nav > a {
-	font-family: monospace;
+	font-family: 'Droid Sans Mono', monospace;
 	font-size: 16px;
 	font-weight: bold;
 	padding: 15px 8px 10px 8px;
@@ -189,7 +192,7 @@ article.main > p {
 article.main > h1, article.main > h2,
 article.main > h3, article.main > h4,
 article.main > h5, article.main > h6 {
-	font-family: monospace;
+	font-family: 'Droid Sans Mono', monospace;
 	font-weight: bolder;
 }
 
@@ -222,7 +225,7 @@ article.main > dl {
 }
 
 article.main > dl > dt {
-	font-family: monospace;
+	font-family: 'Droid Sans Mono', monospace;
 	font-size: 18px;
 	font-weight: bold;
 }
