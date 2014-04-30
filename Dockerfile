@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-FROM ubuntu:13.10
+FROM ubuntu:14.04
 MAINTAINER "cyphar <cyphar@cyphar.com>"
 
 ##################
