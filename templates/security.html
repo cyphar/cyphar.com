@@ -8,7 +8,7 @@
 for the discovery, responsible disclosure and collaboration in the fixing of security issues.</p>
 
 <dl>
-{% for ack in g.kudos %}
+{% for ack in kudos %}
 	<dt>
 		{% if ack.url %}
 			<a href="{{ ack.url }}">{{ ack.ack }}</a>
@@ -34,7 +34,7 @@ for the discovery, responsible disclosure and collaboration in the fixing of sec
 The following are some notable compeitions which I have taken part in</p>
 
 <dl>
-{% for comp in g.comps %}
+{% for comp in comps %}
 	<dt>
 		{% if comp.url %}
 			<a href="{{ comp.url }}">{{ comp.comp }}</a>

@@ -33,7 +33,7 @@ like to (legally) <a href="{{ url_for('security') }}">hack stuff</a>.</p>
 <p>Otherwise, here are my relevant links:</p>
 
 <ul class="dots">
-{% for contact in g.contacts %}
+{% for contact in contacts %}
 	{% if contact.url %}
 		<li><a href="{{ contact.url }}">{{ contact.contact }}</a></li>
 	{% else %}

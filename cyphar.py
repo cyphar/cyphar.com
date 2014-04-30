@@ -52,24 +52,24 @@ def cleardb(exception):
 def home():
 	conn = getdb()
 
-	flask.g.contacts = db.api.Contact.findall(conn)
-	return flask.render_template("home.html")
+	contacts = db.api.Contact.findall(conn)
+	return flask.render_template("home.html", contacts=contacts)
 
 @app.route("/projects")
 @app.route("/code")
 def projects():
 	conn = getdb()
 
-	flask.g.projects = db.api.Project.findall(conn)
-	return flask.render_template("projects.html")
+	project_list = db.api.Project.findall(conn)
+	return flask.render_template("projects.html", projects=project_list)
 
 @app.route("/security")
 def security():
 	conn = getdb()
 
-	flask.g.kudos = db.api.Kudos.findall(conn)
-	flask.g.comps = db.api.Competition.findall(conn)
-	return flask.render_template("security.html")
+	kudos = db.api.Kudos.findall(conn)
+	comps = db.api.Competition.findall(conn)
+	return flask.render_template("security.html", kudos=kudos, comps=comps)
 
 @app.route("/src/")
 @app.route("/src/<project>")
@@ -85,7 +85,8 @@ def src(project=None):
 
 @app.route("/favicon.ico")
 def _favicon():
-	return flask.send_from_directory(os.path.join(app.root_path, "static"), "favicon.ico")
+	static = os.path.join(app.root_path, "static")
+	return flask.send_from_directory(static, "favicon.ico")
 
 @app.errorhandler(401)
 def authentication_required(error):
