@@ -30,13 +30,12 @@ app = flask.Flask(__name__)
 app.config.from_object(__name__)
 dbfile = "cyphar.db"
 
+@app.before_request
 def getdb():
 	conn = getattr(flask.g, "conn", None)
 
 	if not conn:
-		conn = flask.g.conn = db.api.getdb(dbfile)
-
-	return conn
+		flask.g.conn = db.api.getdb(dbfile)
 
 @app.teardown_appcontext
 def cleardb(exception):
@@ -50,33 +49,25 @@ def cleardb(exception):
 @app.route("/home")
 @app.route("/")
 def home():
-	conn = getdb()
-
-	contacts = db.api.Contact.findall(conn)
+	contacts = db.api.Contact.findall(flask.g.conn)
 	return flask.render_template("home.html", contacts=contacts)
 
 @app.route("/projects")
 @app.route("/code")
 def projects():
-	conn = getdb()
-
-	project_list = db.api.Project.findall(conn)
+	project_list = db.api.Project.findall(flask.g.conn)
 	return flask.render_template("projects.html", projects=project_list)
 
 @app.route("/security")
 def security():
-	conn = getdb()
-
-	kudos = db.api.Kudos.findall(conn)
-	comps = db.api.Competition.findall(conn)
+	kudos = db.api.Kudos.findall(flask.g.conn)
+	comps = db.api.Competition.findall(flask.g.conn)
 	return flask.render_template("security.html", kudos=kudos, comps=comps)
 
 @app.route("/src/")
 @app.route("/src/<project>")
 def src(project=None):
-	conn = getdb()
-
-	redir = db.api.Redirect.find(conn, project)
+	redir = db.api.Redirect.find(flask.g.conn, project)
 
 	if not redir:
 		flask.abort(404)
