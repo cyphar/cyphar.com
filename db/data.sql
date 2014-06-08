@@ -35,6 +35,7 @@ INSERT INTO tbl_contacts (priority, contact, url) VALUES (-10, "LinkedIn", "http
 -- PROJECTS --
 --------------
 
+INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (130, "Docker", "Go", "/src/docker", "The open-source application container engine, to which I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations).");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (120, "dotRush", "Java", "/src/dotrush", "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (110, "ninjabot", "Python", "/src/ninjabot", "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core.");
 INSERT INTO tbl_projects (priority, project, language, url, description) VALUES (100, "rawline", "C", "/src/rawline", "The small and self-contained line-editing library. Written in less than 1000 lines of ANSI C and can easily be included in any project.");
@@ -70,6 +71,7 @@ INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (0,
 
 -- Source
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (100, NULL, "https://github.com/cyphar");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "docker", "https://github.com/dotcloud/docker");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "dotrush", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "ninjabot", "https://github.com/ackwell/ninjabot");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "rawline", "https://github.com/cyphar/rawline");
