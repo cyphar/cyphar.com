@@ -67,7 +67,17 @@ def security():
 @app.route("/src/")
 @app.route("/src/<project>")
 def src(project=None):
-	redir = db.api.Redirect.find(flask.g.conn, project)
+	redir = db.api.SrcRedirect.find(flask.g.conn, project)
+
+	if not redir:
+		flask.abort(404)
+
+	return flask.redirect(redir.url, code=302)
+
+@app.route("/bin/")
+@app.route("/bin/<project>")
+def bin(project=None):
+	redir = db.api.BinRedirect.find(flask.g.conn, project)
 
 	if not redir:
 		flask.abort(404)

@@ -25,4 +25,5 @@ DROP TABLE IF EXISTS tbl_contacts;
 DROP TABLE IF EXISTS tbl_projects;
 DROP TABLE IF EXISTS tbl_kudos;
 DROP TABLE IF EXISTS tbl_competitions;
-DROP TABLE IF EXISTS tbl_redirects;
+DROP TABLE IF EXISTS tbl_src_redirects;
+DROP TABLE IF EXISTS tbl_bin_redirects;

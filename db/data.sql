@@ -51,6 +51,7 @@ INSERT INTO tbl_projects (priority, project, language, url, description) VALUES 
 -- KUDOS --
 -----------
 
+INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (30, "Optus Voicemail Exploit", "Information Disclosure", "http://blog.shubh.am/how-i-bypassed-2-factor-authentication-on-google-yahoo-linkedin-and-many-others/", "I assisted Shubham Shah in discovering (and testing) the Optus voicemail PIN bypass exploit. Due to a broken trust model, a forged caller ID would allow an attacker to bypass the PIN protection of voicemail and have full access to the victim's voicemail control panel. I also created the <a href='/bin/voicemail'>web application</a> used to test if a user's phone number is vulnerable.");
 INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (20, "Microsoft (Online Services)", "Coldfusion Exploit (Root Access)", "http://technet.microsoft.com/en-us/security/cc308575#0214", "Due to an outdated version of Coldfusion installed on a Microsoft MSN server, I was able to bypass the administrative logon and gain administrative access. This would allow me to schedule tasks to run as a privelliged user, such as reverse shells, create users, etc.");
 INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (10, "Grok Learning", "Sandbox Bypass", "https://groklearning.com/security", "Due to a misconfiguration in the testing machine's firewall, the sandbox could access the internet. This allowed for the disclosure of test data (as well as possible exploitation vectors).");
 INSERT INTO tbl_kudos (priority, ack, vuln, url, description) VALUES (0, "Medium", "Information Disclosure", "https://medium.com/humans.txt", "Due to a vulnerable version of OpenSSL, Medium's servers were vulnerable to the <a href='http://heartbleed.com'>Heartbleed OpenSSL bug</a>, allowing up to 64kb of server memory to be disclosed to a hacker (possibly leaking private keys, users' passwords and POST data, etc).");
@@ -67,15 +68,20 @@ INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (0,
 -- REDIRECTS --
 ---------------
 
-INSERT INTO tbl_redirects (priority, key, url) VALUES (100, NULL, "https://github.com/cyphar");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "dotrush", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ninjabot", "https://github.com/ackwell/ninjabot");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "rawline", "https://github.com/cyphar/rawline");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "perfectgift", "https://github.com/cyphar/perfectgift");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "epyc", "https://github.com/cyphar/epyc");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "synge", "https://github.com/cyphar/synge");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "copper", "https://github.com/cyphar/copper");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ttu", "https://github.com/cyphar/ttu");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "tic-tac-toe", "https://github.com/cyphar/tic-tac-toe");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "ascii-snake", "https://github.com/cyphar/ascii-snake");
-INSERT INTO tbl_redirects (priority, key, url) VALUES (20, "moss", "https://github.com/cyphar/moss");
+-- Source
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (100, NULL, "https://github.com/cyphar");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "dotrush", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "ninjabot", "https://github.com/ackwell/ninjabot");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "rawline", "https://github.com/cyphar/rawline");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "perfectgift", "https://github.com/cyphar/perfectgift");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "epyc", "https://github.com/cyphar/epyc");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "synge", "https://github.com/cyphar/synge");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "copper", "https://github.com/cyphar/copper");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "ttu", "https://github.com/cyphar/ttu");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "tic-tac-toe", "https://github.com/cyphar/tic-tac-toe");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "ascii-snake", "https://github.com/cyphar/ascii-snake");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "moss", "https://github.com/cyphar/moss");
+
+-- Binary
+INSERT INTO tbl_bin_redirects (priority, key, url) VALUES (100, NULL, "https://scripts.cyphar.com/");
+INSERT INTO tbl_bin_redirects (priority, key, url) VALUES (20, "voicemail", "https://scripts.cyphar.com/voicemail");

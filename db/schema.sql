@@ -56,7 +56,14 @@ CREATE TABLE tbl_competitions (
 	description TEXT
 );
 
-CREATE TABLE tbl_redirects (
+CREATE TABLE tbl_src_redirects (
+	rid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	priority INTEGER NOT NULL,
+	key TEXT UNIQUE,
+	url TEXT NOT NULL
+);
+
+CREATE TABLE tbl_bin_redirects (
 	rid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	priority INTEGER NOT NULL,
 	key TEXT UNIQUE,
