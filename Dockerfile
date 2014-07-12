@@ -27,35 +27,32 @@
 FROM ubuntu:14.04
 MAINTAINER "cyphar <cyphar@cyphar.com>"
 
-##################
-# Update server. #
-##################
-
 # Make sure the repos and packages are up to date
 RUN apt-get update
 RUN apt-get upgrade -y
 
-###########################################
-# Install cyphar.com server dependencies. #
-###########################################
-
 # Install python3 and flask.
 RUN apt-get install -y python3 python3-flask
 
-#####################################
-# Install and configure cyphar.com. #
-#####################################
-
 # Set up cyphar.com server directory.
-RUN mkdir -p /srv/www /srv/db
+RUN mkdir -p -- /srv/db /srv/www
 WORKDIR /srv/www
 
+# Set up server user.
+RUN useradd -U -M -s /bin/nologin -- drone
+RUN passwd -d -- drone
+
+# Change ownership.
+RUN chown drone:drone -- /srv/www /srv/db
+USER drone
+
 # Copy over the cyphar.com app source.
-ADD . /srv/www
+COPY . /srv/www
 
 # Generate database
 RUN python3 db/initdb.py -d /srv/db/cyphar.db
 
 # Set up cyphar.com and port config.
-EXPOSE 80
-CMD ["python3", "cyphar.py", "-H0.0.0.0", "-p80", "-d", "/srv/db/cyphar.db"]
+EXPOSE 5000
+ENTRYPOINT ["python3", "cyphar.py", "-H0.0.0.0", "-p5000"]
+CMD ["-d/srv/db/cyphar.db"]
