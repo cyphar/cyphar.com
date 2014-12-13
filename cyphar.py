@@ -22,8 +22,9 @@
 # SOFTWARE.
 
 import os
-import argparse
+import datetime
 import math
+import argparse
 
 import flask
 import flask_flatpages
@@ -103,6 +104,10 @@ def blog(tag=None, page=1):
 	def _nice(post):
 		if "title" not in post.meta:
 			post.meta["title"] = "Untitled"
+
+		if "published" not in post.meta:
+			# Default to the Unix Epoch.
+			post.meta["published"] = datetime.date(1970, 1, 1)
 
 		if "tags" not in post.meta:
 			post.meta["tags"] = []
