@@ -22,20 +22,31 @@
 # SOFTWARE.
 
 import os
+import datetime
+import math
 import argparse
+
 import flask
+import flask_flatpages
 import db.api
 
+DB_FILE = "cyphar.db"
+
+FLATPAGES_AUTORELOAD = True
+FLATPAGES_ROOT = "blog/posts"
+FLATPAGES_EXTENSION = ".md"
+PAGE_SIZE = 20
+
 app = flask.Flask(__name__)
+flatpages = flask_flatpages.FlatPages(app)
 app.config.from_object(__name__)
-dbfile = "cyphar.db"
 
 @app.before_request
 def getdb():
 	conn = getattr(flask.g, "conn", None)
 
 	if not conn:
-		flask.g.conn = db.api.getdb(dbfile)
+		flask.g.conn = db.api.getdb(DB_FILE)
 
 @app.teardown_appcontext
 def cleardb(exception):
@@ -84,6 +95,57 @@ def bin(project=None):
 
 	return flask.redirect(redir.url, code=302)
 
+@app.route("/blog/")
+@app.route("/blog/<tag>")
+@app.route("/blog/<int:page>")
+@app.route("/blog/<tag>/<int:page>")
+def blog(tag=None, page=1):
+	# Function to fix post objects.
+	def _nice(post):
+		if "title" not in post.meta:
+			post.meta["title"] = "Untitled"
+
+		if "published" not in post.meta:
+			# Default to the Unix Epoch.
+			post.meta["published"] = datetime.date(1970, 1, 1)
+
+		if "tags" not in post.meta:
+			post.meta["tags"] = []
+
+		if "description" not in post.meta:
+			post.meta["description"] = ""
+
+		post.meta["tags"] = [tag.strip() for tag in post.meta["tags"]]
+		post.meta["description"] = flask_flatpages.pygmented_markdown(post.meta["description"])
+
+		return post
+
+	# Generate set of posts in POST_DIR.
+	posts = [_nice(post) for post in flatpages]
+	posts = sorted(posts, key=lambda item: item["published"])
+
+	# Get tags to filter by (if applicable).
+	if tag:
+		posts = [post for post in posts if tag in post["tags"]]
+
+	# Get number of pages after filtering.
+	pages = int(math.ceil(len(posts) / PAGE_SIZE))
+
+	# Go to page.
+	page_start = (page - 1) * PAGE_SIZE
+	page_end = page * PAGE_SIZE
+	posts = posts[page_start:page_end]
+
+	return flask.render_template("blog/list.html", posts=posts, tag=tag, page=page, pages=pages)
+
+@app.route("/blog/post/<name>")
+def blog_post(name):
+	# Get requested post.
+	#path = os.path.join(POST_DIR, name)
+	post = flatpages.get_or_404(name)
+
+	return flask.render_template("blog/post.html", post=post)
+
 @app.route("/favicon.ico")
 def _favicon():
 	static = os.path.join(app.root_path, "static")
@@ -118,9 +180,9 @@ if __name__ == "__main__":
 	parser.add_argument("-p", "--port", type=int, default=8888)
 	parser.add_argument("-H", "--host", type=str, default="0.0.0.0")
 	parser.add_argument("-D", "--debug", action="store_const", const=True, default=False)
-	parser.add_argument("-d", "--db-file", dest="dbfile", type=str, default=dbfile)
+	parser.add_argument("-d", "--db-file", dest="dbfile", type=str, default=DB_FILE)
 
 	args = parser.parse_args()
 
-	dbfile = args.dbfile
+	DB_FILE = args.dbfile
 	run_server(args.host, args.port, args.debug)

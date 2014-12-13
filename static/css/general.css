@@ -45,6 +45,10 @@ a:active {
 	text-decoration: none;
 }
 
+.nodecoration {
+	text-decoration: none;
+}
+
 code {
 	font-family: 'Droid Sans Mono', monospace;
 	font-size: 12px;
@@ -80,13 +84,13 @@ li.spacer {
 }
 
 /* header title */
-header {
+header.navbar {
 	overflow: hidden;
 	color: #f9f9f9;
 	background-color: #333333;
 }
 
-header > h1 {
+header.navbar > h1 {
 	font-family: 'Droid Sans Mono', monospace;
 	font-size: 24px;
 	font-weight: 400;
@@ -94,12 +98,12 @@ header > h1 {
 	padding: 10px 10px 10px 10px;
 }
 
-header > h1 > .path {
+header.navbar > h1 > .path {
 	color: #3775d6;
 	font-weight: bold;
 }
 
-header > h1 > .cursor {
+header.navbar > h1 > .cursor {
 /*	// make cursor block
 	height: 28px;
 	background-color: #37d649;
@@ -133,16 +137,16 @@ header > h1 > .cursor {
 	50% {opacity: 0}
 }
 
-header > h1 > .prompt {
+header.navbar > h1 > .prompt {
 	color: #d64937;
 }
 
 /* header navbar */
-header > nav {
+header.navbar > nav {
 	float: right;
 }
 
-header > nav > a {
+header.navbar > nav > a {
 	float: none;
 	display: inline-block;
 	background: inherit;
@@ -150,21 +154,21 @@ header > nav > a {
 	padding: 15px 0 10px 0;
 }
 
-header > nav > a:hover {
+header.navbar > nav > a:hover {
 	background: #1d1d1d;
 }
 
-header > nav > a:hover {
+header.navbar > nav > a:hover {
 	color: #7d7d7d;
 	text-decoration: none;
 }
 
-header > nav > a:active {
+header.navbar > nav > a:active {
 	color: #f9f9f9;
 	text-decoration: none;
 }
 
-header > nav > a {
+header.navbar > nav > a {
 	font-family: 'Droid Sans Mono', monospace;
 	font-size: 16px;
 	font-weight: bold;
@@ -244,7 +248,11 @@ body {
 	margin-bottom: 85px;
 }
 
-footer {
+footer.pagination {
+	text-align: center;
+}
+
+footer.pagefooter {
 	font-size: 14px;
 	text-align: center;
 	color: #555555;
@@ -259,6 +267,6 @@ footer {
 	overflow: hidden;
 }
 
-footer > p {
+footer.pagefooter > p {
 	margin: 10px 0 0 0;
 }

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Blog{% endblock %}
+{% block body %}
+
+
+<h2>
+	{{ post.title }}
+	<span class="nodecoration">
+		<small>{{ post.published.strftime("%B %d, %Y") }}</small>
+		<p>
+		{% for tag in post.tags %}
+			<a href="{{ url_for("blog", tag=tag) }}"><code>{{ tag }}</code></a>
+		{% endfor %}
+		</p>
+	</span>
+</h2>
+
+{{ post.html|safe }}
+
+{% endblock %}
