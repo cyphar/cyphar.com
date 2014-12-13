@@ -72,6 +72,7 @@ INSERT INTO tbl_competitions (priority, comp, rank, url, description) VALUES (0,
 
 -- Source
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (100, NULL, "https://github.com/cyphar");
+INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "cypharcom", "https://github.com/cyphar/cyphar.com");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "docker", "https://github.com/docker/docker");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "dotrush", "https://play.google.com/store/apps/details?id=com.jtdev.dotrush");
 INSERT INTO tbl_src_redirects (priority, key, url) VALUES (20, "redone", "https://github.com/cyphar/redone");
