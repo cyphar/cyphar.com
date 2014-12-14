@@ -6,7 +6,7 @@
 	<a href="{{ url_for("blog") }}">&laquo;</a>
 	{{ post.title }}
 	<p class="floatright">
-		<small>{{ post.author }}</small>
+		<small><a href="{{ url_for("blog_filter_author", author=post.author) }}">{{ post.author }}</a></small>
 	</p>
 	<p>
 		<p class="floatleft">

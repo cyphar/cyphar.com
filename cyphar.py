@@ -131,11 +131,11 @@ def _get_posts(_filter=None):
 
 		return post
 
-	# Generate set of posts in POST_DIR.
+	# Generate set of posts in the FLATPAGES_ROOT.
 	posts = [_nice(post) for post in flatpages]
 	posts = sorted(posts, key=lambda item: item["published"], reverse=True)
 
-	# Get tags to filter by (if applicable).
+	# Filter the set of posts by the given filter (if applicable).
 	if _filter:
 		posts = [post for post in posts if _filter(post)]
 
@@ -151,7 +151,6 @@ def _paginate_posts(posts, page=1):
 
 	return posts[page_start:page_end], pages
 
-# TODO: Separate tag routes, so that we can have author routes and other such magic.
 @app.route("/blog/")
 @app.route("/blog/<int:page>")
 def blog(page=1):
@@ -160,11 +159,13 @@ def blog(page=1):
 	pg_posts, pages = _paginate_posts(posts, page)
 
 	# If the page number is invalid, bail.
+	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
 	if page < 1 or (page > pages and posts):
 		flask.abort(404)
 
 	# Used to abstract filter links.
 	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", **kwargs)
+	flask.g.bl_filter_type = None
 	flask.g.bl_filter = None
 
 	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
@@ -180,6 +181,7 @@ def blog_filter_tag(tag, page=1):
 	pg_posts, pages = _paginate_posts(posts, page)
 
 	# If the page number is invalid, bail.
+	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
 	if page < 1 or (page > pages and posts):
 		flask.abort(404)
 
@@ -189,7 +191,34 @@ def blog_filter_tag(tag, page=1):
 
 	# Used to abstract filter links.
 	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
+	flask.g.bl_filter_type = "Tag"
 	flask.g.bl_filter = tag
+
+	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+
+@app.route("/blog/author/<author>")
+@app.route("/blog/author/<author>/<int:page>")
+def blog_filter_author(author, page=1):
+	# Generate filter.
+	_filter = lambda post: author == post["author"]
+
+	# Get posts.
+	posts = _get_posts(_filter)
+	pg_posts, pages = _paginate_posts(posts, page)
+
+	# If the page number is invalid, bail.
+	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
+	if page < 1 or (page > pages and posts):
+		flask.abort(404)
+
+	# If there are no posts, it's a bogus tag.
+	if not posts:
+		flask.abort(404)
+
+	# Used to abstract filter links.
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_author", author=author, **kwargs)
+	flask.g.bl_filter_type = "Author"
+	flask.g.bl_filter = author
 
 	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
 
