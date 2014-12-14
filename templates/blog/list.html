@@ -10,8 +10,8 @@
 (including security disclosures, my thoughts on various topics, and anything
 else that I feel like writing about).</p>
 
-{% if tag %}
-<h3>{{ tag }}</h3>
+{% if g.bl_filter %}
+<h3>{{ g.bl_filter }}</h3>
 {% endif %}
 
 <dl>
@@ -27,7 +27,7 @@ else that I feel like writing about).</p>
 	<dd>
 		<p>
 		{% for tag in post.tags %}
-			<a href="{{ url_for("blog", tag=tag) }}"><code>{{ tag }}</code></a>
+			<a href="{{ url_for("blog_filter_tag", tag=tag) }}"><code>{{ tag }}</code></a>
 		{% endfor %}
 		</p>
 	</dd>
@@ -49,11 +49,11 @@ else that I feel like writing about).</p>
 <footer class="pagination">
 	<p>
 		{% if (page - 1) >= 1 %}
-			<a href="{{ url_for("blog", page=(page - 1), tag=tag) }}">&laquo; Prev</a> |
+			<a href="{{ g.bl_url_for(page=(page - 1)) }}">&laquo; Prev</a> |
 		{% endif %}
 		Page <b>{{ page }}</b> of <b>{{ pages }}</b>
 		{% if (page + 1) <= pages %}
-			| <a href="{{ url_for("blog", page=(page + 1), tag=tag) }}">Next &raquo;</a>
+			| <a href="{{ g.bl_url_for(page=(page + 1)) }}">Next &raquo;</a>
 		{% endif %}
 	</p>
 </footer>

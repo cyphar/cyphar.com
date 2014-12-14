@@ -102,7 +102,7 @@ def bin(project=None):
 
 	return flask.redirect(redir.url, code=302)
 
-def _get_blog_posts(_filter=None):
+def _get_posts(_filter=None):
 	# Function to fix post objects.
 	def _nice(post):
 		if "title" not in post.meta:
@@ -141,28 +141,57 @@ def _get_blog_posts(_filter=None):
 
 	return posts
 
-# TODO: Separate tag routes, so that we can have author routes and other such magic.
-@app.route("/blog/")
-@app.route("/blog/<tag>")
-@app.route("/blog/<int:page>")
-@app.route("/blog/<tag>/<int:page>")
-def blog(tag=None, page=1):
-	# Generate filter.
-	_filter = None
-	if tag:
-		_filter = lambda post: tag in post["tags"]
-
-	# Get posts.
-	posts = _get_blog_posts(_filter)
-
-	# Get number of pages after filtering.
+def _paginate_posts(posts, page=1):
+	# Get number of pages from post list.
 	pages = int(math.ceil(len(posts) / PAGE_SIZE))
 
-	# Go to page.
+	# Slice to page.
 	page_start = (page - 1) * PAGE_SIZE
 	page_end = page * PAGE_SIZE
-	posts = posts[page_start:page_end]
-	return flask.render_template("blog/list.html", posts=posts, tag=tag, page=page, pages=pages)
+
+	return posts[page_start:page_end], pages
+
+# TODO: Separate tag routes, so that we can have author routes and other such magic.
+@app.route("/blog/")
+@app.route("/blog/<int:page>")
+def blog(page=1):
+	# Get posts.
+	posts = _get_posts(None)
+	pg_posts, pages = _paginate_posts(posts, page)
+
+	# If the page number is invalid, bail.
+	if page < 1 or (page > pages and posts):
+		flask.abort(404)
+
+	# Used to abstract filter links.
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", **kwargs)
+	flask.g.bl_filter = None
+
+	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+
+@app.route("/blog/tag/<tag>")
+@app.route("/blog/tag/<tag>/<int:page>")
+def blog_filter_tag(tag, page=1):
+	# Generate filter.
+	_filter = lambda post: tag in post["tags"]
+
+	# Get posts.
+	posts = _get_posts(_filter)
+	pg_posts, pages = _paginate_posts(posts, page)
+
+	# If the page number is invalid, bail.
+	if page < 1 or (page > pages and posts):
+		flask.abort(404)
+
+	# If there are no posts, it's a bogus tag.
+	if not posts:
+		flask.abort(404)
+
+	# Used to abstract filter links.
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
+	flask.g.bl_filter = tag
+
+	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
 
 @app.route("/blog/posts.atom")
 def blog_feed():
@@ -179,7 +208,7 @@ def blog_feed():
 	                     url=make_external(flask.url_for("blog")))
 
 	# Get latest posts.
-	posts = _get_blog_posts(None)[:ATOM_FEED_SIZE]
+	posts = _get_posts(None)[:ATOM_FEED_SIZE]
 
 	# Add posts to feed.
 	for post in posts:

@@ -11,7 +11,7 @@
 	<p>
 		<p class="floatleft">
 		{% for tag in post.tags %}
-			<a href="{{ url_for("blog", tag=tag) }}"><code>{{ tag }}</code></a>
+			<a href="{{ url_for("blog_filter_tag", tag=tag) }}"><code>{{ tag }}</code></a>
 		{% endfor %}
 		</p>
 		<p class="floatright">
