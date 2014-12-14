@@ -2,7 +2,6 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block body %}
 
-
 <h2>
 	{{ post.title }}
 	<p class="floatright">
@@ -24,5 +23,11 @@
 </h2>
 
 {{ post.html|safe }}
+
+{# Shamelessly plug the Atom feed. #}
+<small>
+	<p>Want to keep up to date with my posts?</p>
+	<p>You can subscribe to the <a href="{{ url_for("blog_feed") }}">Atom Feed</a>.</p>
+</small>
 
 {% endblock %}
