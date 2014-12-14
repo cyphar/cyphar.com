@@ -49,6 +49,10 @@ strong {
 	font-weight: bold;
 }
 
+em {
+	font-style: italic;
+}
+
 .floatleft {
 	float: left;
 }
@@ -88,6 +92,7 @@ b {
 small {
 	font-size: 12px;
 	font-weight: normal;
+	line-height: 1.2em;
 }
 
 li.spacer {
