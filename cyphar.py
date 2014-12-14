@@ -48,6 +48,10 @@ def getdb():
 	if not conn:
 		flask.g.conn = db.api.getdb(DB_FILE)
 
+@app.before_request
+def set_locale():
+	flask.g.date_format = "%d %B %Y"
+
 @app.teardown_appcontext
 def cleardb(exception):
 	conn = getattr(flask.g, "conn", None)
@@ -122,7 +126,7 @@ def blog(tag=None, page=1):
 
 	# Generate set of posts in POST_DIR.
 	posts = [_nice(post) for post in flatpages]
-	posts = sorted(posts, key=lambda item: item["published"])
+	posts = sorted(posts, key=lambda item: item["published"], reverse=True)
 
 	# Get tags to filter by (if applicable).
 	if tag:
@@ -141,9 +145,7 @@ def blog(tag=None, page=1):
 @app.route("/blog/post/<name>")
 def blog_post(name):
 	# Get requested post.
-	#path = os.path.join(POST_DIR, name)
 	post = flatpages.get_or_404(name)
-
 	return flask.render_template("blog/post.html", post=post)
 
 @app.route("/favicon.ico")
