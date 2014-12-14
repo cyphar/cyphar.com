@@ -113,11 +113,18 @@ def blog(tag=None, page=1):
 			# Default to the Unix Epoch.
 			post.meta["published"] = datetime.date(1970, 1, 1)
 
+		if "updated" not in post.meta:
+			# Default to never updated.
+			post.meta["updated"] = post.meta["published"]
+
 		if "tags" not in post.meta:
 			post.meta["tags"] = []
 
 		if "description" not in post.meta:
 			post.meta["description"] = ""
+
+		if "author" not in post.meta:
+			post.meta["author"] = "Unknown"
 
 		post.meta["tags"] = [tag.strip() for tag in post.meta["tags"]]
 		post.meta["description"] = flask_flatpages.pygmented_markdown(post.meta["description"])

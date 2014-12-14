@@ -5,6 +5,9 @@
 
 <h2>
 	{{ post.title }}
+	<p class="floatright">
+		<small>{{ post.author }}</small>
+	</p>
 	<p>
 		<p class="floatleft">
 		{% for tag in post.tags %}

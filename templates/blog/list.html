@@ -16,9 +16,11 @@ else that I feel like writing about).</p>
 {% for post in posts %}
 	<dt>
 		<a href="{{ url_for("blog_post", name=post.path) }}">{{ post.title }}</a>
-		<small>{{ post.published.strftime(g.date_format) }}</small>
+		<small>{{ post.author }}, {{ post.published.strftime(g.date_format) }}.</small>
 	</dt>
-	<dd>{{ post.description|safe }}</dd>
+	<dd>
+		{{ post.description|safe }}
+	</dd>
 	<dd>
 		<p>
 		{% for tag in post.tags %}
