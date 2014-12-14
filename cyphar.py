@@ -22,12 +22,14 @@
 # SOFTWARE.
 
 import os
-import datetime
 import math
+import datetime
 import argparse
+import urllib.parse
 
 import flask
 import flask_flatpages
+from werkzeug.contrib import atom
 import db.api
 
 DB_FILE = "cyphar.db"
@@ -36,6 +38,7 @@ FLATPAGES_AUTORELOAD = True
 FLATPAGES_ROOT = "blog/posts"
 FLATPAGES_EXTENSION = ".md"
 PAGE_SIZE = 20
+ATOM_FEED_SIZE = 15
 
 app = flask.Flask(__name__)
 flatpages = flask_flatpages.FlatPages(app)
@@ -47,6 +50,10 @@ def getdb():
 
 	if not conn:
 		flask.g.conn = db.api.getdb(DB_FILE)
+
+@app.before_request
+def set_locale():
+	flask.g.date_format = "%d %B %Y"
 
 @app.teardown_appcontext
 def cleardb(exception):
@@ -95,11 +102,7 @@ def bin(project=None):
 
 	return flask.redirect(redir.url, code=302)
 
-@app.route("/blog/")
-@app.route("/blog/<tag>")
-@app.route("/blog/<int:page>")
-@app.route("/blog/<tag>/<int:page>")
-def blog(tag=None, page=1):
+def _get_posts(_filter=None):
 	# Function to fix post objects.
 	def _nice(post):
 		if "title" not in post.meta:
@@ -109,41 +112,123 @@ def blog(tag=None, page=1):
 			# Default to the Unix Epoch.
 			post.meta["published"] = datetime.date(1970, 1, 1)
 
+		if "updated" not in post.meta:
+			# Default to never updated.
+			post.meta["updated"] = post.meta["published"]
+
 		if "tags" not in post.meta:
 			post.meta["tags"] = []
 
 		if "description" not in post.meta:
 			post.meta["description"] = ""
 
+		if "author" not in post.meta:
+			post.meta["author"] = "Unknown"
+
 		post.meta["tags"] = [tag.strip() for tag in post.meta["tags"]]
 		post.meta["description"] = flask_flatpages.pygmented_markdown(post.meta["description"])
+		post.meta["url"] = flask.url_for("blog_post", name=post.path)
 
 		return post
 
 	# Generate set of posts in POST_DIR.
 	posts = [_nice(post) for post in flatpages]
-	posts = sorted(posts, key=lambda item: item["published"])
+	posts = sorted(posts, key=lambda item: item["published"], reverse=True)
 
 	# Get tags to filter by (if applicable).
-	if tag:
-		posts = [post for post in posts if tag in post["tags"]]
+	if _filter:
+		posts = [post for post in posts if _filter(post)]
 
-	# Get number of pages after filtering.
+	return posts
+
+def _paginate_posts(posts, page=1):
+	# Get number of pages from post list.
 	pages = int(math.ceil(len(posts) / PAGE_SIZE))
 
-	# Go to page.
+	# Slice to page.
 	page_start = (page - 1) * PAGE_SIZE
 	page_end = page * PAGE_SIZE
-	posts = posts[page_start:page_end]
 
-	return flask.render_template("blog/list.html", posts=posts, tag=tag, page=page, pages=pages)
+	return posts[page_start:page_end], pages
+
+# TODO: Separate tag routes, so that we can have author routes and other such magic.
+@app.route("/blog/")
+@app.route("/blog/<int:page>")
+def blog(page=1):
+	# Get posts.
+	posts = _get_posts(None)
+	pg_posts, pages = _paginate_posts(posts, page)
+
+	# If the page number is invalid, bail.
+	if page < 1 or (page > pages and posts):
+		flask.abort(404)
+
+	# Used to abstract filter links.
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", **kwargs)
+	flask.g.bl_filter = None
+
+	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+
+@app.route("/blog/tag/<tag>")
+@app.route("/blog/tag/<tag>/<int:page>")
+def blog_filter_tag(tag, page=1):
+	# Generate filter.
+	_filter = lambda post: tag in post["tags"]
+
+	# Get posts.
+	posts = _get_posts(_filter)
+	pg_posts, pages = _paginate_posts(posts, page)
+
+	# If the page number is invalid, bail.
+	if page < 1 or (page > pages and posts):
+		flask.abort(404)
+
+	# If there are no posts, it's a bogus tag.
+	if not posts:
+		flask.abort(404)
+
+	# Used to abstract filter links.
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
+	flask.g.bl_filter = tag
+
+	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+
+@app.route("/blog/posts.atom")
+def blog_feed():
+	def make_external(url):
+		return urllib.parse.urljoin(flask.request.url_root, url)
+
+	# Create Atom feed.
+	feed = atom.AtomFeed(title="Cyphar's Blog",
+	                     title_type="text",
+	                     author="Aleksa Sarai",
+	                     subtitle="The wild ramblings of Aleksa Sarai.",
+	                     subtitle_type="text",
+	                     feed_url=flask.request.url,
+	                     url=make_external(flask.url_for("blog")))
+
+	# Get latest posts.
+	posts = _get_posts(None)[:ATOM_FEED_SIZE]
+
+	# Add posts to feed.
+	for post in posts:
+		feed.add(title=post.meta["title"],
+		         title_type="text",
+		         author=post.meta["author"],
+		         url=make_external(post.meta["url"]),
+		         summary=post.meta["description"],
+		         summary_type="html",
+		         updated=post.meta["updated"],
+		         published=post.meta["published"],
+		         categories=[{"term": tag} for tag in post.meta["tags"]])
+
+	# Generate Atom response.
+	return feed.get_response()
 
 @app.route("/blog/post/<name>")
 def blog_post(name):
 	# Get requested post.
-	#path = os.path.join(POST_DIR, name)
 	post = flatpages.get_or_404(name)
-
 	return flask.render_template("blog/post.html", post=post)
 
 @app.route("/favicon.ico")

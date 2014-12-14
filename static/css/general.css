@@ -45,6 +45,18 @@ a:active {
 	text-decoration: none;
 }
 
+strong {
+	font-weight: bold;
+}
+
+.floatleft {
+	float: left;
+}
+
+.floatright {
+	float: right;
+}
+
 .nodecoration {
 	text-decoration: none;
 }
@@ -190,6 +202,8 @@ article.main > h1 {
 }
 
 article.main > p {
+	line-height: 1.3em;
+	margin-bottom: 1em;
 	padding: 2px;
 }
 

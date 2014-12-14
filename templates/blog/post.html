@@ -1,20 +1,34 @@
 {% extends "layout.html" %}
-{% block title %}Blog{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 {% block body %}
 
-
 <h2>
+	<a href="{{ url_for("blog") }}">&laquo;</a>
 	{{ post.title }}
-	<span class="nodecoration">
-		<small>{{ post.published.strftime("%B %d, %Y") }}</small>
-		<p>
+	<p class="floatright">
+		<small>{{ post.author }}</small>
+	</p>
+	<p>
+		<p class="floatleft">
 		{% for tag in post.tags %}
-			<a href="{{ url_for("blog", tag=tag) }}"><code>{{ tag }}</code></a>
+			<a href="{{ url_for("blog_filter_tag", tag=tag) }}"><code>{{ tag }}</code></a>
 		{% endfor %}
 		</p>
-	</span>
+		<p class="floatright">
+			<small>{{ post.published.strftime(g.date_format) }}</small>
+		</p>
+
+		{# Don't ask. #}
+		<br>
+	</p>
 </h2>
 
 {{ post.html|safe }}
+
+{# Shamelessly plug the Atom feed. #}
+<small>
+	<p>Want to keep up to date with my posts?</p>
+	<p>You can subscribe to the <a href="{{ url_for("blog_feed") }}">Atom Feed</a>.</p>
+</small>
 
 {% endblock %}
