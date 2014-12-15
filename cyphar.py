@@ -125,7 +125,7 @@ def _get_posts(_filter=None):
 		if "author" not in post.meta:
 			post.meta["author"] = "Unknown"
 
-		post.meta["tags"] = [tag.strip() for tag in post.meta["tags"]]
+		post.meta["tags"] = sorted(tag.strip() for tag in post.meta["tags"])
 		post.meta["description"] = flask_flatpages.pygmented_markdown(post.meta["description"])
 		post.meta["url"] = flask.url_for("blog_post", name=post.path)
 
