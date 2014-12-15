@@ -56,7 +56,7 @@ def set_locale():
 	flask.g.date_format = "%d %B %Y"
 
 @app.teardown_appcontext
-def cleardb(exception):
+def cleardb(_):
 	conn = getattr(flask.g, "conn", None)
 
 	if conn:
@@ -84,7 +84,7 @@ def security():
 
 @app.route("/src/")
 @app.route("/src/<project>")
-def src(project=None):
+def src_redirect(project=None):
 	redir = db.api.SrcRedirect.find(flask.g.conn, project)
 
 	if not redir:
@@ -94,7 +94,7 @@ def src(project=None):
 
 @app.route("/bin/")
 @app.route("/bin/<project>")
-def bin(project=None):
+def bin_redirect(project=None):
 	redir = db.api.BinRedirect.find(flask.g.conn, project)
 
 	if not redir:
@@ -266,23 +266,23 @@ def _favicon():
 	return flask.send_from_directory(static, "favicon.ico")
 
 @app.errorhandler(401)
-def authentication_required(error):
+def authentication_required(_):
 	return flask.render_template('401.html'), 401
 
 @app.errorhandler(403)
-def forbidden(error):
+def forbidden(_):
 	return flask.render_template('403.html'), 403
 
 @app.errorhandler(404)
-def page_not_found(exception):
+def page_not_found(_):
 	return flask.render_template('404.html'), 404
 
 @app.errorhandler(410)
-def gone(exception):
+def gone(_):
 	return flask.render_template('410.html'), 410
 
 @app.errorhandler(500)
-def internal_server_error(error):
+def internal_server_error(_):
 	return flask.render_template('500.html'), 500
 
 def run_server(host, port, debug):
