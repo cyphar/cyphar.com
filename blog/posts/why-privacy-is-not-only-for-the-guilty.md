@@ -50,37 +50,22 @@ anti-social. Of course, this is an entirely artificial viewpoint brought on by
 the emergence of so many avenues for social communication. Private people (like
 myself) are seen as "weird" and are treated as such by the majority of society.
 
-It is important to differentiate solitude and privacy, because they are not
-synonymous terms -- even though advocates of anti-privacy laws attempt to
-equate their meanings and connotations.
-
-#### Solitude ####
-Solitude is the complete (or near total) cut-off from any social contact. A
-person in solitude is a person without friends who does not value other
-people's attention or their presence. You have likely never met a person who
-was in solitude (for obvious reasons), so solitude is a concept that is
-considered by most to be not only strange, but also seedy and somehow
-untrustworthy.
-
 Most people imagine that criminals and other ne'er-do-wells are such people,
 since most have never met a criminal in their daily lives. As such, people
-associate solace with wrong-doing -- this association is not correct, but
-debunking it thoroughly is beyond the scope of this post so I digress (it
-should be clear just from the reasoning used that their logic is flawed). The
-point of succinctly outlining the distinction between "solitude" and "privacy"
-is to show that the (right or wrong) negative connotations of "solitude" should
-not pervade through to affect how "privacy" is understood as a term.
+associate privacy with wrong-doing -- this association is not correct, and it
+should be readily apparent that the "logic" behind that association is
+completely flawed.
 
 #### Privacy ####
 Privacy is a state of being free from unwanted attention or intrusion. It does
 **not** require a complete cut-off from social contact, rather it requires a
 sense of boundaries between people.
 
-However, many people (as I outlined above) seem to consider "privacy" and
-"solitude" as being synonymous and as such consider that most forms of privacy
-*must* be something that is reserved for the criminal classes. Essentially the
-idea being that if you wish not to have unwanted attention on your person, you
-must clearly have something to hide.
+However, many people seem to consider "privacy" and "concealment of wrongdoing"
+as being synonymous and as such consider that most forms of privacy *must* be
+something that is reserved for the criminal classes. Essentially the idea being
+that if you wish not to have unwanted attention on your person, you must
+clearly have something to hide.
 
 This is utterly ludicrous, of course. You wouldn't want your parents to know
 what kind of pornography you watch. You wouldn't want your neighbours to know
