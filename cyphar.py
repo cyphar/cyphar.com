@@ -110,7 +110,7 @@ def _get_posts(_filter=None):
 
 		if "published" not in post.meta:
 			# Default to the Unix Epoch.
-			post.meta["published"] = datetime.date(1970, 1, 1)
+			post.meta["published"] = datetime.datetime(1970, 1, 1)
 
 		if "updated" not in post.meta:
 			# Default to never updated.
