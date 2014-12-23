@@ -1,0 +1,12 @@
+# Git.
+.git/
+
+# Database files.
+*.db
+
+# Server config files.
+srv/
+
+# Python binary files.
+*.pyc
+__pycache__/
