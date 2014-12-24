@@ -258,6 +258,10 @@ def blog_feed():
 def blog_post(name):
 	# Get requested post.
 	post = flatpages.get_or_404(name)
+
+	# Add post identifier data.
+	post.meta["ident"] = name
+
 	return flask.render_template("blog/post.html", post=post)
 
 @app.route("/favicon.ico")
