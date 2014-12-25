@@ -266,8 +266,13 @@ def blog_post(name):
 
 @app.route("/favicon.ico")
 def _favicon():
-	static = os.path.join(app.root_path, "static")
+	static = os.path.join(app.root_path, "static", "img")
 	return flask.send_from_directory(static, "favicon.ico")
+
+@app.route("/<filename>.txt")
+def _txt_redirect(filename):
+	static = os.path.join(app.root_path, "static", "txt")
+	return flask.send_from_directory(static, "%s.txt" % (filename,))
 
 @app.errorhandler(401)
 def authentication_required(_):

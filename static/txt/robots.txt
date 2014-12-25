@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /static/
+
+User-Agent: TheOne
+Disallow: /matrix.txt
