@@ -23,6 +23,9 @@
 /* fonts */
 @import url(fonts.css);
 
+/* highlight rules for code */
+@import url(highlight.css);
+
 /* global css rules */
 body {
 	font-family: Helvetica, sans-serif;
@@ -65,9 +68,12 @@ em {
 	text-decoration: none;
 }
 
-code {
+code, pre {
+	font-size: 12px !important;
+}
+
+code:not([class*="language-"]) {
 	font-family: 'Droid Sans Mono', monospace;
-	font-size: 12px;
 	white-space: nowrap;
 
 	margin: 0;
