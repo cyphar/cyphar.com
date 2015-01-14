@@ -215,7 +215,7 @@ article.main > h1 {
 
 article.main > p {
 	line-height: 1.3em;
-	margin-bottom: 1em;
+	margin: 0.5em 0 0.5em 0;
 	padding: 2px;
 }
 
@@ -235,8 +235,8 @@ article.main > h6 {font-size: 0.75em; margin: 1.67em 0}
 
 article.main > ul,
 article.main > ol {
-	padding-top: 8px;
-	list-style: none;
+	display: inline-block;
+	padding: 0.5em 0 0.5em 1.3em;
 }
 
 article.main > ul > li,
@@ -244,10 +244,8 @@ article.main > ol > li {
 	padding: 2px 0 2px 0;
 }
 
-article.main > ul.dots {
-	display: inline-block;
+article.main > ul {
 	list-style-type: square;
-	padding-left: 19px;
 }
 
 article.main > dl {
