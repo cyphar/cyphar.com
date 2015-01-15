@@ -1,5 +1,7 @@
 [blog]
-* Write some technical blog posts.
 * Filtering.
 	- Full-text search.
-	- Month + year published.
+
+[database]
+* Don't use database for static lists.
+* Consider switching to in-memory lists -- nothing is modified during runtime anyway.
