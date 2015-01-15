@@ -42,6 +42,8 @@ FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code"]
 PAGE_SIZE = 20
 ATOM_FEED_SIZE = 15
 
+TRACKING_ID = "UA-58580629-1"
+
 app = flask.Flask(__name__)
 flatpages = flask_flatpages.FlatPages(app)
 app.config.from_object(__name__)
@@ -56,6 +58,10 @@ def getdb():
 @app.before_request
 def set_locale():
 	flask.g.date_format = "%d %B %Y"
+
+@app.before_request
+def set_tracking_id():
+	flask.g.tracking_id = TRACKING_ID
 
 @app.teardown_appcontext
 def cleardb(_):

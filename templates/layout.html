@@ -60,5 +60,16 @@
 		</p>
 		<p>Copyright &copy; Cyphar 2014. All wrongs reserved. <a href="{{ url_for("src_redirect", project="cypharcom")}}">Source code</a>.</p>
 	</footer>
+
+	{# Insert Google Analytics JS #}
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', '{{ g.tracking_id }}', 'auto');
+		ga('send', 'pageview');
+	</script>
 </body>
 </html>
