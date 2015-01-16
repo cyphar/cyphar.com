@@ -30,9 +30,7 @@ import urllib.parse
 import flask
 import flask_flatpages
 from werkzeug.contrib import atom
-import db.api
-
-DB_FILE = "cyphar.db"
+import db.data
 
 FLATPAGES_AUTORELOAD = True
 FLATPAGES_ROOT = "blog/posts"
@@ -49,13 +47,6 @@ flatpages = flask_flatpages.FlatPages(app)
 app.config.from_object(__name__)
 
 @app.before_request
-def getdb():
-	conn = getattr(flask.g, "conn", None)
-
-	if not conn:
-		flask.g.conn = db.api.getdb(DB_FILE)
-
-@app.before_request
 def set_locale():
 	flask.g.date_format = "%d %B %Y"
 
@@ -63,52 +54,39 @@ def set_locale():
 def set_tracking_id():
 	flask.g.tracking_id = TRACKING_ID
 
-@app.teardown_appcontext
-def cleardb(_):
-	conn = getattr(flask.g, "conn", None)
-
-	if conn:
-		conn.close()
-
-	flask.g.conn = None
-
 @app.route("/home")
 @app.route("/")
 def home():
-	contacts = db.api.Contact.findall(flask.g.conn)
-	return flask.render_template("home.html", contacts=contacts)
+	return flask.render_template("home.html", contacts=db.data.CONTACTS)
 
 @app.route("/projects")
 @app.route("/code")
 def projects():
-	project_list = db.api.Project.findall(flask.g.conn)
-	return flask.render_template("projects.html", projects=project_list)
+	return flask.render_template("projects.html", projects=db.data.PROJECTS)
 
 @app.route("/security")
 def security():
-	kudos = db.api.Kudos.findall(flask.g.conn)
-	comps = db.api.Competition.findall(flask.g.conn)
-	return flask.render_template("security.html", kudos=kudos, comps=comps)
+	return flask.render_template("security.html", kudos=db.data.KUDOS, comps=db.data.COMPETITIONS)
 
 @app.route("/src/")
 @app.route("/src/<project>")
 def src_redirect(project=None):
-	redir = db.api.SrcRedirect.find(flask.g.conn, project)
+	redir = db.data.REDIRECTS.src.get(project)
 
 	if not redir:
 		flask.abort(404)
 
-	return flask.redirect(redir.url, code=302)
+	return flask.redirect(redir, code=302)
 
 @app.route("/bin/")
 @app.route("/bin/<project>")
 def bin_redirect(project=None):
-	redir = db.api.BinRedirect.find(flask.g.conn, project)
+	redir = db.data.REDIRECTS.bin.get(project)
 
 	if not redir:
 		flask.abort(404)
 
-	return flask.redirect(redir.url, code=302)
+	return flask.redirect(redir, code=302)
 
 def _get_posts(_filter=None):
 	# Function to fix post objects.
@@ -311,9 +289,6 @@ if __name__ == "__main__":
 	parser.add_argument("-p", "--port", type=int, default=8888)
 	parser.add_argument("-H", "--host", type=str, default="0.0.0.0")
 	parser.add_argument("-D", "--debug", action="store_const", const=True, default=False)
-	parser.add_argument("-d", "--db-file", dest="dbfile", type=str, default=DB_FILE)
 
 	args = parser.parse_args()
-
-	DB_FILE = args.dbfile
 	run_server(args.host, args.port, args.debug)
