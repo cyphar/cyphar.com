@@ -1,7 +1,7 @@
-title: Making a Simple Scheduler for Arduino
+title: Making a Simple Scheduler for an Arduino
 author: Aleksa Sarai
 published: 2015-01-12 03:00:00
-updated: 2015-01-12 03:00:00
+updated: 2015-01-16 21:30:00
 description: The latest cool thing I worked on for [NCSS](http://ncss.edu.au/summer_school/) in order to play "The Final Countdown" on a single Arduino Uno with proper chords. Also because I really wanted to write a scheduler, and this was a good excuse.
 tags:
   - arduino
@@ -266,32 +266,49 @@ void loop() {
 
 
 ### How Does it Work? ###
-`tasks_tick()` is basically a function which checks through each of the
+`sched_tick()` is basically a function which checks through each of the
 registered tasks and checks if they should be fired. When they are fired, the
 correct callbacks and deregistration (or registration) functions are called.
 The actual source code for the scheduler is about 200 lines of code, due to
 it's relatively simple design.
 
 ### What's Next? ###
-I really want to do some black magic with `delay()` (or write my own delay-like
-function called `task_delay()` or similar) which would essentially cause the
-scheduler to run another task (or set of tasks) until the timeout expires. This
-obviously could get quite hairy quite quickly, but you can think of this as
-being fairly similar to the Go scheduler (it won't context switch to another
-goroutine until the current goroutine is in a blocking operation like a
-`select` block). The real benefit of this would be its insane simplicity (you
-wouldn't have to break down your functions into smaller tasks anymore, yay!)
-and the fact that there would be little to no code changes between the
-asynchronous and blocking versions of the same code.
+I really want to do some black magic with "delays" (where I write my own
+`delay()`-like function called `sched_delay()` or similar) which would
+essentially cause the scheduler to run another task (or set of tasks) until the
+timeout expires. This obviously could get quite hairy quite quickly, but you can
+think of this as being fairly similar to the Go scheduler (it won't context
+switch to another goroutine until the current goroutine is in a blocking
+operation like a `select` block). The real benefit of this would be its insane
+simplicity (you wouldn't have to break down your functions into smaller tasks
+anymore, yay!) and the fact that there would be little to no code changes
+between the asynchronous and blocking versions of the same code.
 
-However, the memory constraints might make a queueing system's overhead large
-enough that it would be impractical for my initial project (since you have to
-have a very short duty cycle when using PWM with a simple piezo buzzer in order
-use frequencies that are workable for music). But, even as I write this my mind
-is trying to figure out how I could implement such a queueing system so that
-the code using my scheduler is more readable and fast enough to work for my use
-case. And of course, in order to do proper context switches, you'd need to have
-multiple stacks (which further increases the memory overhead).
+However, there are a few issues. The largest of which is that the only way that
+I can think of implementing the above feature requires that I essentially write
+the guts of a full operating system scheduler (including the multiple stack
+code -- requiring me to write some assembly to copy the values of the registers
+and program counter). Not only that, but I'd have to come up with some way of
+returning control to the calling function after saving the task state (without
+interrupts or trap frames -- both of which are not restrictions for real
+kernels) in such a way that I can go back to the point after I leave the
+function when the task is rescheduled. This would require a lot of dark magic
+with inline assembly, and I can't really imagine how it would play with GCC's
+optimisations (GCC loves to mess with your branches such that `ret`s aren't
+where you think, and trying to jump the program counter after them is an
+exercise in futility). And of course, if I have to write assembly code then it
+starts to become more platform specific and then I need to start figuring out a
+new hack for every architecture. Another issue is the memory constraints that
+having so much data in motion for each task would have. It's unlikely that you
+could schedule more than 10 tasks with the 2K limit of dynamic memory on an
+Arduino UNO. Also, there are speed constraints to think about. The current
+design of the scheduler already is pushing the limits of PWM, it's unlikely
+that a more magical implementation would be able to keep up with the speed
+requirements of doing PWM effectively.
+
+To get an idea of how I would consider implementing such a feature, it would be
+some mixture of how [xv6](http://pdos.csail.mit.edu/6.828/2014/xv6.html) and
+[Go](https://golang.org/) do their scheduling.
 
 ### But ... why? ###
 If I had to explain it in a word: [NCSS](http://ncss.edu.au/summer_school/).
