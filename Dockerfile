@@ -43,19 +43,19 @@ RUN git clone git://github.com/SimonSapin/Flask-FlatPages.git /tmp/build/flask_f
 RUN cd /tmp/build/flask_flatpages && python3 ./setup.py install
 
 # Set up cyphar.com server directory.
-RUN mkdir -p -- /srv/db /srv/www
+RUN mkdir -p -- /srv/www
 WORKDIR /srv/www
 
 # Set up server user.
 RUN useradd -U -M -s /bin/nologin -- drone
 RUN passwd -d -- drone
 
-# Change ownership.
-RUN chown drone:drone -- /srv/www /srv/db
-USER drone
-
 # Copy over the cyphar.com app source.
 COPY . /srv/www
+
+# Change ownership.
+RUN chown drone:drone -R -- /srv/www
+USER drone
 
 # Set up cyphar.com and port config.
 EXPOSE 5000
