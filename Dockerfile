@@ -57,10 +57,7 @@ USER drone
 # Copy over the cyphar.com app source.
 COPY . /srv/www
 
-# Generate database
-RUN python3 db/initdb.py -d /srv/db/cyphar.db
-
 # Set up cyphar.com and port config.
 EXPOSE 5000
 ENTRYPOINT ["python3", "cyphar.py", "-H0.0.0.0", "-p5000"]
-CMD ["-d/srv/db/cyphar.db"]
+CMD []
