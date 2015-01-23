@@ -42,7 +42,7 @@ CONTACTS = [
 	},
 	{
 		"contact": "Twitter",
-		"url": "https://twitter.com/thecyphar",
+		"url": "https://twitter.com/lordcyphar",
 	},
 	{
 		"contact": "LinkedIn",
