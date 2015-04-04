@@ -11,9 +11,9 @@ for the discovery, responsible disclosure and collaboration in the fixing of sec
 {% for ack in kudos %}
 	<dt>
 		{% if ack.url %}
-			<a href="{{ ack.url }}">{{ ack.ack }}</a>
+			<a href="{{ ack.url }}">{{ ack.name }}</a>
 		{% else %}
-			<a>{{ ack.ack }}</a>
+			<a>{{ ack.name }}</a>
 		{% endif %}
 
 		{% if ack.vuln %}
@@ -37,9 +37,9 @@ The following are some notable compeitions which I have taken part in</p>
 {% for comp in comps %}
 	<dt>
 		{% if comp.url %}
-			<a href="{{ comp.url }}">{{ comp.comp }}</a>
+			<a href="{{ comp.url }}">{{ comp.name }}</a>
 		{% else %}
-			<a>{{ comp.comp }}</a>
+			<a>{{ comp.name }}</a>
 		{% endif %}
 
 		{% if comp.rank %}

@@ -59,14 +59,13 @@ def set_tracking_id():
 def home():
 	return flask.render_template("home.html", contacts=db.data.CONTACTS)
 
-@app.route("/projects")
 @app.route("/code")
 def projects():
-	return flask.render_template("projects.html", projects=db.data.PROJECTS)
+	return flask.render_template("code.html", projects=db.data.PROJECTS, contribs=db.data.CONTRIBS, comps=db.data.PROGCOMPS)
 
 @app.route("/security")
 def security():
-	return flask.render_template("security.html", kudos=db.data.KUDOS, comps=db.data.COMPETITIONS)
+	return flask.render_template("security.html", kudos=db.data.KUDOS, comps=db.data.SECCOMPS)
 
 @app.route("/src/")
 @app.route("/src/<project>")

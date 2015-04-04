@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block title %}Code{% endblock %}
+{% block description %}A list of the most notable software projects and competitions Aleksa Sarai has worked on.{% endblock %}
+{% block body %}
+
+<h2>Contributions</h2>
+<p>One of my greater passions is contributing to open source projects, to help
+improve the lives of developers and users around the world. The following is a
+list of projects I actively contribute to.</p>
+
+<dl>
+{% for contrib in contribs %}
+	<dt>
+		{% if contrib.url %}
+			<a href="{{ contrib.url }}">{{ contrib.name }}</a>
+		{% else %}
+			<a>{{ contrib.name }}</a>
+		{% endif %}
+
+		{% if contrib.language %}
+			<small>{{ contrib.language }}</small>
+		{% endif %}
+	</dt>
+
+	{% if contrib.description %}
+	<dd>
+		<p>{{ contrib.description|safe }}</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
+
+<h2>Projects</h2>
+<p>Having programmed for most a majority of my life, I have worked on quite a
+few software projects in that time. The following is a list of projects I've
+worked on as either chief or sole contributor.</p>
+
+<dl>
+{% for project in projects %}
+	<dt>
+		{% if project.url %}
+			<a href="{{ project.url }}">{{ project.name }}</a>
+		{% else %}
+			<a>{{ project.name }}</a>
+		{% endif %}
+
+		{% if project.language %}
+			<small>{{ project.language }}</small>
+		{% endif %}
+	</dt>
+
+	{% if project.description %}
+	<dd>
+		<p>{{ project.description|safe }}</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
+
+<h2>Competitions</h2>
+<p>In my spare time, I like working on programming problems and competing
+against others. The following is a list of competitions I've participated in.</p>
+
+<dl>
+{% for comp in comps %}
+	<dt>
+		{% if comp.url %}
+			<a href="{{ comp.url }}">{{ comp.name }}</a>
+		{% else %}
+			<a>{{ comp.name }}</a>
+		{% endif %}
+
+		{% if comp.rank %}
+			<small>{{ comp.rank }}</small>
+		{% endif %}
+	</dt>
+
+	{% if comp.description %}
+	<dd>
+		<p>{{ comp.description|safe }}</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
+
+{% endblock %}
