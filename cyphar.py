@@ -60,7 +60,7 @@ def home():
 	return flask.render_template("home.html", contacts=db.data.CONTACTS)
 
 @app.route("/code")
-def projects():
+def code():
 	return flask.render_template("code.html", projects=db.data.PROJECTS, contribs=db.data.CONTRIBS, comps=db.data.PROGCOMPS)
 
 @app.route("/security")
