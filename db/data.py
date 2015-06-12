@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # cyphar.com: my personal site's flask app
 # Copyright (C) 2014, 2015 Cyphar
 
@@ -62,7 +61,7 @@ PROJECTS = [
 		"name": "redone",
 		"language": "Python",
 		"url": "/src/redone",
-		"description": "A 'correct' implemetation of regular expression matching and substitution using finite state automata."
+		"description": "A 'correct' implementation of regular expression matching and substitution using finite state automata."
 	},
 	{
 		"name": "rawline",
@@ -127,7 +126,7 @@ CONTRIBS = [
 #		"name": "Linux",
 #		"language": "C + ASM",
 #		"url": "/src/linux",
-#		"description": "A modern (and exceptionally widely used) Unix-like operating system kernel. I implementated the PIDs cgroup controller, which required modification of the fork(2) path."
+#		"description": "A modern (and exceptionally widely used) Unix-like operating system kernel. I implemented the PIDs cgroup controller, which required modification of the fork(2) and clone(2) paths."
 #	},
 	{
 		"name": "Docker",
@@ -155,7 +154,7 @@ PROGCOMPS = [
 		"name": "NCSS Challenge (Advanced)",
 		"rank": "Perfect Score",
 		"url": "https://groklearning.com/challenge/",
-		"description": "A High School Python programming compettion, exploring advanced concepts. I acheived a perfect score in 2013 and 2014."
+		"description": "A High School Python programming competition, exploring advanced concepts. I achieved a perfect score in 2013 and 2014."
 	},
 ]
 
@@ -170,7 +169,7 @@ KUDOS = [
 		"name": "Microsoft (Online Services)",
 		"vuln": "Coldfusion Exploit (Root Access)",
 		"url": "http://technet.microsoft.com/en-us/security/cc308575#0214",
-		"description": "Due to an outdated version of Coldfusion installed on a Microsoft MSN server, I was able to bypass the administrative logon and gain administrative access. This would allow me to schedule tasks to run as a privelliged user, such as reverse shells, create users, etc."
+		"description": "Due to an outdated version of Coldfusion installed on a Microsoft MSN server, I was able to bypass the administrative login and gain administrative access. This would allow me to schedule tasks to run as a privileged user, such as reverse shells, create users, etc."
 	},
 	{
 		"name": "Grok Learning",
@@ -198,7 +197,7 @@ SECCOMPS = [
 		"name": "K17 CTF - 2013",
 		"rank": "4th Overall",
 		"url": "https://ctf.k17.org/scores",
-		"description": "A competition which contained challenges pertaining to web applications, reverse engineering and exploitation, cryptography, network and memory forensics and unix exploitation. I was mostly involved in the reverse engineering, cryptography and unix exploitation aspects of the competition and assisted the members working on the web application."
+		"description": "A competition which contained challenges pertaining to web applications, reverse engineering and exploitation, cryptography, network and memory forensics and Unix exploitation. I was mostly involved in the reverse engineering, cryptography and unix exploitation aspects of the competition and assisted the members working on the web application."
 	},
 	{
 		"name": "PHDays CTF IV Quals - 2014",
@@ -215,19 +214,19 @@ REDIRECTS = MagicDict({
 		"cypharcom":    "https://github.com/cyphar/cyphar.com",
 		"docker":       "https://github.com/docker/docker",
 		"libcontainer": "https://github.com/docker/libcontainer",
-		"linux":        "https: //www.kernel.org/",
-		"dotrush":      "https: //play.google.com/store/apps/details?id=com.jtdev.dotrush",
-		"redone":       "https: //github.com/cyphar/redone",
-		"ninjabot":     "https: //github.com/ackwell/ninjabot",
-		"rawline":      "https: //github.com/cyphar/rawline",
-		"perfectgift":  "https: //github.com/cyphar/perfectgift",
-		"epyc":         "https: //github.com/cyphar/epyc",
-		"synge":        "https: //github.com/cyphar/synge",
-		"copper":       "https: //github.com/cyphar/copper",
-		"ttu":          "https: //github.com/cyphar/ttu",
-		"tic-tac-toe":  "https: //github.com/cyphar/tic-tac-toe",
-		"ascii-snake":  "https: //github.com/cyphar/ascii-snake",
-		"moss":         "https: //github.com/cyphar/moss",
+		"linux":        "https://www.kernel.org/",
+		"dotrush":      "https://play.google.com/store/apps/details?id=com.jtdev.dotrush",
+		"redone":       "https://github.com/cyphar/redone",
+		"ninjabot":     "https://github.com/ackwell/ninjabot",
+		"rawline":      "https://github.com/cyphar/rawline",
+		"perfectgift":  "https://github.com/cyphar/perfectgift",
+		"epyc":         "https://github.com/cyphar/epyc",
+		"synge":        "https://github.com/cyphar/synge",
+		"copper":       "https://github.com/cyphar/copper",
+		"ttu":          "https://github.com/cyphar/ttu",
+		"tic-tac-toe":  "https://github.com/cyphar/tic-tac-toe",
+		"ascii-snake":  "https://github.com/cyphar/ascii-snake",
+		"moss":         "https://github.com/cyphar/moss",
 	},
 
 	"bin": {
