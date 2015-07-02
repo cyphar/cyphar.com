@@ -1,7 +1,9 @@
 [blog]
 * Filtering.
 	- Full-text search.
+* Cleanliness.
+	- Remove bolierplate for filter code (use inspect to automate some of it).
+	- Maybe even generate all of the functions and registration.
 
-[database]
-* Don't use database for static lists.
-* Consider switching to in-memory lists -- nothing is modified during runtime anyway.
+[home]
+* Make it more presentable.
