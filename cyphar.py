@@ -33,7 +33,7 @@ from werkzeug.contrib import atom
 import db.data
 
 FLATPAGES_AUTORELOAD = True
-FLATPAGES_ROOT = "blog/posts"
+FLATPAGES_ROOT = "db/posts"
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code"]
 
