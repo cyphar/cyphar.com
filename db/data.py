@@ -22,6 +22,8 @@
 
 # data.py -- website data store in in-memory objects.
 
+import collections
+
 __all__ = ["CONTACTS", "PROJECTS", "KUDOS", "COMPETITIONS"]
 
 class MagicDict(dict):
@@ -29,6 +31,9 @@ class MagicDict(dict):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.__dict__ = self
+
+# Quick and dirty way to automatically make a consistent OrderedDict statically.
+ordered_dict = lambda *args, **kwargs: collections.OrderedDict(sorted(dict(*args, **kwargs).items()))
 
 CONTACTS = [
 	{
@@ -123,27 +128,32 @@ PROJECTS = [MagicDict(item) for item in PROJECTS]
 CONTRIBS = [
 # XXX: Since it hasn't been merged yet, abstain from publishing it.
 #	{
-#		"name": "Linux",
+#		"links": ordered_dict({
+#			"Linux": "/src/linux",
+#		}),
 #		"language": "C + ASM",
-#		"url": "/src/linux",
 #		"description": "A modern (and exceptionally widely used) Unix-like operating system kernel. I implemented the PIDs cgroup controller, which required modification of the fork(2) and clone(2) paths."
 #	},
 	{
-		"name": "Docker",
+		"links": ordered_dict({
+			"Docker": "/src/docker",
+		}),
 		"language": "Go",
-		"url": "/src/docker",
 		"description": "The open-source application container engine, to which I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations)."
 	},
 	{
-		"name": "libcontainer",
+		"links": ordered_dict({
+			"runC": "/src/runc",
+			"libcontainer": "/src/libcontainer",
+		}),
 		"language": "Go",
-		"url": "/src/libcontainer",
 		"description": "A reference implementation for Docker containers. I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations), and maintain parts of the project."
 	},
 	{
-		"name": "ninjabot",
+		"links": ordered_dict({
+			"ninjabot": "/src/ninjabot",
+		}),
 		"language": "Python",
-		"url": "/src/ninjabot",
 		"description": "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core."
 	},
 ]
@@ -214,6 +224,7 @@ REDIRECTS = MagicDict({
 		"cypharcom":    "https://github.com/cyphar/cyphar.com",
 		"docker":       "https://github.com/docker/docker",
 		"libcontainer": "https://github.com/docker/libcontainer",
+		"runc":			"https://github.com/opencontainers/runc",
 		"linux":        "https://www.kernel.org/",
 		"dotrush":      "https://play.google.com/store/apps/details?id=com.jtdev.dotrush",
 		"redone":       "https://github.com/cyphar/redone",

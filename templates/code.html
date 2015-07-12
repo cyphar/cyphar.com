@@ -11,11 +11,18 @@ list of projects I have contributed to (and continue to actively contribute to).
 <dl>
 {% for contrib in contribs %}
 	<dt>
-		{% if contrib.url %}
-			<a href="{{ contrib.url }}">{{ contrib.name }}</a>
-		{% else %}
-			<a>{{ contrib.name }}</a>
-		{% endif %}
+		{% for name, url in contrib.links.items() %}
+			{% if url %}
+				<a href="{{ url }}">{{ name }}</a>
+			{% else %}
+				<a>{{ name }}</a>
+			{% endif %}
+
+			{# Slashes #}
+			{% if not loop.last %}
+				/
+			{% endif %}
+		{% endfor %}
 
 		{% if contrib.language %}
 			<small>{{ contrib.language }}</small>
