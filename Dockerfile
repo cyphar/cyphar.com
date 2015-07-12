@@ -50,9 +50,6 @@ WORKDIR /srv/www
 RUN useradd -U -M -s /bin/nologin -- drone
 RUN passwd -d -- drone
 
-# Copy over the cyphar.com app source.
-COPY . /srv/www
-
 # Change ownership.
 RUN chown drone:drone -R -- /srv/www
 USER drone
@@ -61,3 +58,7 @@ USER drone
 EXPOSE 5000
 ENTRYPOINT ["python3", "cyphar.py", "-H0.0.0.0", "-p5000"]
 CMD []
+
+# Copy over the cyphar.com app source.
+# Do this last to preserve the cache.
+COPY . /srv/www
