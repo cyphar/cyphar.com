@@ -294,3 +294,13 @@ footer.pagefooter {
 footer.pagefooter > p {
 	margin: 10px 0 0 0;
 }
+
+img#profile-image {
+	padding: 15px;
+	float: left;
+	-webkit-border-radius: 50%;
+	   -moz-border-radius: 50%;
+	     -o-border-radius: 50%;
+	        border-radius: 50%;
+	margin: 20px -100% auto 20px;
+}
