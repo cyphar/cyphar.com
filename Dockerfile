@@ -49,9 +49,6 @@ WORKDIR /srv/www
 # Set up server user.
 RUN useradd -U -M -s /bin/nologin -- drone
 RUN passwd -d -- drone
-
-# Change ownership.
-RUN chown drone:drone -R -- /srv/www
 USER drone
 
 # Set up cyphar.com and port config.
