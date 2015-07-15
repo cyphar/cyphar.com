@@ -206,7 +206,7 @@ article.main {
 	overflow: hidden;
 	color: #333333;
 	background-color: #f9f9f9;
-	padding: 25px 25% 25px 25%;
+	padding: 25px 5% 25px 5%;
 }
 
 article.main > h1 {
@@ -303,4 +303,16 @@ img#profile-image {
 	     -o-border-radius: 50%;
 	        border-radius: 50%;
 	margin: 20px -100% auto 20px;
+	display: none; /* hide this on mobile */
+}
+
+/* hacks to use the old style */
+@media screen and (min-width: 1000px) {
+	article.main {
+		padding: 25px 25% 25px 25% !important;
+	}
+
+	img#profile-image {
+		display: inline !important;
+	}
 }
