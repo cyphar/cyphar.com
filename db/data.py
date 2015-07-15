@@ -41,12 +41,20 @@ CONTACTS = [
 		"url": "https://github.com/cyphar",
 	},
 	{
-		"contact": "Bitbucket",
-		"url": "https://bitbucket.org/cyphar",
-	},
-	{
 		"contact": "Twitter",
 		"url": "https://twitter.com/lordcyphar",
+	},
+	{
+		"contact": "Keybase",
+		"url": "https://keybase.io/cyphar",
+	},
+	{
+		"contact": "Reddit",
+		"url": "https://www.reddit.com/user/cyphar",
+	},
+	{
+		"contact": "Bitbucket",
+		"url": "https://bitbucket.org/cyphar",
 	},
 	{
 		"contact": "LinkedIn",
