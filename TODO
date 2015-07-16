@@ -4,6 +4,3 @@
 * Cleanliness.
 	- Remove bolierplate for filter code (use inspect to automate some of it).
 	- Maybe even generate all of the functions and registration.
-
-[home]
-* Make it more presentable.
