@@ -134,14 +134,13 @@ PROJECTS = [
 PROJECTS = [MagicDict(item) for item in PROJECTS]
 
 CONTRIBS = [
-# XXX: Since it hasn't been merged yet, abstain from publishing it.
-#	{
-#		"links": ordered_dict({
-#			"Linux": "/src/linux",
-#		}),
-#		"language": "C + ASM",
-#		"description": "A modern (and exceptionally widely used) Unix-like operating system kernel. I implemented the PIDs cgroup controller, which required modification of the fork(2) and clone(2) paths."
-#	},
+	{
+		"links": ordered_dict({
+			"Linux": "/src/linux",
+		}),
+		"language": "C + ASM",
+		"description": 'A modern (and exceptionally widely used) Unix-like operating system kernel. I implemented the PIDs cgroup controller, which required modification of the `fork(2)` and `clone(2)` paths. In addition, I wrote a [blog post](/blog/post/getting-into-linux-kernel-development) with some recommendations for getting into kernel development.'
+	},
 	{
 		"links": ordered_dict({
 			"Docker": "/src/docker",

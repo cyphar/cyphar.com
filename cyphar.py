@@ -54,6 +54,13 @@ def set_locale():
 def set_tracking_id():
 	flask.g.tracking_id = TRACKING_ID
 
+def markitdown(obj, attr):
+	obj[attr] = flask_flatpages.pygmented_markdown(obj.get(attr, None) or "")
+
+def markthemdown(objs, attr):
+	for obj in objs:
+		markitdown(obj, attr)
+
 @app.route("/home")
 @app.route("/")
 def home():
@@ -61,10 +68,17 @@ def home():
 
 @app.route("/code")
 def code():
+	markthemdown(db.data.CONTRIBS, "description")
+	markthemdown(db.data.PROJECTS, "description")
+	markthemdown(db.data.PROGCOMPS, "description")
+
 	return flask.render_template("code.html", projects=db.data.PROJECTS, contribs=db.data.CONTRIBS, comps=db.data.PROGCOMPS)
 
 @app.route("/security")
 def security():
+	markthemdown(db.data.KUDOS, "description")
+	markthemdown(db.data.SECCOMPS, "description")
+
 	return flask.render_template("security.html", kudos=db.data.KUDOS, comps=db.data.SECCOMPS)
 
 @app.route("/src/")
@@ -111,9 +125,9 @@ def _get_posts(_filter=None):
 			post.meta["author"] = "Unknown"
 
 		post.meta["tags"] = sorted(tag.strip() for tag in post.meta["tags"])
-		post.meta["description"] = flask_flatpages.pygmented_markdown(post.meta["description"])
 		post.meta["url"] = flask.url_for("blog_post", name=post.path)
 
+		markitdown(post.meta, "description")
 		return post
 
 	# Generate set of posts in the FLATPAGES_ROOT.
