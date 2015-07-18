@@ -33,14 +33,7 @@ RUN apt-get upgrade -y
 
 # Install depenencies.
 RUN apt-get install -y python3 python3-pip
-RUN pip3 install flask pyyaml pygments markdown
-
-# XXX: Build flask_flatpages from the git HEAD.
-#      This is a temporary measure, until they add py3k support in the pip repos.
-RUN apt-get install -y git
-RUN mkdir /tmp/build
-RUN git clone git://github.com/SimonSapin/Flask-FlatPages.git /tmp/build/flask_flatpages
-RUN cd /tmp/build/flask_flatpages && python3 ./setup.py install
+RUN pip3 install flask flask-flatpages pygments
 
 # Set up cyphar.com server directory.
 RUN mkdir -p -- /srv/www
