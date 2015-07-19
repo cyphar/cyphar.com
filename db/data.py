@@ -92,7 +92,7 @@ PROJECTS = [
 		"name": "epyc",
 		"language": "Python",
 		"url": "/src/epyc",
-		"description": "A python templating language (written for <a href='/src/perfectgift'>perfectgift</a>)."
+		"description": "A python templating language (written for [perfectgift](/src/perfectgift))."
 	},
 	{
 		"name": "synge",
@@ -128,7 +128,7 @@ PROJECTS = [
 		"name": "moss",
 		"language": "C",
 		"url": "/src/moss",
-		"description": "A simple command-line file viewer. Supports regex searching, multiple files, switching to <code>$EDITOR</code> and file reloading."
+		"description": "A simple command-line file viewer. Supports regex searching, multiple files, switching to `$EDITOR` and file reloading."
 	},
 ]
 PROJECTS = [MagicDict(item) for item in PROJECTS]
@@ -180,7 +180,7 @@ KUDOS = [
 		"name": "Optus Voicemail Exploit",
 		"vuln": "Information Disclosure",
 		"url": "https://shubh.am/how-i-bypassed-2-factor-authentication-on-google-yahoo-linkedin-and-many-others/",
-		"description": "I assisted Shubham Shah in discovering (and testing) the Optus voicemail PIN bypass exploit. Due to a broken trust model, a forged caller ID would allow an attacker to bypass the PIN protection of voicemail and have full access to the victim's voicemail control panel. I also created the <a href='/bin/voicemail'>web application</a> used to test if a user's phone number is vulnerable."
+		"description": "I assisted Shubham Shah in discovering (and testing) the Optus voicemail PIN bypass exploit. Due to a broken trust model, a forged caller ID would allow an attacker to bypass the PIN protection of voicemail and have full access to the victim's voicemail control panel. I also created the [web application](/bin/voicemail) used to test if a user's phone number is vulnerable."
 	},
 	{
 		"name": "Microsoft (Online Services)",
@@ -198,13 +198,13 @@ KUDOS = [
 		"name": "Medium",
 		"vuln": "Information Disclosure",
 		"url": "https://medium.com/humans.txt",
-		"description": "Due to a vulnerable version of OpenSSL, Medium's servers were vulnerable to the <a href='http://heartbleed.com'>Heartbleed OpenSSL bug</a>, allowing up to 64kb of server memory to be disclosed to a hacker (possibly leaking private keys, users' passwords and POST data, etc)."
+		"description": "Due to a vulnerable version of OpenSSL, Medium's servers were vulnerable to the [Heartbleed OpenSSL bug](http://heartbleed.com/), allowing up to 64kb of server memory to be disclosed to a hacker (possibly leaking private keys, users' passwords and POST data, etc)."
 	},
 	{
 		"name": "Altervista",
 		"vuln": "Information Disclosure",
 		"url": "https://en.altervista.org/credits.php",
-		"description": "Due to a vulnerable version of OpenSSL, Altervista's control panel was vulnerable to the <a href='http://heartbleed.com'>Heartbleed OpenSSL bug</a>, allowing up to 64kb of server memory to be disclosed to a hacker (possibly leaking private keys, users' passwords and POST data, etc)."
+		"description": "Due to a vulnerable version of OpenSSL, Altervista's control panel was vulnerable to the [Heartbleed OpenSSL bug](http://heartbleed.com/), allowing up to 64kb of server memory to be disclosed to a hacker (possibly leaking private keys, users' passwords and POST data, etc)."
 	},
 ]
 KUDOS = [MagicDict(item) for item in KUDOS]
