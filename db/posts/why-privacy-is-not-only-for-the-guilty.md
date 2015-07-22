@@ -2,7 +2,10 @@ title: Why Privacy is not only for the Guilty
 author: Aleksa Sarai
 published: 2014-12-18 01:30:00
 updated: 2015-01-12 02:00:00
-description: My thoughts on anti-privacy laws and the argument "why care about  privacy if you have nothing to hide" (and similar) and why they **completely**  miss the point of privacy.
+description: >
+  My thoughts on anti-privacy laws and the argument "why care about privacy if
+  you have nothing to hide" (and similar) and why they **completely**  miss the
+  point of privacy.
 tags:
   - personal
   - privacy
