@@ -2,7 +2,11 @@ title: Making a Simple Scheduler for an Arduino
 author: Aleksa Sarai
 published: 2015-01-12 03:00:00
 updated: 2015-01-16 21:30:00
-description: The latest cool thing I worked on for [NCSS](http://ncss.edu.au/summer_school/) in order to play "The Final Countdown" on a single Arduino Uno with proper chords. Also because I really wanted to write a scheduler, and this was a good excuse.
+description: >
+  The latest cool thing I worked on for [NCSS](http://ncss.edu.au/summer_school/)
+  in order to play "The Final Countdown" on a single Arduino Uno with proper
+  chords. Also because I really wanted to write a scheduler, and this was a good
+  excuse.
 tags:
   - arduino
   - c
