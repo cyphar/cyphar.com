@@ -241,11 +241,15 @@ article.main > ol {
 
 article.main > ul > li,
 article.main > ol > li {
-	padding: 2px 0 2px 0;
+	padding: 5px 0 5px 0;
 }
 
 article.main > ul {
 	list-style-type: square;
+}
+
+article.main > ol {
+	list-style-type: decimal;
 }
 
 article.main > dl {
