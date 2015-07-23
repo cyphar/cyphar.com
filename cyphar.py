@@ -101,37 +101,36 @@ def bin_redirect(project=None):
 
 	return flask.redirect(redir, code=302)
 
+def _fix_post_meta(post):
+	if "title" not in post.meta:
+		post.meta["title"] = "Untitled"
+
+	if "published" not in post.meta:
+		# Default to the Unix Epoch.
+		post.meta["published"] = datetime.datetime(1970, 1, 1)
+
+	if "updated" not in post.meta:
+		# Default to never updated.
+		post.meta["updated"] = post.meta["published"]
+
+	if "tags" not in post.meta:
+		post.meta["tags"] = []
+
+	if "description" not in post.meta:
+		post.meta["description"] = ""
+
+	if "author" not in post.meta:
+		post.meta["author"] = "Unknown"
+
+	post.meta["tags"] = sorted(tag.strip() for tag in post.meta["tags"])
+	post.meta["url"] = flask.url_for("blog_post", name=post.path)
+
+	markitdown(post.meta, "description")
+	return post
+
 def _get_posts(_filter=None):
-	# Function to fix post objects.
-	def _nice(post):
-		if "title" not in post.meta:
-			post.meta["title"] = "Untitled"
-
-		if "published" not in post.meta:
-			# Default to the Unix Epoch.
-			post.meta["published"] = datetime.datetime(1970, 1, 1)
-
-		if "updated" not in post.meta:
-			# Default to never updated.
-			post.meta["updated"] = post.meta["published"]
-
-		if "tags" not in post.meta:
-			post.meta["tags"] = []
-
-		if "description" not in post.meta:
-			post.meta["description"] = ""
-
-		if "author" not in post.meta:
-			post.meta["author"] = "Unknown"
-
-		post.meta["tags"] = sorted(tag.strip() for tag in post.meta["tags"])
-		post.meta["url"] = flask.url_for("blog_post", name=post.path)
-
-		markitdown(post.meta, "description")
-		return post
-
 	# Generate set of posts in the FLATPAGES_ROOT.
-	posts = [_nice(post) for post in flatpages]
+	posts = [_fix_post_meta(post) for post in flatpages]
 	posts = sorted(posts, key=lambda item: item["published"], reverse=True)
 
 	# Filter the set of posts by the given filter (if applicable).
@@ -259,6 +258,7 @@ def blog_post(name):
 	post = flatpages.get_or_404(name)
 
 	# Add post identifier data.
+	post = _fix_post_meta(post)
 	post.meta["ident"] = name
 
 	return flask.render_template("blog/post.html", post=post)
