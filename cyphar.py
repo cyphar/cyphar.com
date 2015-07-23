@@ -150,50 +150,34 @@ def _paginate_posts(posts, page=1):
 
 	return posts[page_start:page_end], pages
 
-@app.route("/blog/")
-@app.route("/blog/<int:page>")
-def blog(page=1):
-	# Get posts.
-	posts = _get_posts(None)
-	pg_posts, pages = _paginate_posts(posts, page)
+def blog_filter_generic(app, rules, label, _filter):
+	name = "blog+%s" % (label or "",)
 
-	# If the page number is invalid, bail.
-	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
-	if page < 1 or (page > pages and posts):
-		flask.abort(404)
+	def wrapper(page=1, **kwargs):
+		# Get posts.
+		posts = _get_posts(_filter)
+		pg_posts, pages = _paginate_posts(posts, page)
 
-	# Used to abstract filter links.
-	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", **kwargs)
-	flask.g.bl_filter_type = None
-	flask.g.bl_filter = None
+		# If the page number is invalid, bail.
+		# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
+		if page < 1 or (page > pages and posts):
+			flask.abort(404)
 
-	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+		# Used to abstract filter links.
+		flask.g.bl_url_for = lambda **kwargs: flask.url_for(name, **kwargs)
+		flask.g.bl_filter_type = label
+		flask.g.bl_filter = tp
 
-@app.route("/blog/tag/<tag>")
-@app.route("/blog/tag/<tag>/<int:page>")
-def blog_filter_tag(tag, page=1):
-	# Generate filter.
-	_filter = lambda post: tag in post["tags"]
+		return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
 
-	# Get posts.
-	posts = _get_posts(_filter)
-	pg_posts, pages = _paginate_posts(posts, page)
+	for rule in rules:
+		app.add_url_rule(rule, name, wrapper)
 
-	# If the page number is invalid, bail.
-	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
-	if page < 1 or (page > pages and posts):
-		flask.abort(404)
-
-	# If there are no posts, it's a bogus tag.
-	if not posts:
-		flask.abort(404)
-
-	# Used to abstract filter links.
-	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
-	flask.g.bl_filter_type = "Tag"
-	flask.g.bl_filter = tag
-
-	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
+blog_filter_generic(app, ["/blog/", "/blog/<int:page>"], None, None)
+blog_filter_generic(app, ["/blog/tag/<tag>", "/blog/tag/<tag>/<int:page>"], "Tag", None)
+blog_filter_generic(app, ["/blog/author/<author>", "/blog/author/<author>/<int:page>"], "Tag", None)
+@app.route("")
+@app.route("/blog/author/<author>/<int:page>")
 
 @app.route("/blog/author/<author>")
 @app.route("/blog/author/<author>/<int:page>")
