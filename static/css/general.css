@@ -107,6 +107,14 @@ li.spacer {
 	padding: 8px !important;
 }
 
+blockquote {
+	border-left: 4px solid #d64937;
+	padding: 10px;
+	background-color: #d3d3d3;
+	font-style: italic;
+	color: #444444;
+}
+
 /* header title */
 header.navbar {
 	overflow: hidden;
