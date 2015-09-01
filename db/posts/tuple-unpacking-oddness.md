@@ -1,7 +1,7 @@
 title: Tuple Unpacking Oddness
 author: Aleksa Sarai
 published: 2015-09-01 01:00:00
-updated: 2015-09-01 16:35:00
+updated: 2015-09-01 18:10:00
 description: >
   While working on tutoring the [NCSS Challenge](https://groklearning.com/), I
   found a very interesting oddity of Python's tuple unpacking execution order.
@@ -43,6 +43,21 @@ True
 ... Wait, what? So not only didn't it do what we'd expect (that the values would
 be switched), but in addition it didn't even affect the list? Even though
 clearly the first portion of the tuple simply **must** modify the list, right?
+
+However, if we switch the order of the list, we see what we'd expect:
+
+```language-python
+>>> L = [b, a]
+>>> L[L.index(a)], L[L.index(b)] = b, a
+>>> L == [b, a]
+False
+>>> L == [a, b]
+True
+```
+
+So what the hell is going on here? It looks like the list is always going to end
+up being `[a, b]` using this method. There's clearly something fishy going on
+here.
 
 ### Can't Touch **`dis`**&sup1; ###
 So, after staring at the code for ten minutes or so (and some very generous help
