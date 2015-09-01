@@ -1,7 +1,7 @@
 title: Tuple Unpacking Oddness
 author: Aleksa Sarai
 published: 2015-09-01 01:00:00
-updated: 2015-09-01 01:00:00
+updated: 2015-09-01 16:35:00
 description: >
   While working on tutoring the [NCSS Challenge](https://groklearning.com/), I
   found a very interesting oddity of Python's tuple unpacking execution order.
@@ -105,7 +105,7 @@ L[L.index(a)] = b
 L[L.index(b)] = a
 ```
 
-Which explains why there's no change! We modify it `L[0]` and then revert it
+Which explains why there's no change! We modify `L[0]` and then revert it
 immediately. This seemed to be (at least in my opinion) a violation of the order
 of operations of subscripting and tuple unpacking.
 
@@ -131,8 +131,10 @@ the one sentence that perfectly defines your situation).
 
 In particular, [&sect;7.2][spec-7.2] states that:
 
+> If the target list is a comma-separated list of targets: [...] the items are
+> assigned, **from left to right**, to the corresponding targets. [...]
 > Assignment of an object to a single target is recursively defined as follows
-> [...] If the target is a subscription: The primary expression in the reference
+> [...] if the target is a subscription: The primary expression in the reference
 > is evaluated. It should yield either a mutable sequence object [...] **Next,
 > the subscript expression is evaluated.** [emphasis added]
 
