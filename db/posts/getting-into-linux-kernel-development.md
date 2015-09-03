@@ -1,7 +1,7 @@
 title: Getting into Linux Kernel Development
 author: Aleksa Sarai
 published: 2015-07-15 14:20:00
-updated: 2015-07-19 17:00:00
+updated: 2015-09-03 12:00:00
 description: >
   I've been interested in kernel development for a *long* time, and recently got
   some patches merged into the Linux kernel. Here are my experiences about the
@@ -167,8 +167,13 @@ mainly because of my lack of experience with kernel development. A lot of this
 stuff is still new to me, and I'm still learning a lot more about the kernel
 every day by just reading code and trying to fix bugs.
 
+As of [8bdc69b764013a9b5ebeef7df8f314f1066c5d79][linus] all of the changes I
+refer to in this blog post have been merged into Linus' tree during the 4.3
+merge window.
+
 So, all's well that ends well. Don't be afraid of diving into kernel development
 feet first. Books won't help you (they're all out of date), but reading the code
 will. As an old man once told me, "Read the source, Luke!"
 
 [merged]: https://lkml.org/lkml/2015/7/14/711
+[linus]: https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=8bdc69b764013a9b5ebeef7df8f314f1066c5d79
