@@ -30,6 +30,9 @@ import urllib.parse
 import flask
 import flask_flatpages
 from werkzeug.contrib import atom
+
+import bleach
+
 import db.data
 
 FLATPAGES_AUTORELOAD = True
@@ -54,8 +57,13 @@ def set_locale():
 def set_tracking_id():
 	flask.g.tracking_id = TRACKING_ID
 
-def markitdown(obj, attr):
-	obj[attr] = flask_flatpages.pygmented_markdown(obj.get(attr, None) or "")
+def markmedown(thing):
+	return flask_flatpages.pygmented_markdown(thing)
+
+def markitdown(obj, attr, tags=None):
+	obj[attr] = markmedown(obj.get(attr, None) or "")
+	if tags is not None:
+		obj[attr] = bleach.clean(obj[attr], tags=tags, strip=True)
 
 def markthemdown(objs, attr):
 	for obj in objs:
@@ -125,6 +133,7 @@ def _fix_post_meta(post):
 	post.meta["tags"] = sorted(tag.strip() for tag in post.meta["tags"])
 	post.meta["url"] = flask.url_for("blog_post", name=post.path)
 
+	markitdown(post.meta, "title", tags=["em", "strong"])
 	markitdown(post.meta, "description")
 	return post
 

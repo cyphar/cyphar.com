@@ -33,7 +33,7 @@ RUN apt-get upgrade -y
 
 # Install depenencies.
 RUN apt-get install -y python3 python3-pip
-RUN pip3 install flask flask-flatpages pygments
+RUN pip3 install flask flask-flatpages pygments bleach
 
 # Set up cyphar.com server directory.
 RUN mkdir -p -- /srv/www

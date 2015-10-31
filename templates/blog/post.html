@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}{{ post.title }}{% endblock %}
+{% block title %}{{ post.title | striptags }}{% endblock %}
 {% block _head %}
 <script type="text/javascript">
 	// Set Disqus variables.
@@ -20,7 +20,7 @@
 
 <h2>
 	<a href="{{ url_for("blog") }}">&laquo;</a>
-	{{ post.title }}
+	{{ post.title | safe }}
 	<p class="floatright">
 		<small><a href="{{ url_for("blog_filter_author", author=post.author) }}">{{ post.author }}</a></small>
 	</p>
