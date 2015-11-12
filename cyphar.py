@@ -36,7 +36,7 @@ import bleach
 import db.data
 
 FLATPAGES_AUTORELOAD = True
-FLATPAGES_ROOT = "db/posts"
+FLATPAGES_ROOT = "doc/published"
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code"]
 
