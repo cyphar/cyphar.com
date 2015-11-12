@@ -89,6 +89,13 @@ def security():
 
 	return flask.render_template("security.html", kudos=db.data.KUDOS, comps=db.data.SECCOMPS)
 
+@app.route("/papers")
+def papers():
+	markthemdown(db.data.PAPERS.authored, "description")
+	markthemdown(db.data.PAPERS.coauthored, "description")
+
+	return flask.render_template("papers.html", papers=db.data.PAPERS)
+
 @app.route("/src/")
 @app.route("/src/<project>")
 def src_redirect(project=None):

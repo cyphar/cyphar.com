@@ -24,8 +24,6 @@
 
 import collections
 
-__all__ = ["CONTACTS", "PROJECTS", "KUDOS", "COMPETITIONS"]
-
 class MagicDict(dict):
 	"A dict-like object that allows you to reference keys through attributes using magic."
 	def __init__(self, *args, **kwargs):
@@ -34,6 +32,8 @@ class MagicDict(dict):
 
 # Quick and dirty way to automatically make a consistent OrderedDict statically.
 ordered_dict = lambda *args, **kwargs: collections.OrderedDict(sorted(dict(*args, **kwargs).items()))
+
+# Contacts.
 
 CONTACTS = [
 	{
@@ -62,6 +62,8 @@ CONTACTS = [
 	},
 ]
 CONTACTS = [MagicDict(item) for item in CONTACTS]
+
+# Code.
 
 PROJECTS = [
 	{
@@ -175,6 +177,8 @@ PROGCOMPS = [
 	},
 ]
 
+# Security.
+
 KUDOS = [
 	{
 		"name": "Optus Voicemail Exploit",
@@ -225,6 +229,8 @@ SECCOMPS = [
 ]
 SECCOMPS = [MagicDict(item) for item in SECCOMPS]
 
+# Redirects under https://www.cyphar.com/{src,bin}/.
+
 REDIRECTS = MagicDict({
 	"src": {
 		None:           "https://github.com/cyphar",
@@ -251,4 +257,25 @@ REDIRECTS = MagicDict({
 		None:        "https://scripts.cyphar.com/",
 		"voicemail": "https://scripts.cyphar.com/voicemail",
 	},
+})
+
+# Papers.
+
+AUTHORED = [
+
+]
+
+COAUTHORED = [
+	{
+		"title": "Photometry of very bright stars with Kepler and K2 smear data",
+		"year": 2015,
+		"field": "Astrophysics",
+		"url": "http://arxiv.org/abs/1510.00008",
+		"description": "This paper came about due to research I was working on within the asteroseismology group at the University of Sydney. After working on figuring out how to do analysis of targets inside the *Kepler* K2 field, a couple of techniques were being worked on -- the one outlined in this paper being one of them. [Benjamin Pope](http://www-astro.physics.ox.ac.uk/~popeb/) and [Tim White](http://www.astro.physik.uni-goettingen.de/~twhite/) did most of the work refining this technique and applying it, my own research uses a very different technique.",
+	},
+]
+
+PAPERS = MagicDict({
+	"authored": [MagicDict(item) for item in AUTHORED],
+	"coauthored": [MagicDict(item) for item in COAUTHORED],
 })

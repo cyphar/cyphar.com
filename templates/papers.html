@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}Papers{% endblock %}
+{% block description %}A list of the papers Aleksa Sarai has written and been a coauthor on.{% endblock %}
+{% block body %}
+
+{# <!-- Hide this until my paper is published (in 2016). -->
+
+<h2 id="authored">Authored</h2>
+<p>As part of my interest in science, I've done research at the University of Sydney
+in the Astrophysics department. I hope to continue doing research in other fields,
+and go on to do post-graduate research.</p>
+
+<dl>
+{% for paper in papers.authored %}
+	<dt>
+		{% if paper.url %}
+			<a href="{{ paper.url }}">{{ paper.title }}</a>
+		{% else %}
+			<a>{{ paper.title }}</a>
+		{% endif %}
+
+		<p>
+			{% if paper.field %}
+				<small>{{ paper.year }} | {{ paper.field }}</small>
+			{% endif %}
+		</p>
+	</dt>
+
+	{% if paper.description %}
+	<dd>
+		<p>
+			{{ paper.description|safe }}
+		</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
+
+#}
+
+<h2 id="coauthored">Coauthored</h2>
+<p>In addition to doing my own research and writing my own papers, I've also
+collaborated with other researchers to produce papers on which I am a coauthor.</p>
+
+<dl>
+{% for paper in papers.coauthored %}
+	<dt>
+		{% if paper.url %}
+			<a href="{{ paper.url }}">{{ paper.title }}</a>
+		{% else %}
+			<a>{{ paper.title }}</a>
+		{% endif %}
+
+		<p>
+			{% if paper.field %}
+				<small>{{ paper.year }} | {{ paper.field }}</small>
+			{% endif %}
+		</p>
+	</dt>
+
+	{% if paper.description %}
+	<dd>
+		<p>
+			{{ paper.description|safe }}
+		</p>
+	</dd>
+	{% endif %}
+{% endfor %}
+</dl>
+
+{% endblock %}
