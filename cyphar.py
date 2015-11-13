@@ -38,7 +38,12 @@ import db.data
 FLATPAGES_AUTORELOAD = True
 FLATPAGES_ROOT = "doc/published"
 FLATPAGES_EXTENSION = ".md"
-FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code"]
+FLATPAGES_MARKDOWN_EXTENSIONS = [
+	"fenced_code",
+	"mdx_unimoji", "mdx_math", "mdx_subscript", "mdx_superscript",
+	"markdown_newtab",
+	"markdown.extensions.toc", "markdown.extensions.smarty",
+]
 
 PAGE_SIZE = 20
 ATOM_FEED_SIZE = 15

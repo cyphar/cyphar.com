@@ -95,11 +95,19 @@ b {
 	font-weight: bold;
 }
 
-small {
+small, sup, sub {
 	font-size: 12px;
 	font-weight: normal;
 	line-height: 1.2em;
 	padding: 0.6em;
+}
+
+sup {
+	vertical-align: super;
+}
+
+sub {
+	vertical-align: sub;
 }
 
 li.spacer {
