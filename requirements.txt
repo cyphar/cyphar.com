@@ -10,3 +10,4 @@ git+git://github.com/Undeterminant/markdown-newtab.git
 git+git://github.com/mitya57/python-markdown-math.git
 git+git://github.com/jambonrose/markdown_superscript_extension.git
 git+git://github.com/jambonrose/markdown_subscript_extension.git
+git+git://github.com/aleray/mdx_del_ins.git

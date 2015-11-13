@@ -110,6 +110,11 @@ sub {
 	vertical-align: sub;
 }
 
+h3 > del {
+	text-decoration: none;
+	background-image: linear-gradient(transparent 13px, black 1px, black 16px,transparent 1px);
+}
+
 li.spacer {
 	list-style: none;
 	padding: 8px !important;
