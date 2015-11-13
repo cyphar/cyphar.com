@@ -1,7 +1,7 @@
 title: Tuple Unpacking Oddness
 author: Aleksa Sarai
 published: 2015-09-01 01:00:00
-updated: 2015-09-01 18:10:00
+updated: 2015-11-13 18:05:00
 description: >
   While working on tutoring the [NCSS Challenge](https://groklearning.com/), I
   found a very interesting oddity of Python's tuple unpacking execution order.
@@ -59,7 +59,7 @@ So what the hell is going on here? It looks like the list is always going to end
 up being `[a, b]` using this method. There's clearly something fishy going on
 here.
 
-### Can't Touch **`dis`**&sup1; ###
+### Can't Touch **`dis`**^1^ ###
 So, after staring at the code for ten minutes or so (and some very generous help
 from my fellow tutors) we nailed what the problem was. First we busted out `dis`
 to see what CPython was **actually** executing and *in what order*.
@@ -124,7 +124,7 @@ Which explains why there's no change! We modify `L[0]` and then revert it
 immediately. This seemed to be (at least in my opinion) a violation of the order
 of operations of subscripting and tuple unpacking.
 
-<small>&sup1; I'm sorry, I'm so sorry. I just couldn't resist.</small>
+^^**1**^ I'm sorry, I'm so sorry. I just couldn't resist.^
 
 ### Versions of Python Affected ###
 This appeared to affect the following Python versions and implementations:
