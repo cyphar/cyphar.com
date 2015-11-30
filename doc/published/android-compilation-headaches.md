@@ -1,7 +1,7 @@
 title: Android Compilation Headaches
 author: Aleksa Sarai
 published: 2015-11-28 03:20:00
-updated: 2015-11-28 03:20:00
+updated: 2015-12-01 07:00:00
 description: >
   I've spent the last week of my life trying to build [TWRP](https://twrp.me/),
   which requires having a full, and working Android build environment. With the
@@ -243,3 +243,25 @@ by producing a *conclusive* set of instructions on how to build Android and how
 to solve common problems.
 
 [submitted-patchset]: https://gerrit.omnirom.org/#/q/topic:issue/525
+
+### UPDATE: I Booted! ###
+
+So, after I got a response from upstream, I decided I needed to sort this out. I
+figured out that I didn't actually need to compile a whole new kernel (and all
+of the device problems that causes). All I needed to do was to rip apart an
+existing [`recovery.img`][twrp-bacon] and then modify the ramdisk to contain my
+changes. In particular you just needed to update these paths:
+
+* `/sbin/recovery`
+* `/sbin/twrp` (if you've changed the command-line for TWRP)
+* `/twres` (if you've changed the resources)
+
+Afterwards, make sure that you use the **exact same** options for `mkbootimg`
+when gluing together all of the pieces (make sure you include everything that
+was in the original recovery image too).
+
+This worked and allowed me to boot, allowing me to bypass the compilation of
+Android entirely. So, I guess you could call this a success? It's still pretty
+messed up though.
+
+[twrp-bacon]: https://twrp.me/devices/oneplusone.html
