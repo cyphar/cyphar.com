@@ -28,11 +28,10 @@ FROM ubuntu:14.04
 MAINTAINER "cyphar <cyphar@cyphar.com>"
 
 # Make sure the repos and packages are up to date
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt-get update && \
+	apt-get upgrade -y && \
+	apt-get install -y python3 python3-pip git pandoc
 
-# Install depenencies.
-RUN apt-get install -y python3 python3-pip git pandoc
 COPY requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
 
@@ -41,8 +40,8 @@ RUN mkdir -p -- /srv/www
 WORKDIR /srv/www
 
 # Set up server user.
-RUN useradd -U -M -s /bin/nologin -- drone
-RUN passwd -d -- drone
+RUN useradd -U -M -s /bin/nologin -- drone && \
+	passwd -d -- drone
 USER drone
 
 # Set up cyphar.com and port config.
