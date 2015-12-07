@@ -14,6 +14,7 @@ tags:
   - science
   - peer review
   - free software
+  - licensing
   - programming
 
 Before I start, I'd like the make the record clear: I am **not** a [GPL][gpl],
