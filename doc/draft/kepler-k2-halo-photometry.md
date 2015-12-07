@@ -179,11 +179,10 @@ to point to something and say "I've done something real".
 
 ## Where's the code at? ##
 
-Of course, the code has been made open source and [is available on GitHub][git],
-licensed under the GNU General Public License (version 2 only). The reason for
-using the GPL, rather than my usual choice of the MIT license is mainly
-philosophical (and I should probably write up a blog post on this topic) and is
-better explained [here][proprietary-poison].
+Of course, the code is free software and [is available on GitHub][git], licensed
+under the GNU General Public License (version 2 only). The reason for using the
+GPL, rather than my usual choice of the MIT license is mainly philosophical, and
+is thoroughly explained [here][proprietary-poison].
 
 [git]: https://github.com/cyphar/keplerk2-halo
 [proprietary-poison]: research-code-licensing

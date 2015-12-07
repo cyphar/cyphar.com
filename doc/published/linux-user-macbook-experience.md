@@ -1,7 +1,7 @@
 title: A Linux User's OS X Experience
 author: Aleksa Sarai
 published: 2015-07-24 02:00:00
-updated: 2015-07-24 02:00:00
+updated: 2015-12-07 22:30:00
 description: >
   Someone gave me a new Macbook as a gift, and I decided to give OS X a chance
   before I purge and install Arch Linux on it. As a result, I now need to vent
@@ -61,8 +61,8 @@ I only need my operating system to do a few *exceptionally* simple things:
 
 OS X fails to do *all* of the above things. I'm sure that it's fine for ordinary
 people if the above points are not met. But as a developer (and as a lover of
-open source software), these are not negotiable points for me. I will not permit
-a proprietary swipey operating system to make me forgo my ideals.
+free software), these are not negotiable points for me. I will not permit a
+proprietary swipey operating system to make me forgo my ideals.
 
 [negative-in-the-freedom-dimension]: https://www.gnu.org/philosophy/free-sw.html
 

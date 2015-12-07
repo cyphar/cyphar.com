@@ -1,7 +1,7 @@
 title: Android Compilation Headaches
 author: Aleksa Sarai
 published: 2015-11-28 03:20:00
-updated: 2015-12-01 07:00:00
+updated: 2015-12-07 22:30:00
 description: >
   I've spent the last week of my life trying to build [TWRP](https://twrp.me/),
   which requires having a full, and working Android build environment. With the
@@ -13,10 +13,10 @@ description: >
   build system.
 tags:
   - android
-  - open source
+  - free software
   - rant
 
-*"Open source projects are only useful if you can build them for yourselves."*
+*"Free software projects are only useful if you can build them for yourselves."*
 
 I'm sure that most developers would agree with this statement, even if all you
 want to do is test changes you've written before sending them upstream. What good

@@ -1,7 +1,7 @@
 title: Getting into Linux Kernel Development
 author: Aleksa Sarai
 published: 2015-07-15 14:20:00
-updated: 2015-09-03 12:00:00
+updated: 2015-12-07 22:30:00
 description: >
   I've been interested in kernel development for a *long* time, and recently got
   some patches merged into the Linux kernel. Here are my experiences about the
@@ -10,7 +10,7 @@ tags:
   - linux
   - kernel
   - c
-  - open source
+  - free software
   - programming
 
 I don't know about you, but I've always found the idea of kernel programming to
