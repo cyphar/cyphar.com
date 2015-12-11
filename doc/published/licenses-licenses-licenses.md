@@ -45,9 +45,11 @@ should consider it while choosing a license.
 
 #### Version 2 ####
 
-In my personal opinion, version 2 of the GPL is the only acceptable version of
-the license. It is free of the "tivoisation" clause, as well as not including
-any mention of the Affero GPL, patent or other such exceptions.
+In my personal opinion, version 2 of the GPL is a very good license, as long as
+you are not concerned with "tivoisation" of your software. While "tivoisation"
+is a slightly unfair term (TiVo aren't the devil), introduction of effective
+anti-circumvention measures to free software that restrict users is very harmful
+behaviour. If you decide to ship free software, you need to play by the rules.
 
 Unfortunately, version 2 of the license is not as internationalised as version 3,
 and it is very likely that it may not apply in certain jurisdictions. While this
@@ -56,13 +58,21 @@ might be a problem for you.
 
 #### Version 3 ####
 
-The issues with this license mainly involve the "tivoisation" clause. "Tivoisation"
-is a word that Richard Stallman invented to try to convince others that creating
-hardware which "resists anti-circumvention measures" is immoral. This is clearly
-wrong (in certain cases, free software that provides anti-circumvention measures
-is quite favourable). In addition, the "tivoisation" clause in the license is
-**exceptionally** vague and I definitely wouldn't license any software that has
-reasonable security measures under it.
+I personally agree with the view on anti-circumvention. Such technology is entirely
+valid, so long as the user has control over the software (and that's the entire
+point of free software). While it is true that "tivoised" software can contribute
+useful patches back to the original project (as happened with TiVo), one can
+imagine a dystopia where no users can run modified versions of the free software
+they have been given. At that point, their freedoms are all but useless, and that
+is the dystopia Richard Stallman and the FSF are trying to counteract. I was not
+always in favour of version 3 of the GPL, mainly because the anti-circumvention
+clause always hit me as being vague. However, what's quite important to establish
+upfront is the intent of the author.
+
+The GPL version 3 also has much nicer patent protections for users, resulting in
+much more explicit patent grants from all contributors and distributors to all
+users. This is nice, and if you agree with the "tivoisation" clause (or you don't
+care) you should use version 3 as it is a superior license in several respects.
 
 #### The Danger of "Or Any Later Version" ####
 
