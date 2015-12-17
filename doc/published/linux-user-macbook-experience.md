@@ -1,7 +1,7 @@
-title: A Linux User's OS X Experience
+title: A GNU/Linux User's OS X Experience
 author: Aleksa Sarai
 published: 2015-07-24 02:00:00
-updated: 2015-12-07 22:30:00
+updated: 2015-12-18 00:00:00
 description: >
   Someone gave me a new Macbook as a gift, and I decided to give OS X a chance
   before I purge and install Arch Linux on it. As a result, I now need to vent
@@ -17,7 +17,7 @@ rant, so that should be expected by nature. If you're insulted by that, you can
 fuck right off.
 
 I just want to start out by saying that I *did* give OS X a chance to impress
-me. I used my new Macbook (without any Linux VMs or anything else) as my daily
+me. I used my new Macbook (without any GNU/Linux VMs or anything else) as my daily
 driver for almost a full week. I decided against using VMs, because if you have
 to supplement your operating system with another (ore useful) operating system
 then that's not exactly a good thing.
@@ -30,7 +30,7 @@ I really did. So, what's my opinion on OS X?
 I can't stand it any more. Get me the fuck out of here.
 
 I'm currently writing this blog post inside `vim` on my Mac. And I'll admit that
-the font rendering is nicer than my minimalist Linux setups. But that's not a
+the font rendering is nicer than my minimalist GNU/Linux setups. But that's not a
 selling point to me. I don't give a shit how far you can zoom in without seeing
 pixels. I care about feeling the power of a modern operating system and being
 able to build any software I want. I cannot do either with OS X.
@@ -80,15 +80,15 @@ everything wrong (though it's not too far from the truth).
 2. Unification. One of the few benefits you have of having an uncustomisable
    system is that the entire system is (by definition) one unit and can work
    seamlessly together. While I don't like the lack of configuration, I do like
-   how things like `open` and [f.lux][flux] just work out of the box. Linux does
-   have `xdg-open`, but my experience with it has always been quite dodgy.
+   how things like `open` and [f.lux][flux] just work out of the box. GNU/Linux
+   does have `xdg-open`, but my experience with it has always been quite dodgy.
 
-3. Pretty nice font rendering. I must admit that getting crisp fonts in Linux
+3. Pretty nice font rendering. I must admit that getting crisp fonts in GNU/Linux
    has always been a bit of a pain. That said, for terminal work I like
    pixelated fonts like [dina][dina-font] (unfortunately, that doesn't work for
    high pixel density screens like this Macbook). Chrome fonts looks very crisp
-   under OS X, and I've had people tell me that my font rendering under Linux is
-   absolute crap.
+   under OS X, and I've had people tell me that my font rendering under GNU/Linux
+   is absolute crap.
 
 [flux]: https://justgetflux.com/
 [dina-font]: https://www.donationcoder.com/Software/Jibz/Dina/
@@ -113,7 +113,7 @@ As an Arch Linux user, I'm used to being able to replace any part of the system
 with something I prefer (in fact, in Arch, you have to build your system from
 the bare minimum). That's a model I much prefer when it comes to computing. I
 knew going into this that OS X would be different. That should be expected. Even
-in Linux systems like Ubuntu, changing components is unreasonably difficult.
+in GNU/Linux systems like Ubuntu, changing components is unreasonably difficult.
 However, I would never have thought it would be nigh impossible to change any
 aspect of the system in OS X.
 
@@ -189,12 +189,12 @@ bullshit. OS X impotency for development is not a design decision to make
 separation of concern part of the operating system. It's just that OS X doesn't
 do what a developer needs their operating system to do.
 
-Admittedly, Linux also has some pain points that make things like Illumos quite
-appealing. But at least Linux does *enough* of it right to make it useable for
-development. Honestly, the only "development" work I've done so far is just
-writing this blog post and making minor changes to my website's CSS. I've tried
-editing some Linux kernel code or trying to hack on some cool Go code and it
-just doesn't feel right. I keep finding myself `ssh`ing back into my main rig.
+Admittedly, GNU/Linux also has some pain points that make things like Illumos
+quite appealing. But at least GNU/Linux does *enough* of it right to make it
+useable for development. Honestly, the only "development" work I've done so far
+is just writing this blog post and making minor changes to my website's CSS. I've
+tried editing some Linux kernel code or trying to hack on some cool Go code and
+it just doesn't feel right. I keep finding myself `ssh`ing back into my main rig.
 
 [vagrant]: https://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
@@ -250,3 +250,16 @@ that still is the case. The only way to update the firmware is through OS X
 quite annoying though, because it means that when I purge my laptop of OS X I'll
 have to keep a small OS X partition so I can update the firmware (and get
 support from Apple).
+
+### Update ###
+
+So, I've been using my Mac as my main driver for 5 months. Because Linux doesn't
+support the keyboard and trackpad, I can't install any GNU/Linux distribution on
+it. Unfortunately, the battery life is such a good selling point that I can't
+switch from it at the moment. I am however planning on buying a better laptop
+soon, and installing [coreboot][coreboot] and GNU/Linux on it. I still don't like
+any of the swishy bullshit, I still don't like the completely broken App Store
+updates, I still don't like the fact that I'm treated like a child on my own
+machine.
+
+[coreboot]: https://www.coreboot.org/

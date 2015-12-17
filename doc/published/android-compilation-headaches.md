@@ -36,7 +36,7 @@ to the letter and---
 
 > All of TWRP 2.x source is public. You can compile it on your own. This guide
 > isn't going to be a step-by-step, word-for-word type of guide. If you're not
-> familiar with basic Linux commands and/or building in AOSP then you probably
+> familiar with basic [GNU/]Linux commands and/or building in AOSP then you probably
 > won't be able to do this. [...] There's only so much that you can dumb it down
 > and simplify it. There's lots of other guides out there for getting started.
 
@@ -109,7 +109,7 @@ good bandwidth on my VPS provider.
 The toolchain was not an issue this time, but on the other hand my locale settings
 were. Curiously, `flex` just broke because `LC_COLLATE` was not flex-friendly. I
 fixed this (wondering why on Earth was going wrong) and continued on. This problem
-kept resurfacing on every Linux distribution I tried, making **every single build**
+kept resurfacing on every GNU/Linux distribution I tried, making **every single build**
 require special love and care. Fixing this is mostly a shotgun approach, with
 doing everything from resetting all of the locale files to reinstalling `glibc`.
 
