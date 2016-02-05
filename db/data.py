@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # cyphar.com: my personal site's flask app
-# Copyright (C) 2014, 2015 Cyphar
+# Copyright (C) 2014, 2015, 2016 Cyphar
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -67,10 +67,10 @@ CONTACTS = [MagicDict(item) for item in CONTACTS]
 
 PROJECTS = [
 	{
-		"name": "dotRush",
-		"language": "Java",
-		"url": "/src/dotrush",
-		"description": "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd."
+		"name": "mkonion",
+		"language": "Go",
+		"url": "/src/mkonion",
+		"description": "Small, simple and self-contained tool to create a Tor onion address for an existing container without restarts or modification of the container."
 	},
 	{
 		"name": "redone",
@@ -85,16 +85,10 @@ PROJECTS = [
 		"description": "The small and self-contained line-editing library. Written in less than 1000 lines of ANSI C and can easily be included in any project."
 	},
 	{
-		"name": "perfectgift",
-		"language": "Python + SQL",
-		"url": "/src/perfectgift",
-		"description": "A tornado webapp, written by Group 4 at the NCSS Summer School 2014 all-nighter. Get the perfect gift for your friends, with this innovative wishlist app."
-	},
-	{
 		"name": "epyc",
 		"language": "Python",
 		"url": "/src/epyc",
-		"description": "A python templating language (written for [perfectgift](/src/perfectgift))."
+		"description": "A Python templating language like Jinja (written for [perfectgift](/src/perfectgift))."
 	},
 	{
 		"name": "synge",
@@ -103,10 +97,10 @@ PROJECTS = [
 		"description": "Very powerful scientific calculation engine. Supports variables, short-cutting conditions and recursive expressions."
 	},
 	{
-		"name": "copper",
+		"name": "pulltab",
 		"language": "C",
-		"url": "/src/copper",
-		"description": "Cu, a C userland."
+		"url": "/src/pulltab",
+		"description": "A complete rewrite of [corkscrew](http://agroman.net/corkscrew/), allowing you to tunnel arbitrary stream connections through HTTP proxies."
 	},
 	{
 		"name": "ttu",
@@ -115,22 +109,22 @@ PROJECTS = [
 		"description": "Small program which silently converts TCP sockets to Unix sockets for any standard *nix executable."
 	},
 	{
-		"name": "tic-tac-toe",
+		"name": "sched",
 		"language": "C",
-		"url": "/src/tic-tac-toe",
-		"description": "The classic game, boasting a heuristic AI. Supports zero, one or two players."
+		"url": "/src/sched",
+		"description": "A simple toy scheduler for the Arduino, which currently doesn't support preemptive scheduling.",
 	},
 	{
-		"name": "ascii-snake",
-		"language": "C",
-		"url": "/src/ascii-snake",
-		"description": "Remake of the Nokia snake game for *nix consoles, with several compile-time configuration options."
+		"name": "dotRush",
+		"language": "Java",
+		"url": "/src/dotrush",
+		"description": "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd."
 	},
 	{
-		"name": "moss",
-		"language": "C",
-		"url": "/src/moss",
-		"description": "A simple command-line file viewer. Supports regex searching, multiple files, switching to `$EDITOR` and file reloading."
+		"name": "keplerk2-halo",
+		"language": "Python + Shell",
+		"url": "/src/keplerk2-halo",
+		"description": "All of the scripts written and used during my research project into Asteroseismology at the Univeristy of Sydney, as well as some document and reports on my findings using these scripts.",
 	},
 ]
 PROJECTS = [MagicDict(item) for item in PROJECTS]
@@ -148,7 +142,7 @@ CONTRIBS = [
 			"Docker": "/src/docker",
 		}),
 		"language": "Go",
-		"description": "The open-source application container engine, to which I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations)."
+		"description": "The free software application container engine, to which I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations)."
 	},
 	{
 		"links": ordered_dict({
@@ -160,10 +154,17 @@ CONTRIBS = [
 	},
 	{
 		"links": ordered_dict({
-			"ninjabot": "/src/ninjabot",
+			"Portus": "/src/portus",
 		}),
-		"language": "Python",
-		"description": "Modular IRC bot written in Python. Supports dynamic reloading of bot modules and core."
+		"language": "Ruby",
+		"description": "Authorization service and frontend for the Docker registry, which supports self-hosting and has many of the features of the Docker Hub.",
+	},
+	{
+		"links": ordered_dict({
+			"Team Win Recovery Project": "/src/twrp",
+		}),
+		"language": "C++",
+		"description": "A free software custom recovery for Android-based devices, the only such recovery which supports disk encryption. I implemented CyanogenMod-style NxN pattern decryption for TWR NxN pattern decryption for TWRP.",
 	},
 ]
 CONTRIBS = [MagicDict(item) for item in CONTRIBS]
@@ -248,10 +249,13 @@ REDIRECTS = MagicDict({
 		"synge":         "https://github.com/cyphar/synge",
 		"copper":        "https://github.com/cyphar/copper",
 		"ttu":           "https://github.com/cyphar/ttu",
-		"tic-tac-toe":   "https://github.com/cyphar/tic-tac-toe",
-		"ascii-snake":   "https://github.com/cyphar/ascii-snake",
-		"moss":          "https://github.com/cyphar/moss",
 		"docker-rebase": "https://github.com/cyphar/docker-rebase",
+		"mkonion":       "https://github.com/cyphar/mkonion",
+		"twrp":          "https://twrp.me/",
+		"portus":        "https://github.com/SUSE/Portus",
+		"pulltab":       "https://github.com/cyphar/pulltab",
+		"sched":         "https://github.com/cyphar/sched",
+		"keplerk2-halo": "https://github.com/cyphar/keplerk2-halo",
 	},
 
 	"bin": {
