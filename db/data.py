@@ -70,7 +70,7 @@ PROJECTS = [
 		"name": "mkonion",
 		"language": "Go",
 		"url": "/src/mkonion",
-		"description": "Small, simple and self-contained tool to create a Tor onion address for an existing container without restarts or modification of the container."
+		"description": "Small, simple and self-contained tool to create a Tor onion address for an existing container without restarts or modification of the container. I use this to manage the [onion link for this website](http://dqzsjhefvopcfbn5.onion/)."
 	},
 	{
 		"name": "redone",
