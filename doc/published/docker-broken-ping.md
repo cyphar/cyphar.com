@@ -1,7 +1,7 @@
 title: Debugging why `ping` was Broken in Docker Images
 author: Aleksa Sarai
 published: 2016-03-04 21:05:00
-updated: 2016-03-04 21:05:00
+updated: 2016-03-05 08:30:00
 description: >
   All complicated bugs start with the simplest of observations. I recently was
   assigned a bug on our openSUSE Docker images complaining that `ping` didn't
@@ -308,23 +308,25 @@ happened next, I probably wouldn't have ever made a blog post about this.
 
 Then about two weeks ago, I was in Nürnberg for a team get-together. We'd gone
 out for a few beers with a few of the people at SUSE. I was talking to
-[Richard Brown][richard-brown] over a beer and we were swapping "horrible bug
+[Richard Brown][richard] over a beer and we were swapping "horrible bug
 stories". He mentioned there was some very, **very** unholy things about how kiwi
 does its packaging of virtual machines. I reckoned that it's possible that there
 are equally unholy things going on with the packaging of Docker containers (because
-I **know** that the actual package kiwi installs have the right set-capability
+I **know** that the actual packages kiwi installs have the right set-capability
 bits set).
 
 Fortunately, the way kiwi packages Docker images is *much* less crazy than the
 way it packages virtual machines. All you need to do to create a Docker image is
-to create a `tar` archive of a rootfs, and then use `docker import`. Very simple.
-The way kiwi does it is still a bit weird, though. Essentially, the process is
-something like this:
+to create a `tar` archive of a rootfs, and then use `docker import`. Essentially,
+the process is something like this:
 
 1. Create a directory for the rootfs image, bootstrap it and then install all of
    the packages specified in the [kiwi configuration file][kiwi-docker-config].
-2. Use `rsync` to copy the rootfs directory to somewhere else (don't ask me why).
-3. Replace a bunch of files in the new rootfs directory.
+2. Use `rsync` to copy the rootfs directory to somewhere else. This is done because
+   kiwi allows you to build many different formats of OS images (VMs, etc) from
+   the same rootfs.
+3. Replace a bunch of files in the new rootfs directory that are specific to
+   Docker and LXC.
 4. Use `tar` to create an `<image>.tar.xz` file.
 
 Now, I know what you're thinking. "Aha! They're not using the right `rsync` flag
@@ -362,11 +364,12 @@ sub __copyUnpackedTreeContent {
 ```
 
 Oh, didn't I mention that it was written in Perl? Yes. It's written in Perl
-(although there is [another SUSE project][kiwi-ng] that implements it in Python).
-
-Anyway, that's not where the problem lied. As it turns out, `tar` doesn't support
-extended attributes by default. You have to use the flag `--xattrs`, which has
-been available since `1.2.7` (2013). So the diff was really small:
+(although there is [another SUSE project][kiwi-ng] that implements it in Python,
+and has many improvements to the original, but it not what we currently use to
+generate Docker images for openSUSE and SLE). Anyway, that's not where the problem
+lied. As it turns out, `tar` doesn't support extended attributes by default. You
+have to use the flag `--xattrs`, which has been available since `1.2.7` (2013).
+So the diff ended up being quite small:
 
 ```language-diff
 commit 419d55400edf800527b2cd4836e94190326bd10f
@@ -399,11 +402,15 @@ index 305ecf024da9..5672c870ef12 100644
 
 Naturally there were some outstanding problems with the CI (such as it running
 on Ubuntu 12.04 which packages GNU tar `1.2.6`, which is from 2011). All of those
-issues aside, this problem was finally fixed. Phew. Time to go grab a beer.
+issues aside, this problem was finally fixed. The code was merged a few hours
+after I opened [the pull request][kiwi-pr]. The maintainer [Marcus Schäfer][marcus]
+also [ported my fix to kiwi-ng][kiwi-ng-ping-commit]. Phew. Time to go grab a beer.
 
-[richard-brown]: https://twitter.com/sysrich
+[richard]: https://twitter.com/sysrich
 [kiwi-docker-config]: https://github.com/openSUSE/docker-containers
 [kiwi-ng]: https://github.com/SUSE/kiwi
+[kiwi-pr]: https://github.com/openSUSE/kiwi/pull/556
+[kiwi-ng-ping-commit]: https://github.com/SUSE/kiwi/commit/49aaa59bf0cfd4fcddee70bfdcbd5501d1a8bc82
 
 ### Loose Ends ###
 
