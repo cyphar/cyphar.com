@@ -1,7 +1,7 @@
 title: Debugging why `ping` was Broken in Docker Images
 author: Aleksa Sarai
 published: 2016-03-04 21:05:00
-updated: 2016-03-05 08:30:00
+updated: 2016-03-06 17:00:00
 description: >
   All complicated bugs start with the simplest of observations. I recently was
   assigned a bug on our openSUSE Docker images complaining that `ping` didn't
@@ -410,6 +410,7 @@ also [ported my fix to kiwi-ng][kiwi-ng-ping-commit]. Phew. Time to go grab a be
 [kiwi-docker-config]: https://github.com/openSUSE/docker-containers
 [kiwi-ng]: https://github.com/SUSE/kiwi
 [kiwi-pr]: https://github.com/openSUSE/kiwi/pull/556
+[marcus]: https://github.com/schaefi
 [kiwi-ng-ping-commit]: https://github.com/SUSE/kiwi/commit/49aaa59bf0cfd4fcddee70bfdcbd5501d1a8bc82
 
 ### Loose Ends ###
