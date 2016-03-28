@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # cyphar.com: my personal site's flask app
-# Copyright (C) 2014, 2015 Cyphar
+# Copyright (C) 2014, 2015, 2016 Aleksa Sarai
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -47,8 +47,6 @@ FLATPAGES_MARKDOWN_EXTENSIONS = [
 PAGE_SIZE = 20
 ATOM_FEED_SIZE = 15
 
-TRACKING_ID = "UA-58580629-1"
-
 app = flask.Flask(__name__)
 flatpages = flask_flatpages.FlatPages(app)
 app.config.from_object(__name__)
@@ -56,10 +54,6 @@ app.config.from_object(__name__)
 @app.before_request
 def set_locale():
 	flask.g.date_format = "%d %B %Y"
-
-@app.before_request
-def set_tracking_id():
-	flask.g.tracking_id = TRACKING_ID
 
 def markmedown(thing):
 	return flask_flatpages.pygmented_markdown(thing)
