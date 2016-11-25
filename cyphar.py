@@ -39,7 +39,7 @@ FLATPAGES_MARKDOWN_EXTENSIONS = [
 	"markdown.extensions.toc", "markdown.extensions.smarty",
 ]
 
-PAGE_SIZE = 20
+PAGE_SIZE = 10
 ATOM_FEED_SIZE = 15
 
 app = flask.Flask(__name__)
