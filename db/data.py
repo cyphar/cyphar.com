@@ -44,16 +44,12 @@ CONTACTS = [
 		"url": "https://keybase.io/cyphar",
 	},
 	{
+		"contact": "GitLab",
+		"url": "https://gitlab.com/cyphar",
+	},
+	{
 		"contact": "Reddit",
 		"url": "https://www.reddit.com/user/cyphar",
-	},
-	{
-		"contact": "Bitbucket",
-		"url": "https://bitbucket.org/cyphar",
-	},
-	{
-		"contact": "LinkedIn",
-		"url": "https://www.linkedin.com/in/cyphar",
 	},
 ]
 CONTACTS = [MagicDict(item) for item in CONTACTS]
@@ -61,6 +57,18 @@ CONTACTS = [MagicDict(item) for item in CONTACTS]
 # Code.
 
 PROJECTS = [
+	{
+		"name": "umoci",
+		"language": "Go",
+		"url": "/src/umoci",
+		"description": "Free software tool to create and modify Open Container Initiative images, without needing to understand how such images are structured internally. I wrote a [blog post](/blog/post/umoci-new-oci-image-tool) about this new project."
+	},
+	{
+		"name": "remainroot",
+		"language": "Go + C",
+		"url": "/src/remainroot",
+		"description": "A set of shims to allow unmodified programs to run nicely in [rootless containers](/blog/post/rootless-containers-with-runc).",
+	},
 	{
 		"name": "mkonion",
 		"language": "Go",
@@ -80,6 +88,12 @@ PROJECTS = [
 		"description": "The small and self-contained line-editing library. Written in less than 1000 lines of ANSI C and can easily be included in any project."
 	},
 	{
+		"name": "keplerk2-halo",
+		"language": "Python + Shell",
+		"url": "/src/keplerk2-halo",
+		"description": "All of the scripts written and used during my research project into Asteroseismology at the Univeristy of Sydney, as well as some document and reports on my findings using these scripts.",
+	},
+	{
 		"name": "epyc",
 		"language": "Python",
 		"url": "/src/epyc",
@@ -92,34 +106,10 @@ PROJECTS = [
 		"description": "Very powerful scientific calculation engine. Supports variables, short-cutting conditions and recursive expressions."
 	},
 	{
-		"name": "pulltab",
-		"language": "C",
-		"url": "/src/pulltab",
-		"description": "A complete rewrite of [corkscrew](http://agroman.net/corkscrew/), allowing you to tunnel arbitrary stream connections through HTTP proxies."
-	},
-	{
-		"name": "ttu",
-		"language": "C",
-		"url": "/src/ttu",
-		"description": "Small program which silently converts TCP sockets to Unix sockets for any standard *nix executable."
-	},
-	{
 		"name": "sched",
 		"language": "C",
 		"url": "/src/sched",
 		"description": "A simple toy scheduler for the Arduino, which currently doesn't support preemptive scheduling.",
-	},
-	{
-		"name": "dotRush",
-		"language": "Java",
-		"url": "/src/dotrush",
-		"description": "Very addictive android game. Eat the smaller dots to grow and eat bigger dots. Just don't get dotrush'd."
-	},
-	{
-		"name": "keplerk2-halo",
-		"language": "Python + Shell",
-		"url": "/src/keplerk2-halo",
-		"description": "All of the scripts written and used during my research project into Asteroseismology at the Univeristy of Sydney, as well as some document and reports on my findings using these scripts.",
 	},
 ]
 PROJECTS = [MagicDict(item) for item in PROJECTS]
@@ -142,10 +132,10 @@ CONTRIBS = [
 	{
 		"links": ordered_dict({
 			"runC": "/src/runc",
-			"libcontainer": "/src/libcontainer",
+			"libcontainer": "/src/runc",
 		}),
 		"language": "Go",
-		"description": "A reference implementation for Docker containers. I have contributed several fairly significant patch sets (ranging from security fixes to feature implementations), and maintain parts of the project."
+		"description": "A reference implementation for [OCI](https://www.opencontainers.org/) container runtimes, and is the runtime that powers Docker containers. I am a maintainer of runC, and have been working on container runtimes for several years."
 	},
 	{
 		"links": ordered_dict({
@@ -230,27 +220,27 @@ SECCOMPS = [MagicDict(item) for item in SECCOMPS]
 REDIRECTS = MagicDict({
 	"src": {
 		None:            "https://github.com/cyphar",
+		"copper":        "https://github.com/cyphar/copper",
 		"cypharcom":     "https://github.com/cyphar/cyphar.com",
 		"docker":        "https://github.com/docker/docker",
-		"libcontainer":  "https://github.com/docker/libcontainer",
-		"runc":			 "https://github.com/opencontainers/runc",
-		"linux":         "https://www.kernel.org/",
-		"dotrush":       "https://play.google.com/store/apps/details?id=com.jtdev.dotrush",
-		"redone":        "https://github.com/cyphar/redone",
-		"ninjabot":      "https://github.com/ackwell/ninjabot",
-		"rawline":       "https://github.com/cyphar/rawline",
-		"perfectgift":   "https://github.com/cyphar/perfectgift",
-		"epyc":          "https://github.com/cyphar/epyc",
-		"synge":         "https://github.com/cyphar/synge",
-		"copper":        "https://github.com/cyphar/copper",
-		"ttu":           "https://github.com/cyphar/ttu",
 		"docker-rebase": "https://github.com/cyphar/docker-rebase",
+		"epyc":          "https://github.com/cyphar/epyc",
+		"keplerk2-halo": "https://github.com/cyphar/keplerk2-halo",
+		"linux":         "https://www.kernel.org/",
 		"mkonion":       "https://github.com/cyphar/mkonion",
-		"twrp":          "https://twrp.me/",
+		"ninjabot":      "https://github.com/ackwell/ninjabot",
+		"perfectgift":   "https://github.com/cyphar/perfectgift",
 		"portus":        "https://github.com/SUSE/Portus",
 		"pulltab":       "https://github.com/cyphar/pulltab",
+		"rawline":       "https://github.com/cyphar/rawline",
+		"redone":        "https://github.com/cyphar/redone",
+		"remainroot":    "https://github.com/cyphar/umoci",
+		"runc":			 "https://github.com/opencontainers/runc",
 		"sched":         "https://github.com/cyphar/sched",
-		"keplerk2-halo": "https://github.com/cyphar/keplerk2-halo",
+		"synge":         "https://github.com/cyphar/synge",
+		"ttu":           "https://github.com/cyphar/ttu",
+		"twrp":          "https://twrp.me/",
+		"umoci":         "https://github.com/cyphar/umoci",
 	},
 
 	"bin": {
