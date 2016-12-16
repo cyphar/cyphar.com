@@ -1,7 +1,7 @@
 title: "umoci: a New Tool for OCI Images"
 author: Aleksa Sarai
 published: 2016-11-29 15:30:00
-updated: 2016-11-29 15:30:00
+updated: 2016-12-16 18:15:00
 description: >
   Very recently, I've been working on implementing the required tooling for
   creating and modifying [Open Container Initiative](https://www.opencontainers.org/)
@@ -118,19 +118,27 @@ USAGE:
    umoci [global options] command [command options] [arguments...]
 
 VERSION:
-   0.0.0-rc1~git2f61f493fd7ca16690e2080975887de049b8e7ae
+   0.0.0~rc2
 
 AUTHOR(S):
    Aleksa Sarai <asarai@suse.com>
 
 COMMANDS:
-     config   modifies the image configuration of an OCI image
-     unpack   unpacks a reference into an OCI runtime bundle
-     repack   repacks an OCI runtime bundle into a reference
-     gc       garbage-collects an OCI image's blobs
-     create   creates an OCI image and/or base manifest
-     tag      manipulate the references in an OCI image
      help, h  Shows a list of commands or help for one command
+
+   image:
+     config      modifies the image configuration of an OCI image
+     unpack      unpacks a reference into an OCI runtime bundle
+     repack      repacks an OCI runtime bundle into a reference
+     new         creates a blank tagged OCI image
+     tag         creates a new tag in an OCI image
+     remove, rm  removes a tag from an OCI image
+     stat        displays status information of an image manifest
+
+   layout:
+     gc        garbage-collects an OCI image's blobs
+     init      create a new OCI layout
+     list, ls  lists the set of tags in an OCI image
 
 GLOBAL OPTIONS:
    --debug        set log level to debug
@@ -176,9 +184,9 @@ Uploading manifest to image destination
 Storing signatures
 ```
 
-It is also possible to [create an image from scratch with `umoci
-create`](#creating-new-images), but that's not as cool as modifying a Docker
-image using OCI tooling.
+It is also possible to [create an image from scratch with `umoci new` and
+`umoci init` ](#creating-new-images), but that's not as cool as modifying a
+Docker image using OCI tooling.
 
 Now that we have an OCI image in a particular directory, we can play around
 with the image using `umoci`. Note that some of the modifications we do require
@@ -196,29 +204,57 @@ number of tagged images. An image inside an OCI image bundle is the combination
 of a configuration file and the layers that make up the root filesystem of the
 image.
 
-With `umoci tag` we can take a look at what we just pulled.
+With `umoci ls` we can take a look at what we just pulled.
 
 ```language-bash
-% umoci tag --image opensuse ls
+% umoci ls --layout opensuse
 latest
 old
 ```
 
-The very first thing to note is the `--image opensuse` argument. Since every
+The very first thing to note is the `--layout opensuse` argument. Since every
 OCI image is independent, we have to specify which one is the one we're
-operating on. All `umoci` commands take an `--image` argument. `umoci` supports
-local, directory-based OCI images so `--image` refers to a local directory
-(it's unclear if the OCI will in the foreseeable future define any
-remote-registry API).
+operating on. All `umoci` commands take either a `--layout` or `--image`
+argument (in `umoci -h` you can see what commands fall into the respective
+categories). `umoci` supports local, directory-based OCI images so `--layout`
+(or `--image`) refers to a local directory (it's unclear if the OCI will in
+the forseeable future define any remote-registry API).
 
-We can also create, inspect or delete tags using `umoci tag add`, `umoci tag
-stat` and `umoci tag rm` respectively. Unfortunately, currently this interface
-is not pretty at all, and I'm planning on completely scrapping it in [the UX
-rewrite][umoci-ux]. So I'm not going to spend time describing an interface I
-know is really ugly.
+We can also create, inspect or delete tags using `umoci tag`, `umoci stat` and
+`umoci rm` respectively. A trivial example is swapping the `old` and `latest`:
+
+```
+% umoci stat --image opensuse:latest
+LAYER                                                                   CREATED                        CREATED BY                                                                                        SIZE    COMMENT
+<none>                                                                  2016-12-14T00:17:31.334478162Z /bin/sh -c #(nop)  MAINTAINER SUSE Containers Team <containers@suse.com>                          <none>
+sha256:d05d5d3c35088ecc4cf83c172c881cedc58df38ed127a9b0dc4adda9b291afa3 2016-12-14T00:17:44.456345827Z /bin/sh -c #(nop) ADD file:379aeb5188443ed46af74119ff2eb532b9280e72d137b1e1865ad41911c13e58 in /  49.3 MB
+% umoci stat --image opensuse:old
+LAYER                                                                   CREATED                        CREATED BY                                                                                        SIZE     COMMENT
+<none>                                                                  2016-12-14T00:13:28.318720201Z /bin/sh -c #(nop)  MAINTAINER SUSE Containers Team <containers@suse.com>                          <none>
+sha256:8f0d2170f95bbad6858ad6432396bfebb990cd3396d841581d4b4c6b55c7d333 2016-12-14T00:13:37.494221488Z /bin/sh -c #(nop) ADD file:2f6306c949ad0e3316bf5afa7b1e9f598d88cedc31caa0abe616bfef470fade6 in /  38.85 MB
+% # Preform the swap.
+% umoci tag --image opensuse:latest tmp
+% umoci tag --image opensuse:old latest
+% umoci tag --image opensuse:tmp old
+% # Delete the tmp tag.
+% umoci rm --image opensuse:tmp
+% # Verify that :old is now :latest.
+% umoci stat --image opensuse:latest
+LAYER                                                                   CREATED                        CREATED BY                                                                                        SIZE     COMMENT
+<none>                                                                  2016-12-14T00:13:28.318720201Z /bin/sh -c #(nop)  MAINTAINER SUSE Containers Team <containers@suse.com>                          <none>
+sha256:8f0d2170f95bbad6858ad6432396bfebb990cd3396d841581d4b4c6b55c7d333 2016-12-14T00:13:37.494221488Z /bin/sh -c #(nop) ADD file:2f6306c949ad0e3316bf5afa7b1e9f598d88cedc31caa0abe616bfef470fade6 in /  38.85 MB
+```
+As you can see, `umoci stat` is in the `image` category of commands and thus
+takes an `--image` flag. The exact meaning of `--image` depends on the command,
+but `--image` is always of the format `layout:tag`. If you don't specify a
+`tag`, the default is `latest` (so I could've used `umoci stat --image
+opensuse` in the above example if I wanted to save characters).
+
+Please note that the output of `umoci stat` will change in future versions (use
+`--json` if you want to script around `umoci stat`) but the general idea will
+always be the same -- it gives you information about what a tag points to.
 
 [docker-tags]: https://docs.docker.com/engine/tutorials/dockerimages/#/setting-tags-on-an-image
-[umoci-ux]: https://github.com/cyphar/umoci/issues/7
 
 #### Unpacking ####
 
@@ -230,7 +266,7 @@ for the extracted image). This means, if we wanted, we could go from an OCI
 image to a running container with `runc` in a few seconds:
 
 ```language-bash
-% sudo umoci unpack --image opensuse --from latest --bundle opensuse_bundle
+% sudo umoci unpack --image opensuse:latest opensuse_bundle
 INFO[0000] parsed mappings                    map.gid=[] map.uid=[]
 INFO[0000] unpack manifest: unpacking layer sha256:467db25190688bc9dc1d5fd6dbced1ac56f55d93a942987f448e62ad2614e46e  diffid="sha256:33e694f8e290bc896a8da5718854e81845fe79579f34704cf249ea457500134f"
 INFO[0001] unpack manifest: unpacking config  config="sha256:16724059119c810dd03218fd597625067dcf14d661c687a4396413345ced91c4"
@@ -251,8 +287,8 @@ sh-4.3# exit
 
 Note that `umoci unpack` has other options related to mapping of user IDs (for
 rootless and user namespaced containers). However, there's probably enough
-information in the help page (and in the man pages I will write soon) that I
-don't need to give an example here.
+information in the help page (and in the man pages) that I don't need to give
+an example here.
 
 It is true that this feature already exists within the [`oci-image-tools`][oci-image-tools]
 project (under the `oci-create-runtime-bundle` command), but it will become
@@ -327,7 +363,7 @@ sh-4.3# exit
 % sudo touch opensuse_bundle/rootfs/a_new_file
 % sudo rm -rf opensuse_bundle/rootfs/selinux
 % # The fun part! Let's repack the image into a new tag.
-% sudo umoci repack --image opensuse --from latest --bundle opensuse_bundle --tag new-latest
+% sudo umoci repack --image opensuse:new-latest opensuse_bundle
 INFO[0000] parsed mappings    map.gid=[] map.uid=[]
 INFO[0002] created new image  digest="sha256:e18f2438c89d9e6ae1e931448bcf525ba0ec4ebdc0888af836889e6ebcf70cd5" mediatype="application/vnd.oci.image.manifest.v1+json" size=586
 ```
@@ -341,6 +377,11 @@ root filesystem, without using a container. And finally we told `umoci` to
 create a modified version of the `latest` image (tagged `new-latest`), with our
 changes to `opensuse_bundle/rootfs` being converted into a diff layer and added
 to the set of diff layers for the new image.
+
+You might be wondering how `umoci repack` knew that the unpacked image came
+from `opensuse:latest`. The answer is that `umoci unpack` stores some metadata
+inside the bundle that allows it to infer what the extracted filesystem came
+from.
 
 Essentially `umoci repack` creates a **derivative** image from a base image,
 using the changes made between an `unpack` and a `repack` as the set of
@@ -356,7 +397,7 @@ to the new image. Note that `umoci unpack` now extracts one more layer than it
 did in the `umoci unpack` example.
 
 ```language-bash
-% sudo umoci unpack --image opensuse --from new-latest --bundle opensuse_bundle_updated
+% sudo umoci unpack --image opensuse:new-latest opensuse_bundle_updated
 INFO[0000] parsed mappings                    map.gid=[] map.uid=[]
 INFO[0000] unpack manifest: unpacking layer sha256:467db25190688bc9dc1d5fd6dbced1ac56f55d93a942987f448e62ad2614e46e  diffid="sha256:33e694f8e290bc896a8da5718854e81845fe79579f34704cf249ea457500134f"
 INFO[0005] unpack manifest: unpacking layer sha256:9dab7d4b116241c5a3e30212f703a1f3ab786e05fae7555a4fbd63ab211df0ae  diffid="sha256:1a7f92d610b1a4ebb11a81a6d9dd011f82598afa92be7f9f9f517c4b77708f68"
@@ -403,16 +444,18 @@ NAME:
    umoci config - modifies the image configuration of an OCI image
 
 USAGE:
-   umoci config [command options] --image <image-path> --from <reference>
+   umoci config [command options] --image <image-path>[:<tag>] [--tag <new-tag>]
 
-Where "<image-path>" is the path to the OCI image, and "<reference>" is the
-name of the reference descriptor from which the config modifications will be
-based.
+Where "<image-path>" is the path to the OCI image, and "<tag>" is the name of
+the tagged image from which the config modifications will be based (if not
+specified, it defaults to "latest"). "<new-tag>" is the new reference name to
+save the new image as, if this is not specified then umoci will replace the old
+image.
+
+CATEGORY:
+   image
 
 OPTIONS:
-   --image value                path to OCI image bundle
-   --from value                 reference descriptor name to modify
-   --tag value                  tag name for repacked image
    --config.user value
    --config.memory.limit value  (default: 0)
    --config.memory.swap value   (default: 0)
@@ -422,30 +465,40 @@ OPTIONS:
    --config.entrypoint value
    --config.cmd value
    --config.volume value
+   --config.label value
    --config.workingdir value
-   --history value
    --created value
    --author value
    --architecture value
    --os value
+   --manifest.annotation value
    --clear value
+   --tag value                  tag name
+   --history.author value       author value for the history entry
+   --history.comment value      comment for the history entry
+   --history.created value      created value for the history entry
+   --history.created_by value   created_by value for the history entry
+   --image value                OCI image URI of the form 'path[:tag]'
 ```
 
-These will be better documented once I create man pages, but the names should
-be familiar to those who use Docker. For example, here is an example of using
+The flags are documented in a much better fashion if you look at the man pages,
+but the names should sound familiar to anyone who has used Docker (or ever
+looked at the output of `docker inspect`). For example, here is an example of using
 `umoci config` to change the default user and program that containers based on
 this image will run:
 
 ```language-bash
-% umoci config --image opensuse --from latest --tag latest --config.user daemon:daemon --config.entrypoint="id" --config.cmd="-a"
+% umoci config --image opensuse --config.user daemon:daemon --config.entrypoint="id" --config.cmd="-a"
 INFO[0000] created new image  digest="sha256:7429ff32d9b769405620688d581d435a76608a187fe3cd3d8dcd11ed0c34379b" mediatype="application/vnd.oci.image.manifest.v1+json" size=426
-% sudo umoci unpack --image opensuse --from latest --bundle opensuse_bundle_new
+% sudo umoci unpack --image opensuse opensuse_bundle_new
 INFO[0000] parsed mappings                    map.gid=[] map.uid=[]
 INFO[0000] unpack manifest: unpacking layer sha256:467db25190688bc9dc1d5fd6dbced1ac56f55d93a942987f448e62ad2614e46e  diffid="sha256:33e694f8e290bc896a8da5718854e81845fe79579f34704cf249ea457500134f"
 INFO[0001] unpack manifest: unpacking config  config="sha256:1383884f41c46931acfb180609109848556d545a501bb4190468c1b8d4649d9a"
 % sudo runc run -b opensuse_bundle_new ctr-build
 uid=2(daemon) gid=2(daemon) groups=2(daemon)
 ```
+
+Note that if we don't specify `--tag` then `umoci` will overwrite the old tag.
 
 The `--clear` flag allows us to clear list-based configuration options.
 Examples include the `--history`, `--config.volume`s, `--config.exposedports`,
@@ -457,21 +510,28 @@ and `--config.env`s.
 
 #### Creating new Images ####
 
-For completeness, `umoci create` allows users to create an OCI image from
-scratch. It allows us to create a brand-new OCI image layout directory (without
-needing to pull a base image with `skopeo`). In addition, it lets us create an
-"empty image" that we can use `umoci unpack` and `umoci repack` on. This can be
-considered something like the Docker `scratch` image, which contains no files
-or other metadata and is a blank slate for users to craft an image from.
+For completeness, `umoci init` and `umoci new` allow users to create an OCI
+image from scratch. It allows us to create a brand-new OCI image layout
+directory (without needing to pull a base image with `skopeo`). In addition, it
+lets us create an "empty image" that we can use `umoci unpack` and `umoci
+repack` on. This can be considered something like the Docker `scratch` image,
+which contains no files or other metadata and is a blank slate for users to
+craft an image from.
+
+`umoci init` allows you to create a new OCI image layout (an image with no tags
+or blobs inside it). `umoci new` allows you to create a new tagged image (which
+has no layers and has a dummy configuration) that you can then modify to your
+liking.
 
 ```language-bash
-% umoci create --image newimage --tag new-tag
-INFO[0000] creating non-existent image
-INFO[0000] creating new manifest        tag=new-tag
-INFO[0000] created new image            digest="sha256:02882331e46d3b76b9ef49709c831f03f12627c6fcab53b8b7bec193edc10a1a" mediatype="application/vnd.oci.image.manifest.v1+json" size=268
-% sudo umoci unpack --image newimage --from new-tag --bundle newbundle
+% umoci init --layout newimage
+INFO[0000] created new OCI image layout  path=newimage
+% umoci create --image newimage:new-tag
+INFO[0000] creating new manifest  tag=new-tag
+INFO[0000] created new image      digest="sha256:3b6ff1d61cd4d3ed25370607a48db9094c3bb1aa2de796e25fca51c08ef86a8b" mediatype="application/vnd.oci.image.manifest.v1+json" size=249
+% sudo umoci unpack --image newimage:new-tag newbundle
 INFO[0000] parsed mappings                    map.gid=[] map.uid=[]
-INFO[0000] unpack manifest: unpacking config  config="sha256:a31f1a96f1705d43928558fece576c5522c560a3e8b7006682037aefe314ed62"
+INFO[0000] unpack manifest: unpacking config  config="sha256:a6d0e1ce7500a4b80cfed9779255a5ce2eccc8508de10ffc1825b4217f8588e1"
 % ls -la newbundle/rootfs
 total 0
 drwxr-xr-x 1 root root   0 Jan  1  1970 .
@@ -495,12 +555,12 @@ The command-line is very simple, and we can see what I mean by "unused blobs"
 if we delete a tag from the OCI image.
 
 ```language-bash
-% umoci gc --image opensuse
+% umoci gc --layout opensuse
 INFO[0000] GC: garbage collected 0 blobs
-% umoci gc --image opensuse
+% umoci gc --layout opensuse
 INFO[0000] GC: garbage collected 0 blobs
-% umoci tag --image opensuse rm --tag old
-% umoci gc --image opensuse
+% umoci rm --image opensuse:old
+% umoci gc --layout opensuse
 INFO[0000] GC: garbage collecting blob  digest="sha256:51caf3bdd5f3e395f81e5454276b2dc2e15cf7a3047cc991f14b77e158356a3b"
 INFO[0000] GC: garbage collecting blob  digest="sha256:b5b3627caa3d91971b1d701feec88c16e621d9f28122facfe22dd6ab57476221"
 INFO[0000] GC: garbage collecting blob  digest="sha256:f041be4a5bbe4e191ec9e323f30a7e82ec4a1781e3376a885e8e5218bce6400c"
@@ -518,14 +578,9 @@ the user just has to manually garbage collect blobs if they want to.
 So, while all of the above is enough for OCI images, maybe you want to convert
 your brand-new OCI image into a Docker image. `skopeo` to the rescue again! You
 can push an OCI image to a Docker registry or to a local Docker daemon with the
-following commands. Note that the [current release of `skopeo`,
-`0.1.16`][skopeo-0.1.16] requires patches in order for the following example to
-work (and I haven't yet included the patches in [my `skopeo` package for
-openSUSE][obs-vc-skopeo]). For those who want to patch `skopeo` themselves, you
-need to update `vendor/github.com/containers/image` to a newer version (with
-[these][image-pr151] [patches][image-pr172] [applied][image-pr165]). I'll be
-adding these patches to [the openSUSE package][obs-vc-skopeo] once they're
-merged upstream.
+following commands. You need to have a skopeo version later than
+[`0.1.17`][skopeo-0.1.17] (which you can get from `Virtualization:containers`
+if you're on openSUSE).
 
 Also, note that pushing to a Docker registry requires you to have logged into
 the registry with `docker login`. This is not intended (and [I've submitted a
@@ -596,10 +651,7 @@ just grab a copy of `skopeo` from upstream to be able to do all of these
 conversions from OCI images. I will patch the openSUSE version once these
 patches get more review and are merged upstream.
 
-[skopeo-0.1.16]: https://github.com/projectatomic/skopeo/releases/tag/v0.1.16
-[image-pr151]: https://github.com/containers/image/pull/151
-[image-pr172]: https://github.com/containers/image/pull/172
-[image-pr165]: https://github.com/containers/image/pull/165
+[skopeo-0.1.17]: https://github.com/projectatomic/skopeo/releases/tag/v0.1.17
 [image-pr148]: https://github.com/containers/image/pull/148
 [skopeo-issue253]: https://github.com/projectatomic/skopeo/issues/253
 
@@ -610,14 +662,15 @@ is the that `umoci repack` knows what changes were made to the image root
 filesystem after doing an `umoci unpack`. The way this works is using manifests.
 
 If you look at the extracted bundle, you can see that there's an oddly-named
-`.mtree` file in the bundle.
+`.mtree` file in the bundle. And there is also an `umoci.json` file as well.
 
 ```language-bash
 % ls -l opensuse_bundle
-total 740
--rw-r--r-- 1 root root  24706 Nov 23 01:59 config.json
-drwxr-xr-x 1 root root    122 Nov 23 02:04 rootfs
--rw-r--r-- 1 root root 728899 Nov 23 01:45 sha256_2255aab27dfbd93caf24caf5af544a28896305c3c5b9141d4873cfe6d6ca4476.mtree
+total 744
+-rw-r--r-- 1 root root  24738 Dec 16 18:06 config.json
+drwxr-xr-x 1 root root    128 Jan  1  1970 rootfs
+-rw-r--r-- 1 root root 728474 Dec 16 18:06 sha256_80e063bbd4b40705b6d7d6e4d0b3f567376a9ac21ddf7aeb90ef9c7ca461c4e5.mtree
+-rw-r--r-- 1 root root    324 Dec 16 18:06 umoci.json
 ```
 
 `mtree` is [a fairly old FreeBSD utility][freebsd-mtree] that allows you to
@@ -643,7 +696,7 @@ project][go-mtree] (which if you're on openSUSE can be installed [from my home
 project on OBS][obs-home-cyphar]):
 
 ```language-bash
-% sudo gomtree -p opensuse_bundle/rootfs -f opensuse_bundle/sha256_2255aab27dfbd93caf24caf5af544a28896305c3c5b9141d4873cfe6d6ca4476.mtree
+% sudo gomtree -p opensuse_bundle/rootfs -f opensuse_bundle/sha256_80e063bbd4b40705b6d7d6e4d0b3f567376a9ac21ddf7aeb90ef9c7ca461c4e5.mtree
 "usr/bin": keyword "size": expected 5614; got 5682
 "var/lib/rpm/Name": keyword "tar_time": expected 1479529762.000000000; got 1479826841.000000000
 "var/log/zypper.log": keyword "size": expected 260934; got 549336
@@ -687,6 +740,13 @@ project on OBS][obs-home-cyphar]):
 filesystem diff layers. Then `umoci` modifies the image manifest and
 configuration to include the new diff layer and creates the requested tag to
 point to the new manifest.
+
+In addition, `umoci.json` contains information about what `--image` flag was
+used to extract the image initially (so `umoci repack` knows what image it has
+to modify), as well as the `--uid-map`, `--gid-map` and `--rootless` flag
+values. This is why `umoci repack` doesn't have any of those flags (they're all
+read from `umoci.json` because `umoci repack` and `umoci unpack` would always
+have be run with the same flags anyway).
 
 [freebsd-mtree]: https://www.freebsd.org/cgi/man.cgi?mtree(8)
 [linux-mtree]: https://github.com/archiecobbs/mtree-port
