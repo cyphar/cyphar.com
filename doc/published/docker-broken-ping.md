@@ -1,7 +1,7 @@
 title: Debugging why `ping` was Broken in Docker Images
 author: Aleksa Sarai
 published: 2016-03-04 21:05:00
-updated: 2016-03-06 17:00:00
+updated: 2016-12-20 19:20:00
 description: >
   All complicated bugs start with the simplest of observations. I recently was
   assigned a bug on our openSUSE Docker images complaining that `ping` didn't
@@ -403,13 +403,20 @@ index 305ecf024da9..5672c870ef12 100644
 Naturally there were some outstanding problems with the CI (such as it running
 on Ubuntu 12.04 which packages GNU tar `1.2.6`, which is from 2011). All of those
 issues aside, this problem was finally fixed. The code was merged a few hours
-after I opened [the pull request][kiwi-pr]. The maintainer [Marcus Schäfer][marcus]
-also [ported my fix to kiwi-ng][kiwi-ng-ping-commit]. Phew. Time to go grab a beer.
+after I opened [the pull request][kiwi-pr556]. The maintainer [Marcus
+Schäfer][marcus] also [ported my fix to kiwi-ng][kiwi-ng-ping-commit]. Phew.
+Time to go grab a beer.
+
+**UPDATE**: Since posting this blog post, I found out that you need to also
+apply an extra flag (`--xattrs-include=*`) which instructs GNU tar to include
+all of the extended attributes (including `security.capability`). This [has
+also been fixed in KIWI][kiwi-pr561].
 
 [richard]: https://twitter.com/sysrich
 [kiwi-docker-config]: https://github.com/openSUSE/docker-containers
 [kiwi-ng]: https://github.com/SUSE/kiwi
-[kiwi-pr]: https://github.com/openSUSE/kiwi/pull/556
+[kiwi-pr556]: https://github.com/openSUSE/kiwi/pull/556
+[kiwi-pr561]: https://github.com/openSUSE/kiwi/pull/561
 [marcus]: https://github.com/schaefi
 [kiwi-ng-ping-commit]: https://github.com/SUSE/kiwi/commit/49aaa59bf0cfd4fcddee70bfdcbd5501d1a8bc82
 
