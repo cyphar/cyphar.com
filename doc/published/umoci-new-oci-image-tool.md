@@ -223,7 +223,7 @@ the forseeable future define any remote-registry API).
 We can also create, inspect or delete tags using `umoci tag`, `umoci stat` and
 `umoci rm` respectively. A trivial example is swapping the `old` and `latest`:
 
-```
+```language-bash
 % umoci stat --image opensuse:latest
 LAYER                                                                   CREATED                        CREATED BY                                                                                        SIZE    COMMENT
 <none>                                                                  2016-12-14T00:17:31.334478162Z /bin/sh -c #(nop)  MAINTAINER SUSE Containers Team <containers@suse.com>                          <none>
