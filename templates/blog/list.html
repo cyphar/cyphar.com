@@ -4,7 +4,7 @@
 
 <h2>
 	Blog
-	<small><a href="{{ url_for("blog_feed") }}">Atom Feed</a></small>
+	<small><a href="{{ url_for("blog_feed", bl_filter=g.bl_filter, bl_filter_type=g.bl_filter_type) }}">Atom Feed</a></small>
 </h2>
 <p>Inside these pages you will find a collection of my personal ramblings
 (including security disclosures, my thoughts on various topics, and anything
@@ -12,7 +12,7 @@ else that I feel like writing about). All of the opinions stated here are
 solely my own, and are released under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0 license</a>.</p>
 
 {% if g.bl_filter %}
-<h4>{{ g.bl_filter_type }}: {{ g.bl_filter.title() }}</h4>
+<h4>{{ g.bl_filter_type.title() }}: {{ g.bl_filter.title() }}</h4>
 {% endif %}
 
 <dl>

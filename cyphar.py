@@ -198,7 +198,7 @@ def blog_filter_tag(tag, page=1):
 
 	# Used to abstract filter links.
 	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
-	flask.g.bl_filter_type = "Tag"
+	flask.g.bl_filter_type = "tag"
 	flask.g.bl_filter = tag
 
 	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
@@ -224,27 +224,40 @@ def blog_filter_author(author, page=1):
 
 	# Used to abstract filter links.
 	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_author", author=author, **kwargs)
-	flask.g.bl_filter_type = "Author"
+	flask.g.bl_filter_type = "author"
 	flask.g.bl_filter = author
 
 	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
 
 @app.route("/blog/posts.atom")
-def blog_feed():
+@app.route("/blog/<bl_filter_type>/<bl_filter>/posts.atom")
+def blog_feed(bl_filter_type=None, bl_filter=None):
 	def make_external(url):
 		return urllib.parse.urljoin(flask.request.url_root, url)
+
+	# Build the filter.
+	_filter = None
+	url = make_external(flask.url_for("blog"))
+	if bl_filter_type is not None:
+		# Currently we only support tags.
+		if bl_filter_type != "tag":
+			flask.abort(404)
+		_filter = lambda post: bl_filter in post["tags"]
+		url = make_external(flask.url_for("blog_filter_tag", tag=bl_filter))
 
 	# Create Atom feed.
 	feed = atom.AtomFeed(title="Cyphar's Blog",
 	                     title_type="text",
 	                     author="Aleksa Sarai",
+	                     rights="Copyright (C) 2014-2017 Aleksa Sarai. Licensed under CC-BY-SA 4.0.",
+	                     rights_type="text",
 	                     subtitle="The wild ramblings of Aleksa Sarai.",
 	                     subtitle_type="text",
 	                     feed_url=flask.request.url,
-	                     url=make_external(flask.url_for("blog")))
+	                     url=url)
 
 	# Get latest posts.
-	posts = _get_posts(None)[:ATOM_FEED_SIZE]
+	posts = _get_posts(_filter)[:ATOM_FEED_SIZE]
 
 	# Add posts to feed.
 	for post in posts:
