@@ -6,12 +6,12 @@
 	<a href="{{ url_for("blog") }}">&laquo;</a>
 	{{ post.title | safe }}
 	<p class="floatright">
-		<small><a href="{{ url_for("blog_filter_author", author=post.author) }}">{{ post.author }}</a></small>
+		<small><a href="{{ url_for("blog", bl_filter_type="author", bl_filter=post.author) }}">{{ post.author }}</a></small>
 	</p>
 	<p>
 		<p class="floatleft">
 		{% for tag in post.tags %}
-			<a href="{{ url_for("blog_filter_tag", tag=tag) }}"><code>{{ tag }}</code></a>
+			<a href="{{ url_for("blog", bl_filter_type="tag", bl_filter=tag) }}"><code>{{ tag }}</code></a>
 		{% endfor %}
 		</p>
 		<p class="floatright">

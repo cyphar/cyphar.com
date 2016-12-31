@@ -158,30 +158,23 @@ def _paginate_posts(posts, page=1):
 
 	return posts[page_start:page_end], pages
 
+def bl_filter_function(bl_filter_type, bl_filter):
+	return {
+		"tag": lambda post: bl_filter in post["tags"],
+		"author": lambda post: bl_filter == post["author"],
+		None: lambda post: True,
+	}.get(bl_filter_type, None)
+
 @app.route("/blog/")
 @app.route("/blog/<int:page>")
-def blog(page=1):
-	# Get posts.
-	posts = _get_posts(None)
-	pg_posts, pages = _paginate_posts(posts, page)
+@app.route("/blog/<bl_filter_type>/<bl_filter>/")
+@app.route("/blog/<bl_filter_type>/<bl_filter>/<int:page>")
+def blog(bl_filter_type=None, bl_filter=None, page=1):
+	_filter = bl_filter_function(bl_filter_type, bl_filter)
 
-	# If the page number is invalid, bail.
-	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
-	if page < 1 or (page > pages and posts):
+	# We don't support other flag types.
+	if _filter is None:
 		flask.abort(404)
-
-	# Used to abstract filter links.
-	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", **kwargs)
-	flask.g.bl_filter_type = None
-	flask.g.bl_filter = None
-
-	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
-
-@app.route("/blog/tag/<tag>")
-@app.route("/blog/tag/<tag>/<int:page>")
-def blog_filter_tag(tag, page=1):
-	# Generate filter.
-	_filter = lambda post: tag in post["tags"]
 
 	# Get posts.
 	posts = _get_posts(_filter)
@@ -192,40 +185,10 @@ def blog_filter_tag(tag, page=1):
 	if page < 1 or (page > pages and posts):
 		flask.abort(404)
 
-	# If there are no posts, it's a bogus tag.
-	if not posts:
-		flask.abort(404)
-
 	# Used to abstract filter links.
-	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_tag", tag=tag, **kwargs)
-	flask.g.bl_filter_type = "tag"
-	flask.g.bl_filter = tag
-
-	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
-
-@app.route("/blog/author/<author>")
-@app.route("/blog/author/<author>/<int:page>")
-def blog_filter_author(author, page=1):
-	# Generate filter.
-	_filter = lambda post: author == post["author"]
-
-	# Get posts.
-	posts = _get_posts(_filter)
-	pg_posts, pages = _paginate_posts(posts, page)
-
-	# If the page number is invalid, bail.
-	# Allow for a page number of 1 if there are no posts -- for the "no posts found" error.
-	if page < 1 or (page > pages and posts):
-		flask.abort(404)
-
-	# If there are no posts, it's a bogus tag.
-	if not posts:
-		flask.abort(404)
-
-	# Used to abstract filter links.
-	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog_filter_author", author=author, **kwargs)
-	flask.g.bl_filter_type = "author"
-	flask.g.bl_filter = author
+	flask.g.bl_url_for = lambda **kwargs: flask.url_for("blog", bl_filter_type=bl_filter_type, bl_filter=bl_filter, **kwargs)
+	flask.g.bl_filter_type = bl_filter_type
+	flask.g.bl_filter = bl_filter
 
 	return flask.render_template("blog/list.html", posts=pg_posts, page=page, pages=pages)
 
@@ -236,14 +199,9 @@ def blog_feed(bl_filter_type=None, bl_filter=None):
 		return urllib.parse.urljoin(flask.request.url_root, url)
 
 	# Build the filter.
-	_filter = None
-	url = make_external(flask.url_for("blog"))
-	if bl_filter_type is not None:
-		# Currently we only support tags.
-		if bl_filter_type != "tag":
-			flask.abort(404)
-		_filter = lambda post: bl_filter in post["tags"]
-		url = make_external(flask.url_for("blog_filter_tag", tag=bl_filter))
+	_filter = bl_filter_function(bl_filter_type, bl_filter)
+	if _filter is None:
+		flask.abort(404)
 
 	# Create Atom feed.
 	feed = atom.AtomFeed(title="Cyphar's Blog",
@@ -254,7 +212,7 @@ def blog_feed(bl_filter_type=None, bl_filter=None):
 	                     subtitle="The wild ramblings of Aleksa Sarai.",
 	                     subtitle_type="text",
 	                     feed_url=flask.request.url,
-	                     url=url)
+	                     url=make_external(flask.url_for("blog", bl_filter_type=bl_filter_type, bl_filter=bl_filter)))
 
 	# Get latest posts.
 	posts = _get_posts(_filter)[:ATOM_FEED_SIZE]
