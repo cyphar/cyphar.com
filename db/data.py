@@ -36,6 +36,10 @@ CONTACTS = [
 		"url": "https://github.com/cyphar",
 	},
 	{
+		"contact": "Mastodon",
+		"url": "https://mastodon.social/@cyphar",
+	},
+	{
 		"contact": "Twitter",
 		"url": "https://twitter.com/lordcyphar",
 	},
