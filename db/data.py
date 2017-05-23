@@ -245,6 +245,8 @@ REDIRECTS = MagicDict({
 		"ttu":           "https://github.com/cyphar/ttu",
 		"twrp":          "https://twrp.me/",
 		"umoci":         "https://github.com/cyphar/umoci",
+		"talks":         "https://github.com/cyphar/talks",
+		"talk":          "https://github.com/cyphar/talks/tree/master",
 	},
 
 	"bin": {

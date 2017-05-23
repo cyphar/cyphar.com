@@ -91,12 +91,15 @@ def papers():
 
 @app.route("/src/")
 @app.route("/src/<project>")
-def src_redirect(project=None):
+@app.route("/src/<project>/<path:rest>")
+def src_redirect(project=None, rest=None):
 	redir = db.data.REDIRECTS.src.get(project)
 
 	if not redir:
 		flask.abort(404)
 
+	if rest is not None:
+		redir += "/" + rest
 	return flask.redirect(redir, code=302)
 
 @app.route("/bin/")
