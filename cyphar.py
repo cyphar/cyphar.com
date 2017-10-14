@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # cyphar.com: my personal site's flask app
-# Copyright (C) 2014, 2015, 2016 Aleksa Sarai
+# Copyright (C) 2014, 2015, 2016, 2017 Aleksa Sarai
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -235,8 +235,43 @@ def blog_feed(bl_filter_type=None, bl_filter=None):
 	# Generate Atom response.
 	return feed.get_response()
 
+def isodate_lstrip(string, fmt="%Y%m%d-"):
+	prefix = None
+	suffix = string
+
+	try:
+		# This should *always* raise an error.
+		datetime.datetime.strptime(string, fmt)
+	except ValueError as v:
+		# Parse the error message. Yeah, I know. I'm sorry.
+		if "unconverted data remains" in v.args[0]:
+			_, _, suffix = v.args[0].partition('unconverted data remains: ')
+			prefix = datetime.datetime.strptime(string[:-len(suffix)], fmt)
+
+	return (prefix, suffix)
+
+def blog_permacode(name):
+	if "blog_permacode" not in app.extensions:
+		app.extensions["blog_permacode"] = {}
+
+		# If the name starts with a date then we can add it to the index.
+		# Otherwise we don't do anything to it.
+		for post in flatpages:
+			prefix, suffix = isodate_lstrip(post.path)
+			if suffix == post.path or prefix is None:
+				continue
+			app.extensions["blog_permacode"][suffix] = post.path
+	return app.extensions["blog_permacode"].get(name, name)
+
 @app.route("/blog/post/<name>")
 def blog_post(name):
+	# Get the permacode version of the name. If there is one, redirect to the
+	# permacode version. This is necessary to support old-style names (that
+	# didn't include a date).
+	perma = blog_permacode(name)
+	if perma != name:
+		return flask.redirect(flask.url_for("blog_post", name=perma), code=301)
+
 	# Get requested post.
 	post = flatpages.get_or_404(name)
 
