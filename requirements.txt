@@ -5,7 +5,7 @@ bleach>=1.4.2
 smartypants>=1.8.6
 
 # We have to use git here because there aren't any proper PyPi builds.
-git+git://github.com/Undeterminant/markdown-newtab.git
+git+git://github.com/andreykko/markdown-newtab.git
 git+git://github.com/mitya57/python-markdown-math.git
 git+git://github.com/jambonrose/markdown_superscript_extension.git
 git+git://github.com/jambonrose/markdown_subscript_extension.git
