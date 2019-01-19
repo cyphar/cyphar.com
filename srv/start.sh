@@ -1,6 +1,6 @@
 #!/bin/zsh
 # cyphar.com: my personal site's flask app
-# Copyright (C) 2014, 2015, 2016 Aleksa Sarai
+# Copyright (C) 2014, 2015, 2016, 2019 Aleksa Sarai
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -47,3 +47,4 @@ function _dockrun() {
 
 # See: github.com/cyphar/cyphar.com
 _dockrun -d -p 127.0.0.1:8001:5000 cyphar/personal-site:latest
+_dockrun -d -p 127.0.0.1:9001:5000 cyphar/personal-site:beta
