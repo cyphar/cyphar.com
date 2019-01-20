@@ -161,9 +161,12 @@ def _paginate_posts(posts, page=1):
 	return posts[page_start:page_end], pages
 
 def bl_filter_function(bl_filter_type, bl_filter):
+	if bl_filter is not None:
+		# bl_filter is case-insensitive.
+		bl_filter = bl_filter.lower()
 	return {
-		"tag": lambda post: bl_filter in post["tags"],
-		"author": lambda post: bl_filter == post["author"],
+		"tag": lambda post: bl_filter in {tag.lower() for tag in post["tags"]},
+		"author": lambda post: bl_filter == post["author"].lower(),
 		None: lambda post: True,
 	}.get(bl_filter_type, None)
 
