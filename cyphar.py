@@ -260,10 +260,25 @@ def blog_permacode(name):
 		# Otherwise we don't do anything to it.
 		for post in flatpages:
 			prefix, suffix = isodate_lstrip(post.path)
+			# The article is an old-style article and doesn't have an ISO-date
+			# prefix (so we can't alias it).
 			if suffix == post.path or prefix is None:
 				continue
+			# The article has more than one ISO-date prefix. This will cause
+			# errors, and is a Bad Thing™. So let's make the failure loud.
+			sub_prefix, sub_suffix = isodate_lstrip(suffix)
+			if sub_suffix != suffix or sub_prefix is not None:
+				raise ValueError("found post with double-iso-date name: %s" % (post.path,))
+			# If there are shared suffixes, we need to not include them as a
+			# redirect (because that will make things quite confusing).
+			if suffix in app.extensions["blog_permacode"]:
+				raise ValueError("found duplicate suffix-alias: %s" % (suffix,))
 			app.extensions["blog_permacode"][suffix] = post.path
-	return app.extensions["blog_permacode"].get(name, name)
+
+	# We want to handle invalid dates as well as just a suffix (if I ever make
+	# a URL like 20190120-20190120-foo, this will break very badly).
+	_, name_suffix = isodate_lstrip(name)
+	return app.extensions["blog_permacode"].get(name_suffix) or name
 
 @app.route("/blog/post/<name>")
 def blog_post(name):
@@ -272,7 +287,7 @@ def blog_post(name):
 	# didn't include a date).
 	perma = blog_permacode(name)
 	if perma != name:
-		return flask.redirect(flask.url_for("blog_post", name=perma), code=301)
+		return flask.redirect(flask.url_for("blog_post", name=perma), code=302)
 
 	# Get requested post.
 	post = flatpages.get_or_404(name)
