@@ -3,6 +3,10 @@ title: >
 author: Aleksa Sarai
 published: 2019-01-21 13:00:00
 updated: 2019-01-21 13:00:00
+short_description: >
+  A semi-coherent rant about how tar is not suited for container images, and
+  what properties we'd want in an OCIv2 image format (which will be presented
+  in a follow-up).
 description: >
   The need for a better container image format has been fairly self-apparent
   for a long time, but there hasn't been a solid effort to redesign how

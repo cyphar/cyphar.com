@@ -2,6 +2,9 @@ title: Docker Internals and Implementing Rebase
 author: Aleksa Sarai
 published: 2015-12-12 22:30:00
 updated: 2015-12-12 22:30:00
+short_description: >
+  I started a SUSE Hackweek project to rebase container images, but it didn't really
+  work out as well as I'd hoped.
 description: >
   [SUSE's semi-annual Hackweek](https://hackweek.suse.com/) was last week and I
   decided to work on implementing `docker rebase`, mainly to learn about the

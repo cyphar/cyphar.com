@@ -2,6 +2,10 @@ title: Debugging why `ping` was Broken in Docker Images
 author: Aleksa Sarai
 published: 2016-03-04 21:05:00
 updated: 2016-12-20 19:20:00
+short_description: >
+  A deep-dive on why ping was broken in openSUSE's Docker images and how we
+  solved the problem, as well as some of the tyre-fires that spawned from this
+  fix.
 description: >
   All complicated bugs start with the simplest of observations. I recently was
   assigned a bug on our openSUSE Docker images complaining that `ping` didn't

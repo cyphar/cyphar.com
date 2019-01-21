@@ -2,6 +2,9 @@ title: Dockerinit and Dead Code
 author: Aleksa Sarai
 published: 2016-01-21 17:30:00
 updated: 2016-01-21 17:30:00
+short_description: >
+  A short story about the removal of a pretty bad hack from Docker, and the
+  unseen pain of dead code.
 description: >
   After running into insane amounts of very weird issues with `gccgo` with Docker,
   some of which were actual compiler bugs, someone on my team at SUSE asked the

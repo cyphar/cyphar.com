@@ -2,6 +2,11 @@ title: "umoci: a New Tool for OCI Images"
 author: Aleksa Sarai
 published: 2016-11-29 15:30:00
 updated: 2016-12-16 18:15:00
+short_description: >
+  The lack of tooling for OCI container images is a real concern, especially
+  given the slow progression to 1.0 without any implementations. I wrote one
+  that I hope is generic enough that it can be used (and also gives the
+  opportunity to do cool things with it).
 description: >
   Very recently, I've been working on implementing the required tooling for
   creating and modifying [Open Container Initiative](https://www.opencontainers.org/)

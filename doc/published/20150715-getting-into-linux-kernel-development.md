@@ -2,6 +2,9 @@ title: Getting into Linux Kernel Development
 author: Aleksa Sarai
 published: 2015-07-15 14:20:00
 updated: 2015-12-07 22:30:00
+short_description: >
+  An overview of my experiences getting into kernel development, something I've
+  been interested in for a long time.
 description: >
   I've been interested in kernel development for a *long* time, and recently got
   some patches merged into the Linux kernel. Here are my experiences about the

@@ -2,6 +2,10 @@ title: Rootless Containers with runC
 author: Aleksa Sarai
 published: 2016-06-27 21:05:00
 updated: 2016-06-27 17:00:00
+short_description: >
+  I've been working on being able to run fully unprivileged (rootless)
+  containers within runc for a while, and this is the fruit of my efforts -- it
+  all seems to work now and is on its way to getting merged.
 description: >
   There has been a lot of work within the runC community recently to get proper
   "rootless containers". I've been working on this for a couple of months now,

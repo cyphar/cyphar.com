@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}{{ post.title | striptags }}{% endblock %}
+{% block description %}{{ post.short_description | striptags }}{% endblock %}
 {% block body %}
 
 <h2>
@@ -23,7 +24,7 @@
 	</p>
 </h2>
 
-{{ post.html|safe }}
+{{ post.html | safe }}
 
 {# Disclaim that these are my own opinions. #}
 <small>

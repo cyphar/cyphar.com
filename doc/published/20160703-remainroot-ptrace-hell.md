@@ -2,6 +2,10 @@ title: Adventures into `ptrace(2)` Hell
 author: Aleksa Sarai
 published: 2016-07-03 19:00:00
 updated: 2016-07-03 19:00:00
+short_description: >
+  While working on rootless containers, I found myself wanting to use ptrace to
+  fake a few syscalls in a way that the kernel doesn't at the moment. It was an
+  awful experience, and I'm here to share the pain with you.
 description: >
   As part of my work on [rootless containers](/blog/rootless-containers-with-runc),
   I found that many tools try to drop privileges. This makes those tools break

@@ -2,6 +2,9 @@ title: Generating Coverage Profiles for Golang Integration Tests
 author: Aleksa Sarai
 published: 2017-04-12 15:30:00
 updated: 2017-04-12 15:30:00
+short_description: >
+  An interesting hack I figured out to give you far more coverage information
+  for your test suite, by abusing test packages and a splash of AWK.
 description: >
   While Go's system for unit tests is very seamless and full-featured, allowing
   for coverage reports to be generated as well as various other cool features,

@@ -129,6 +129,9 @@ def _fix_post_meta(post):
 	if "description" not in post.meta:
 		post.meta["description"] = ""
 
+	if "short_description" not in post.meta:
+		post.meta["short_description"] = post.meta["description"]
+
 	if "author" not in post.meta:
 		post.meta["author"] = "Unknown"
 
@@ -137,6 +140,7 @@ def _fix_post_meta(post):
 
 	markitdown(post.meta, "title", tags=["em", "strong"])
 	markitdown(post.meta, "description")
+	markitdown(post.meta, "short_description", tags=[])
 	return post
 
 def _get_posts(_filter=None):

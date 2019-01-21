@@ -2,6 +2,8 @@ title: Licenses, licenses, licenses
 author: Aleksa Sarai
 published: 2015-12-07 22:30:00
 updated: 2015-12-07 22:30:00
+short_description: >
+  An overview of what I think about licenses.
 description: >
   There are many different types of works, and it can often be difficult to decide
   what license you should use (assuming that you intend to release it so that

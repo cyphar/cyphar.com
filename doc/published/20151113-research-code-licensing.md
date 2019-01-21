@@ -1,7 +1,11 @@
 title: Proprietary Software Poisons Science
 author: Aleksa Sarai
 published: 2015-11-13 18:05:00
-updated: 2015-12-07 22:30:00
+updated: 2019-01-22 00:30:00
+short_description: >
+  A rant about how proprietary software use is rampant within the scientific
+  community, and how dangerous it is to the reproducibility and accessibility
+  of scientific knowledge.
 description: >
   As a result of my recent research project (and the one I plan to do next year),
   I've developed some strong views on how code should be licensed if it is used
@@ -18,9 +22,15 @@ tags:
   - programming
 
 Before I start, I'd like the make the record clear: I am **not** a [GPL][gpl],
-GNU or FSF zealot. Most of the code I've written is licensed under the MIT License
-(but that's a story for another day), and I don't understand the thinking of people
-who use the GPL for every single piece of code they've released as free software.
+GNU or FSF zealot. Most of the code I've written is licensed under the MIT
+License (but that's a story for another day), and I don't understand the
+thinking of people who use the GPL for every single piece of code they've
+released as free software.
+
+[EDIT: Since writing this blog post, I have become a bit of a GPL zealot. So
+this is no longer a valid portrayal of my views -- though the rest of the
+article still is a fairly accurate summary of my concerns with proprietary
+software and science.]
 
 I agree with [Linus Torvalds][linus-gplv3] on the question of the *purpose* of
 the GPL, that what matters is the collaboration aspect of the GPL:

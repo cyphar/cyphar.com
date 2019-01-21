@@ -2,6 +2,9 @@ title: Android Compilation Headaches
 author: Aleksa Sarai
 published: 2015-11-28 03:20:00
 updated: 2015-12-07 22:30:00
+short_description: >
+  A rant about how difficult it is to set up the build system for Android, and
+  what hacks I figured out so I could actually test my TWRP patches.
 description: >
   I've spent the last week of my life trying to build [TWRP](https://twrp.me/),
   which requires having a full, and working Android build environment. With the
