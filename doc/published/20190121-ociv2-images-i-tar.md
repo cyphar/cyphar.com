@@ -2,7 +2,7 @@ title: >
   The Road to OCIv2 Images: What's Wrong with Tar?
 author: Aleksa Sarai
 published: 2019-01-21 13:00:00
-updated: 2019-01-21 13:00:00
+updated: 2019-01-22 17:00:00
 short_description: >
   A semi-coherent rant about how tar is not suited for container images, and
   what properties we'd want in an OCIv2 image format (which will be presented
@@ -375,8 +375,9 @@ hadn't solved the issues that they'd hoped to solve (vendor compatibility and
 modernising the Unix v7 `tar` format). In addition, the `tar` vs. `cpio` war
 hadn't fizzled out -- and POSIX wanted to have *One Format To Rule Them All™*.
 So POSIX.1-2001 scrapped `cpio` and `ustar` and [came up with a new format,
-called PAX][pax(1)] (**P**ortable **A**rchive Interchange -- I'm not sure where
-the *"X"* comes from, since POSIX doesn't use the word e**X**change).
+called PAX][pax(1)] ([apparently][reddit-pax] "pax" is meant to to be a pun,
+since it means "peace" in Latin -- and the intention of PAX was to bring peace
+between the `tar` and `cpio` camps).
 
 PAX is effectively `ustar` but with a series of extensions that they hoped
 would alleviate some of the issues that weren't fixed by `ustar`. While POSIX
@@ -420,6 +421,7 @@ attributes is the most obvious example, as well as how to handle new file-types
 (other than just doing it the old-fashioned `ustar` way).
 
 [pax(1)]: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html
+[reddit-pax]: https://www.reddit.com/r/linux/comments/ai68ds/the_road_to_ociv2_images_whats_wrong_with_tar/eendgeg/
 [pax(1)-header]: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html#tag_20_92_13_02
 [pax(1)-keywords]: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html#tag_20_92_13_03
 
