@@ -19,7 +19,7 @@ solely my own, and are released under the <a href="https://creativecommons.org/l
 {# Post list. #}
 {% for post in posts %}
 	<dt>
-		<a href="{{ post.url }}">{{ post.title | safe }}</a>
+		<a href="{{ url_for("blog_post", name=post.path) }}">{{ post.title | safe }}</a>
 		<small>
 			<a href="{{ url_for("blog", bl_filter_type="author", bl_filter=post.author) }}">{{ post.author }}</a>,
 			{{ post.published.strftime(g.date_format) }}.
