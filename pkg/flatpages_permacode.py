@@ -37,11 +37,9 @@ class Permacode(object):
 	_EXTENSION_SUFFIXES = "suffixes"
 
 	def __init__(self, app=None, flatpages=None):
-		self.app = app
-		self.flatpages = flatpages
 		self.extension_dict = {}
 		if app is not None:
-			self.init_app(self.app, flatpages)
+			self.init_app(app, flatpages)
 
 	def init_app(self, app, flatpages=None):
 		if self.EXTENSION_NAME not in app.extensions:
