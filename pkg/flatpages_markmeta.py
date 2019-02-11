@@ -1,6 +1,6 @@
 #!/usr/bin/false
 # cyphar.com: my personal site's flask app
-# Copyright (C) 2014-2019 Aleksa Sarai
+# Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
