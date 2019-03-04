@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # cyphar.com: my personal site's flask app
 # Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #

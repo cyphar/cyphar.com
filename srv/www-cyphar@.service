@@ -1,0 +1,14 @@
+[Unit]
+Description=%I.cyphar.com web server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/%I/
+EnvironmentFile=/srv/%I.env
+ExecStart=/srv/%I/server.sh
+
+[Install]
+WantedBy=multi-user.target
