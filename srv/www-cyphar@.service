@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=www-%I
+Group=www-%I
 WorkingDirectory=/srv/%I/
 EnvironmentFile=/srv/%I.env
 ExecStart=/srv/%I/server.sh
