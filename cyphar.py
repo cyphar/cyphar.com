@@ -33,7 +33,7 @@ FLATPAGES_ROOT = "doc/published"
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = [
 	"fenced_code",
-	"mdx_math", "mdx_subscript", "mdx_superscript",
+	"mdx_subscript", "mdx_superscript",
 	"markdown.extensions.toc", "markdown.extensions.smarty",
 ]
 

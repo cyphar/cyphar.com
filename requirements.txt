@@ -6,6 +6,5 @@ smartypants
 gunicorn
 
 # We have to use git here because there aren't any proper PyPi builds.
-git+git://github.com/mitya57/python-markdown-math.git
 git+git://github.com/jambonrose/markdown_superscript_extension.git
 git+git://github.com/jambonrose/markdown_subscript_extension.git
