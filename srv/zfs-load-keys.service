@@ -1,0 +1,12 @@
+[Unit]
+Description=Load ZFS encryption keys
+After=zfs-import.target
+Before=zfs-mount.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/zfs load-key -a
+
+[Install]
+WantedBy=zfs.target
