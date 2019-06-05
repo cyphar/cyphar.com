@@ -33,9 +33,9 @@ ControlSocket 0
 ExitRelay 0
 ExitPolicy reject *:*
 
-# For now, limit to 1MBps and 2MBps burst. We can bump this up in the future.
-RelayBandwidthRate 1MB
-RelayBandwidthBurst 2MB
+# For now, limit to 10MBps and 20MBps burst. We can bump this up in the future.
+RelayBandwidthRate 10MB
+RelayBandwidthBurst 20MB
 
 # Basic hidden service for www.cyphar.com.
 HiddenServiceDir /var/lib/tor/hidden-services/v3.cyphar.com
