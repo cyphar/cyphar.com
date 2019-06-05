@@ -18,7 +18,8 @@
 
 config:
   boot.autostart: "true"
-  limits.cpu: "1"
+  boot.autostart.priority: 5
+  limits.cpu: 1
   limits.memory: 512MB
   security.protection.delete: "true"
 devices:

@@ -37,6 +37,11 @@ ExitPolicy reject *:*
 RelayBandwidthRate 1MB
 RelayBandwidthBurst 2MB
 
-# TODO: Setup cyphar.com hidden service.
-#HiddenServiceDir /var/lib/tor/hidden_service/
-#HiddenServicePort 80 127.0.0.1:80
+# Basic hidden service for www.cyphar.com.
+HiddenServiceDir /var/lib/tor/hidden-services/v3.cyphar.com
+HiddenServiceVersion 3
+HiddenServicePort 80 unix:/var/run/www.sock
+
+HiddenServiceDir /var/lib/tor/hidden-services/v2.cyphar.com
+HiddenServiceVersion 2
+HiddenServicePort 80 unix:/var/run/www.sock

@@ -18,10 +18,20 @@
 
 config:
   boot.autostart: "true"
-  limits.cpu: "1"
-  limits.memory: 2GB
+  boot.autostart.priority: 0
+  limits.cpu: 1
+  limits.memory: 1GB
   security.protection.delete: "true"
 devices:
+  root:
+    path: /
+    size: 1GB
+    pool: default
+    type: disk
+  tor-hsdir:
+    path: /var/lib/tor/hidden-services
+    source: /store/deku/dot.cyphar.com/hidden-services
+    type: disk
   tor-orport-proxy:
     connect: tcp:127.0.0.1:9001
     listen: tcp:0.0.0.0:9001
@@ -31,6 +41,14 @@ devices:
   tor-dirport-proxy:
     connect: tcp:127.0.0.1:9030
     listen: tcp:0.0.0.0:9030
+    security.gid: 65534
+    security.uid: 65534
+    type: proxy
+  www-proxy:
+    bind: container
+    connect: unix:/srv/run/www-prod.sock
+    listen: unix:/var/run/www.sock
+    mode: 0777
     security.gid: 65534
     security.uid: 65534
     type: proxy
