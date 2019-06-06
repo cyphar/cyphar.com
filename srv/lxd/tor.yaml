@@ -18,10 +18,11 @@
 
 config:
   boot.autostart: "true"
-  boot.autostart.priority: 0
   limits.cpu: 1
   limits.memory: 1GB
   security.protection.delete: "true"
+  raw.idmap: |
+    both 1000000 5000
 devices:
   root:
     path: /

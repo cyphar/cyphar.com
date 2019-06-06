@@ -24,6 +24,11 @@ config:
   limits.memory: 512MB
   security.protection.delete: "true"
 devices:
+  root:
+    path: /
+    size: 3GB
+    pool: default
+    type: disk
   beta-proxy:
     connect: tcp:127.0.0.1:8081
     listen: unix:/srv/run/www-beta.sock

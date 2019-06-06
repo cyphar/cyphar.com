@@ -48,5 +48,6 @@ profiles:
       type: nic
     root:
       path: /
+      size: 10GB
       pool: default
       type: disk
