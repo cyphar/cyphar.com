@@ -14,14 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# [HOST] ZFS Automated Scrubs
+# [HOST] NextCloud Cron
 
 [Unit]
-Description=Scrub ZFS Pool %I
-Requires=zfs.target
+Description=NextCloud Cron
 
 [Service]
-ExecStart=/usr/sbin/zpool scrub %I
-
-[Install]
-WantedBy=multi-user.target
+ExecStart=/usr/bin/lxc exec nextcloud -- sudo -u www-data php /var/www/nextcloud/cron.php

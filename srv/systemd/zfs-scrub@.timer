@@ -21,8 +21,7 @@ Description=Timer for Scrub ZFS Pool %I
 Requires=zfs.target
 
 [Timer]
-OnBootSec=3600
-OnUnitActiveSec=2w
+OnCalendar=Sun *-*-* 22:00:00
 
 [Install]
 WantedBy=multi-user.target

@@ -31,7 +31,7 @@ devices:
     type: disk
   tor-hsdir:
     path: /var/lib/tor/hidden-services
-    source: /store/deku/dot.cyphar.com/hidden-services
+    source: /store/glacier/dot.cyphar.com/hidden-services
     type: disk
   tor-orport-proxy:
     connect: tcp:127.0.0.1:9001

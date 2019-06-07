@@ -38,7 +38,7 @@ devices:
   postgres-backup-dir:
     type: disk
     path: /srv/postgres-backup
-    source: /store/deku/postgres-backup
+    source: /store/glacier/postgres-backup
   postgres-proxy:
     type: proxy
     connect: tcp:127.0.0.1:5432

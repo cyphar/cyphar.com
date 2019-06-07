@@ -14,14 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# [HOST] ZFS Automated Scrubs
+# [HOST] Timer for NextCloud Cron
 
 [Unit]
-Description=Scrub ZFS Pool %I
-Requires=zfs.target
+Description=Timer for NextCloud Cron
 
-[Service]
-ExecStart=/usr/sbin/zpool scrub %I
+[Timer]
+OnCalendar=*-*-* *:00/5:00
 
 [Install]
 WantedBy=multi-user.target

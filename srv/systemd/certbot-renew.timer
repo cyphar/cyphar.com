@@ -20,8 +20,8 @@
 Description=Timer for ACME Certificate Renewal
 
 [Timer]
-OnBootSec=300
-OnUnitActiveSec=1w
+OnCalendar=weekly
+RandomizedDelaySec=2hour
 
 [Install]
 WantedBy=multi-user.target

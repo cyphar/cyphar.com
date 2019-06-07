@@ -1,3 +1,4 @@
+#!/bin/zsh
 # cyphar.com: my personal site's flask app
 # Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #
@@ -14,14 +15,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# [HOST] ZFS Automated Scrubs
+# [[ THIS SCRIPT SHOULD ONLY BE RUN ONCE. ]]
 
-[Unit]
-Description=Scrub ZFS Pool %I
-Requires=zfs.target
+set -Eeugo pipefail
 
-[Service]
-ExecStart=/usr/sbin/zpool scrub %I
+SCRIPT_DIRECTORY="$(readlink -m "${(%):-%N}/..")"
+. "$SCRIPT_DIRECTORY/conf.sh"
+export RESTIC_REPOSITORY="$_RESTIC_REPOSITORY_LOCAL"
 
-[Install]
-WantedBy=multi-user.target
+set -x
+restic init
+rclone --config="$RCLONE_CONFIG" config create \
+	b2cyphar b2 \
+	account "$B2_ACCOUNT_ID" \
+	key "$B2_ACCOUNT_KEY"
+

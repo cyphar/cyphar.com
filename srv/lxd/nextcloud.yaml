@@ -27,11 +27,11 @@ devices:
   config-dir:
     type: disk
     path: /var/www/nextcloud/config
-    source: /store/deku/nextcloud-config
+    source: /store/glacier/nextcloud-config
   data-dir:
     type: disk
     path: /srv/nextcloud-data
-    source: /store/deku/nextcloud-data
+    source: /store/glacier/nextcloud-data
   nextcloud-proxy:
     type: proxy
     connect: tcp:127.0.0.1:80

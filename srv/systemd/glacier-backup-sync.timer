@@ -14,14 +14,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# [HOST] ZFS Automated Scrubs
+# [HOST] /store/glacier Backup Sync Timer
 
 [Unit]
-Description=Scrub ZFS Pool %I
-Requires=zfs.target
+Description=Timer for Glacier Backup Sync
 
-[Service]
-ExecStart=/usr/sbin/zpool scrub %I
+[Timer]
+OnCalendar=daily
 
 [Install]
 WantedBy=multi-user.target
+
