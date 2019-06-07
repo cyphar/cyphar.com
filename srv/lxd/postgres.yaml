@@ -17,10 +17,12 @@
 # dot.cyphar.com postgres config.
 
 config:
+  security.protection.delete: "true"
   boot.autostart: "true"
   boot.autostart.delay: 20
   boot.autostart.priority: 10
-  security.protection.delete: "true"
+  limits.cpu: 4
+  limits.memory: 8GB
   raw.idmap: |
     both 1000001 5000
 devices:
@@ -33,6 +35,10 @@ devices:
     type: disk
     path: /srv/postgres-data
     source: /store/varlib/postgres-data
+  postgres-backup-dir:
+    type: disk
+    path: /srv/postgres-backup
+    source: /store/deku/postgres-backup
   postgres-proxy:
     type: proxy
     connect: tcp:127.0.0.1:5432

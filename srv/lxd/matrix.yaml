@@ -16,9 +16,11 @@
 
 # matrix.cyphar.com synapse config.
 
+# TODO TODO TODO
+
 config:
-  boot.autostart: "true"
   security.protection.delete: "true"
+  boot.autostart: "true"
 devices:
   synapse-proxy:
     connect: tcp:127.0.0.1:8008
@@ -29,3 +31,10 @@ devices:
     security.gid: 65534
     security.uid: 65534
     type: proxy
+  postgres-proxy:
+    type: proxy
+    bind: container
+    connect: unix:/srv/run/postgres.sock
+    listen: tcp:127.0.0.1:5432
+    security.gid: 1000001
+    security.uid: 1000001

@@ -17,12 +17,12 @@
 # www.cyphar.com web server config.
 
 config:
+  security.protection.delete: "true"
   boot.autostart: "true"
   boot.autostart.priority: 5
   boot.autostart.delay: 20
   limits.cpu: 1
   limits.memory: 512MB
-  security.protection.delete: "true"
 devices:
   root:
     path: /
