@@ -20,4 +20,4 @@
 Description=NextCloud Cron
 
 [Service]
-ExecStart=/usr/bin/lxc exec nextcloud -- sudo -u www-data php /var/www/nextcloud/cron.php
+ExecStart=/usr/bin/lxc exec nextcloud -- sudo -u www-data php -f /var/www/nextcloud/cron.php
