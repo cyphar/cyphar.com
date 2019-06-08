@@ -48,5 +48,5 @@ restic --no-lock check
 
 # We now clone the backup to b2.
 rclone --config="$RCLONE_CONFIG" -v \
-	sync --one-file-system --b2-hard-delete --fast-list --transfers 1 \
+	sync --one-file-system --b2-hard-delete --fast-list \
 	"$ZFS_SNAPDIR" "$B2_REMOTE:$B2_BUCKET/$B2_BUCKET_PATH"
