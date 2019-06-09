@@ -1,0 +1,38 @@
+# cyphar.com: my personal site's flask app
+# Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Contact information.
+Nickname navi
+ContactInfo 0x6FA1B3E3F9A18CDCBE6A2CF54A7BE7BF70DE9B9F Aleksa Sarai <cyphar@cyphar.com>
+
+# Relay hosting information.
+Address dot.cyphar.com
+ORPort 9001
+DirPort 9030
+#BridgeRelay 1
+#PublishServerDescriptor 0
+
+# Disable proxying local connections.
+SocksPort 0
+ControlSocket 0
+
+# We are not an exit node.
+ExitRelay 0
+ExitPolicy reject *:*
+
+# For now, limit to 10MBps and 20MBps burst. We can bump this up in the future.
+RelayBandwidthRate 10MB
+RelayBandwidthBurst 20MB

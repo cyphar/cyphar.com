@@ -14,28 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Contact information.
-Nickname navi
-ContactInfo 0x6FA1B3E3F9A18CDCBE6A2CF54A7BE7BF70DE9B9F Aleksa Sarai <cyphar@cyphar.com>
-
-# Relay hosting information.
-Address dot.cyphar.com
-ORPort 9001
-DirPort 9030
-#BridgeRelay 1
-#PublishServerDescriptor 0
-
 # Disable proxying local connections.
 SocksPort 0
 ControlSocket 0
-
-# We are not an exit node.
-ExitRelay 0
-ExitPolicy reject *:*
-
-# For now, limit to 10MBps and 20MBps burst. We can bump this up in the future.
-RelayBandwidthRate 10MB
-RelayBandwidthBurst 20MB
 
 # Basic hidden service for www.cyphar.com.
 HiddenServiceDir /var/lib/tor/hidden-services/v3.cyphar.com
