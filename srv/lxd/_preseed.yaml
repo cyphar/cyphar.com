@@ -42,12 +42,12 @@ profiles:
     snapshots.schedule: 0 0 * * *
   devices:
     eth0:
+      type: nic
       name: eth0
       nictype: bridged
       parent: lxdbr0
-      type: nic
     root:
+      type: disk
       path: /
       size: 10GB
       pool: default
-      type: disk

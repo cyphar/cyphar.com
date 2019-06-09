@@ -27,10 +27,10 @@ config:
     both 1000001 5000
 devices:
   root:
+    type: disk
     path: /
     size: 1GB
     pool: default
-    type: disk
   postgres-data-dir:
     type: disk
     path: /srv/postgres-data

@@ -25,31 +25,35 @@ config:
     both 1000000 5000
 devices:
   root:
+    type: disk
     path: /
     size: 1GB
     pool: default
-    type: disk
   tor-hsdir:
-    path: /var/lib/tor/hidden-services
-    source: /store/glacier/dot.cyphar.com/hidden-services
     type: disk
+    path: /var/lib/tor/hidden-services
+    source: /store/glacier/dot.cyphar.com/tor/hidden-services
+  tor-hsdir:
+    type: disk
+    path: /var/lib/tor/keys
+    source: /store/glacier/dot.cyphar.com/tor/keys
   tor-orport-proxy:
+    type: proxy
     connect: tcp:127.0.0.1:9001
     listen: tcp:0.0.0.0:9001
     security.gid: 65534
     security.uid: 65534
-    type: proxy
   tor-dirport-proxy:
+    type: proxy
     connect: tcp:127.0.0.1:9030
     listen: tcp:0.0.0.0:9030
     security.gid: 65534
     security.uid: 65534
-    type: proxy
   www-proxy:
+    type: proxy
     bind: container
     connect: unix:/srv/run/www-prod.sock
     listen: unix:/var/run/www.sock
     mode: 0777
     security.gid: 65534
     security.uid: 65534
-    type: proxy
