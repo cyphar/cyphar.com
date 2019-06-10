@@ -1,0 +1,62 @@
+# Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+version: 1
+
+formatters:
+  precise:
+   format: '%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(request)s- %(message)s'
+  journal_fmt:
+   format: '%(name)s: [%(request)s] %(message)s'
+
+filters:
+  context:
+    (): synapse.util.logcontext.LoggingContextFilter
+    request: ""
+
+handlers:
+  file:
+    class: logging.handlers.WatchedFileHandler
+    formatter: precise
+    filename: /var/log/matrix-synapse/homeserver.log
+    filters: [context]
+    level: DEBUG
+    encoding: utf8
+  console:
+    class: logging.StreamHandler
+    formatter: precise
+    level: WARN
+  journal:
+    class: systemd.journal.JournalHandler
+    formatter: journal_fmt
+    filters: [context]
+    SYSLOG_IDENTIFIER: synapse
+
+loggers:
+    twisted:
+        level: WARN
+
+    synapse:
+        level: WARN
+
+    synapse.storage.SQL:
+        level: INFO
+
+    synapse.http.matrixfederationclient:
+        level: ERROR
+
+root:
+    level: INFO
+    handlers: [file, journal]

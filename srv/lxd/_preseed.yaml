@@ -1,4 +1,3 @@
-# cyphar.com: my personal site's flask app
 # Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +15,13 @@
 
 # Useful default operation settings for LXD.
 
+config:
+  # Disable auto-updating of images. While it is a pretty neat feature, it
+  # results in wasted storage-pool space because there is no way to rebase an
+  # existing container onto a new image (and there aren't any automated build
+  # systems for LXD).
+  images.auto_update_cached: false
+
 # Use pre-configured ZFS pool.
 storage_pools:
 - name: default
@@ -23,6 +29,7 @@ storage_pools:
   config:
     source: lxd
 
+# Default bridge configuration.
 networks:
 - name: lxdbr0
   type: bridge

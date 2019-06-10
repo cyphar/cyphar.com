@@ -1,6 +1,0 @@
-[blog]
-* Filtering.
-	- Full-text search.
-* Cleanliness.
-	- Remove bolierplate for filter code (use inspect to automate some of it).
-	- Maybe even generate all of the functions and registration.

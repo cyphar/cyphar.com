@@ -1,4 +1,3 @@
-# cyphar.com: my personal site's flask app
 # Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,8 +16,8 @@
 # cloud.cyphar.com NextCloud config.
 
 config:
-  boot.autostart: "true"
   security.protection.delete: "true"
+  boot.autostart: "true"
   limits.cpu: 4
   limits.memory: 8GB
   raw.idmap: |

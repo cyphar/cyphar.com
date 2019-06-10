@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,33 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# matrix.cyphar.com synapse config.
+set -Eeuxo pipefail
 
-config:
-  security.protection.delete: "true"
-  boot.autostart: "true"
-  limits.cpu: 8
-  limits.memory: 8GB
-  raw.idmap: |
-    both 1000004 5000
-devices:
-  data-dir:
-    type: disk
-    path: /srv/matrix-data
-    source: /store/glacier/matrix-data
-  synapse-proxy:
-    connect: tcp:127.0.0.1:8008
-    listen: unix:/srv/run/matrix.sock
-    uid: 33
-    gid: 65534
-    mode: 0700
-    security.gid: 65534
-    security.uid: 65534
-    type: proxy
-  postgres-proxy:
-    type: proxy
-    bind: container
-    connect: unix:/srv/run/postgres.sock
-    listen: tcp:127.0.0.1:5432
-    security.gid: 1000001
-    security.uid: 1000001
+# Set up host-mapped service user.
+groupadd -g 5000 matrix-synapse
+useradd -u 5000 -g matrix-synapse -s/bin/false -d/ matrix-synapse
+
+# Install synapse from experimental.
+echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list
+apt update && apt upgrade -y
+apt -t experimental install -y matrix-synapse
