@@ -16,45 +16,51 @@
 version: 1
 
 formatters:
-  precise:
-   format: '%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(request)s- %(message)s'
-  journal_fmt:
-   format: '%(name)s: [%(request)s] %(message)s'
+    precise:
+        format: '[%(asctime)s] %(levelname)s [%(request)s] %(name)s [%(pathname)s:%(lineno)d] %(message)s'
+    journal_fmt:
+        format: '%(name)s: [%(request)s] %(message)s'
 
 filters:
-  context:
-    (): synapse.util.logcontext.LoggingContextFilter
-    request: ""
+    context:
+        (): synapse.util.logcontext.LoggingContextFilter
+        request: ""
 
 handlers:
-  file:
-    class: logging.handlers.WatchedFileHandler
-    formatter: precise
-    filename: /var/log/matrix-synapse/homeserver.log
-    filters: [context]
-    level: DEBUG
-    encoding: utf8
-  console:
-    class: logging.StreamHandler
-    formatter: precise
-    level: WARN
-  journal:
-    class: systemd.journal.JournalHandler
-    formatter: journal_fmt
-    filters: [context]
-    SYSLOG_IDENTIFIER: synapse
+    file:
+        class: logging.handlers.RotatingFileHandler
+        level: INFO
+        filters: [context]
+        encoding: utf8
+        formatter: precise
+        filename: /var/log/matrix-synapse/homeserver.log
+        maxBytes: 10485760
+        backupCount: 3
+    console:
+        class: logging.StreamHandler
+        level: WARN
+        formatter: precise
+    journal:
+        class: systemd.journal.JournalHandler
+        level: WARN
+        filters: [context]
+        formatter: journal_fmt
+        SYSLOG_IDENTIFIER: synapse
 
 loggers:
     twisted:
         level: WARN
-
     synapse:
         level: WARN
-
     synapse.storage.SQL:
         level: INFO
-
     synapse.http.matrixfederationclient:
+        level: ERROR
+
+    # These are *way* too chatty.
+    synapse.util.metrics:
+        level: ERROR
+    synapse.util.logcontext:
         level: ERROR
 
 root:
