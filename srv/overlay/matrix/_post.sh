@@ -16,11 +16,24 @@
 
 set -Eeuxo pipefail
 
+# Figure out the distribution.
+source /etc/os-release
+# We only work on openSUSE.
+[[ "$ID" =~ opensuse* ]] || exit 1
+
 # Set up host-mapped service user.
-groupadd -g 5000 matrix-synapse
-useradd -u 5000 -g matrix-synapse -s/bin/false -d/ matrix-synapse
+groupadd -g 5000 synapse
+useradd -u 5000 -g synapse -s/bin/false -d/ synapse
+
+# Create logdir.
+mkdir -p /var/log/matrix-synapse
+chmod 0750 /var/log/matrix-synapse
+chown synapse:synapse /var/log/matrix-synapse
 
 # Install synapse from experimental.
-echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list
-apt update && apt upgrade -y
-apt -t experimental install -y matrix-synapse
+zypper addrepo -f obs://network:messaging:matrix obs-matrix
+zypper --gpg-auto-import-keys refresh
+zypper install -y matrix-synapse python3-systemd
+
+systemctl enable matrix-synapse
+systemctl start matrix-synapse

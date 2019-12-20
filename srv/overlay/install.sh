@@ -90,6 +90,12 @@ function host_run() { sudo "$@" ; }
 function do_replace_vars() {
 	local src="$1" lines=()
 
+	# Read all the config variables.
+	if [ -f "/srv/secrets/$src" ]
+	then
+		source "/srv/secrets/$src"
+	fi
+
 	echo "[[ BEGIN REPLACEMENT OF $src/** ]]"
 
 	while read -r line
@@ -103,10 +109,14 @@ function do_replace_vars() {
 
 		file="$(cut -d: -f1  <<<"$line")"
 		line="$(cut -d: -f2- <<<"$line")"
-		name="$(grep -o '@@.*@@' <<<"$line")"
+		name="$(sed -En 's/^.*@@([^@]+)@@.*$/\1/p' <<<"$line")"
 
-		read -r "value?$name: "
-		sed -i "0,/$name/ s//$value/" "$file"
+		eval "value=\${$name:-}"
+		if [ -z "$value" ]
+		then
+			read -r "value?$name: "
+		fi
+		sed -i "0,/@@$name@@/ s//$value/" "$file"
 	done
 
 	echo "[[  END REPLACEMENT OF $src/**  ]]"

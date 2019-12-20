@@ -16,12 +16,38 @@
 
 set -Eeuxo pipefail
 
-# Install our basic dependencies.
-apt update && apt upgrade -y
-apt install -y unattended-upgrades sudo
+function setup_opensuse() {
+	# Update repos.
+	zypper removerepo openSUSE-Tumbleweed-Non-Oss || :
+	zypper update -y
 
-systemctl start apt-daily.timer apt-daily-upgrade.timer
-systemctl enable apt-daily.timer apt-daily-upgrade.timer
+	# Install sudo.
+	zypper install -y sudo
 
-# Don't allow any non-root users use sudo.
-chmod '-s,o-rwx' "$(which sudo)"
+	# Switch to paranoid mode to disable all setuid bits.
+	sed -i 's|^PERMISSION_SECURITY=.*|PERMISSION_SECURITY="paranoid"|g' /etc/sysconfig/security
+	chkstat --system
+}
+
+function setup_debian() {
+	# Update repos.
+	apt update
+	apt upgrade -y
+
+	# Install sudo.
+	apt install -y sudo
+
+	# Don't allow any non-root users to use it.
+	chmod '-s,o-rwx' "$(which sudo)"
+}
+
+# Figure out the distribution.
+source /etc/os-release
+case "$ID" in
+	"opensuse"*)
+		setup_opensuse
+		;;
+	"debian")
+		setup_debian
+		;;
+esac
