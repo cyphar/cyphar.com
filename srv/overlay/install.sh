@@ -151,7 +151,7 @@ function do_install() {
 	fi
 
 	# Clean up any install-related scripts.
-	"$run" rm -rf "/pre.sh" "/post.sh"
+	"$run" rm -rf "/_pre.sh" "/_post.sh"
 }
 
 set -x
