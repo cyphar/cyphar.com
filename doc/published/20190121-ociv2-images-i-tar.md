@@ -56,7 +56,7 @@ images actually are.
 [ociv2-images-search]: /blog/tag/ociv2-images/
 [gentoo-tar]: https://blogs.gentoo.org/mgorny/2018/11/25/portability-of-tar-features/
 [guix-tar]: https://www.gnu.org/software/guix/blog/2018/tarballs-the-ultimate-container-image-format/
-[umoci]: https://github.com/openSUSE/umoci
+[umoci]: https://umo.ci/
 
 ## What [Container Images] Are Made Of ##
 
@@ -487,7 +487,7 @@ POSIX doesn't provide them, so they end up NIH-ing them).
 
 [star(5)]: https://www.freebsd.org/cgi/man.cgi?query=star&sektion=5
 [libarchive-xattrs]: https://github.com/libarchive/libarchive/wiki/TarExtendedAttributes
-[umoci-pr252]: https://github.com/openSUSE/umoci/pull/252
+[umoci-pr252]: https://github.com/opencontainers/umoci/pull/252
 [libarchive-NFSv4]: https://github.com/libarchive/libarchive/wiki/TarNFS4ACLs
 [libarchive-acls]: https://github.com/libarchive/libarchive/wiki/TarPosix1eACLs
 [go-issues-archive/tar]: https://github.com/golang/go/issues?q=tar+in:title+is:closed
@@ -519,7 +519,7 @@ earnestly believe it is the best tool for the job.
 
 [godoc-archive/tar.Format]: https://golang.org/pkg/archive/tar/#Format
 [go-cl59230]: https://go-review.googlesource.com/c/go/+/59230
-[umoci-pr276]: https://github.com/openSUSE/umoci/pull/276
+[umoci-pr276]: https://github.com/opencontainers/umoci/pull/276
 [oci-pr342]: https://github.com/opencontainers/image-spec/pull/342
 
 ## But What Practical Issues Are There? <a id="tar-history-skip"></a> ##
@@ -862,7 +862,7 @@ it's entirely our own fault we're depending on it not to change (there was even
 [reproducible-builds]: https://reproducible-builds.org
 [tar-split]: https://github.com/vbatts/tar-split
 [libarchive-xattrs]: https://github.com/libarchive/libarchive/wiki/TarExtendedAttributes
-[umoci-pr276]: https://github.com/openSUSE/umoci/pull/276
+[umoci-pr276]: https://github.com/opencontainers/umoci/pull/276
 [go-issue26378]: https://github.com/golang/go/issues/26378
 
 ### Avalanching <a id="issue-avalanche"></a> ###

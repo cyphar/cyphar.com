@@ -219,7 +219,7 @@ This is the same function [we use in `umoci`][umoci-TestUmoci], and it works
 pretty well. However, if you want to actually profile your entire codebase and
 also accumulate multiple test runs you need some extra tricks.
 
-[umoci-TestUmoci]: https://github.com/openSUSE/umoci/blob/v0.2.1/cmd/umoci/main_test.go
+[umoci-TestUmoci]: https://github.com/opencontainers/umoci/blob/v0.4.6/cmd/umoci/main_test.go
 
 ### Coverage Profiles ###
 
@@ -282,7 +282,7 @@ END {
 }
 ```
 
-[umoci-collate.awk]: https://github.com/openSUSE/umoci/blob/v0.2.1/hack/collate.awk
+[umoci-collate.awk]: https://github.com/opencontainers/umoci/blob/v0.4.6/hack/collate.awk
 
 ### Conclusion ###
 
@@ -302,5 +302,5 @@ projects.
 
 Hope you enjoyed and happy hacking!
 
-[umoci]: https://github.com/openSUSE/umoci
-[umoci-coverage-example]: https://travis-ci.org/openSUSE/umoci/jobs/221181536#L1846-L2074
+[umoci]: https://umo.ci/
+[umoci-coverage-example]: https://travis-ci.org/opencontainers/umoci/jobs/221181536#L1846-L2074
