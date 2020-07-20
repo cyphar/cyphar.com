@@ -1,7 +1,7 @@
 title: Generating Coverage Profiles for Golang Integration Tests
 author: Aleksa Sarai
 published: 2017-04-12 15:30:00
-updated: 2017-04-12 15:30:00
+updated: 2020-07-20 12:50:00
 short_description: >
   An interesting hack I figured out to give you far more coverage information
   for your test suite, by abusing test packages and a splash of AWK.
@@ -211,6 +211,69 @@ func TestMain(t *testing.T) {
 
 	if run {
 		main()
+	}
+}
+```
+
+Another issue is if your program calls `os.Exit(1)` on error -- the `go test`
+instrumentation doesn't write anything until after the test suite has finished
+executing (and `os.Exit(1)` kills the program before then). This means that you
+won't be able to see the code coverage of cases where you're testing for
+errors. So if you have something like the following in your `main()` function:
+
+```language-go
+if err := someFunction(...); err != nil {
+	log.Fprintf(os.Stderr, "%v", err)
+	os.Exit(1)
+}
+```
+
+You'll have to adjust your program to have a single `Main` function that
+returns `err` and make your `main` look like the following:
+
+```language-go
+func Main(args []string) error {
+	// ...
+}
+
+func main() {
+	if err := Main(os.Args); err != nil {
+		log.Fprintf(os.Stderr, "%v", err)
+		os.Exit(1)
+	}
+}
+```
+
+And this has the nice benefit that you can now avoid modifying `os.Args` and
+just pass the modified argument slice. In order to return a non-zero exit code
+you just need to use `t.Fail` (though unfortunately this doesn't help if you
+need a specific non-zero return code). So now you end up with:
+
+```language-go
+func TestMain(t *testing.T) {
+	var (
+		args []string
+		run  bool
+	)
+
+	for _, arg := range os.Args {
+		switch {
+		case arg == "__DEVEL--i-heard-you-like-tests":
+			run = true
+		case strings.HasPrefix(arg, "-test"):
+		case strings.HasPrefix(arg, "__DEVEL"):
+		default:
+			args = append(args, arg)
+		}
+	}
+
+	if run {
+		if err := Main(args); err != nil {
+			// Output to stderr rather than the test log so that the
+			// integration tests can properly handle cleaning up the output.
+			fmt.Fprintf(os.Stderr, "%v\n", err)
+			t.Fail()
+		}
 	}
 }
 ```
