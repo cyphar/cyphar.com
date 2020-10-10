@@ -53,6 +53,8 @@ lxc exec postgres -- sudo -iu postgres \
 	find /srv/postgres-backup -mindepth 1 -delete
 lxc exec postgres -- sudo -iu postgres \
 	pg_basebackup -D /srv/postgres-backup -F tar -R -X stream -P
+# Compress all postgres backup files.
+find "$LOCAL_DIR/postgres-backup" -type f -print0 | parallel -0 xz -T0 -9 {}
 
 # Take a zfs snapshot of our storage dataset. The path will be different for
 # each invocation of "restic backup" but that's why we group-by tags (and do a
