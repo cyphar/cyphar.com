@@ -87,19 +87,17 @@ restic check
 # changes (we hit this with the /store/deku snapshots).
 #
 # We keep at least:
-#   ... 3 days of hourly snapshots     [  72 hours ]
-#   ... 1 month of daily snapshots     [  31 days  ]
-#   ... 3 months of weekly snapshots   [  12 weeks ]
-#   ... 5 years of monthly backups     [  60 months]
-#   ... effectively all yearly backups [9999 years ]
+#   ... 2 days of hourly snapshots    [  48 hours ]
+#   ... 2 weeks of daily snapshots    [  14 days  ]
+#   ... 3 months of weekly snapshots  [  12 weeks ]
+#   ... 1 year of monthly backups     [  12 months]
 restic forget \
 	--group-by tags \
 	--tag "$RESTIC_TAGS" \
-	--keep-hourly    72 \
-	--keep-daily     31 \
+	--keep-hourly    48 \
+	--keep-daily     14 \
 	--keep-weekly    12 \
-	--keep-monthly   60 \
-	--keep-yearly  9999
+	--keep-monthly   12
 
 # Prune any left over data or extra packfiles. --prune doesn't handle the
 # latter, so we do it separately for every backup.
