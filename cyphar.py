@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (C) 2014-2019 Aleksa Sarai <cyphar@cyphar.com>
+# Copyright (C) 2014-2020 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -162,7 +162,7 @@ def blog_feed(bl_filter_type=None, bl_filter=None):
 	feed = atom.AtomFeed(title="Cyphar's Blog",
 	                     title_type="text",
 	                     author="Aleksa Sarai",
-	                     rights="Copyright (C) 2014-2019 Aleksa Sarai. Licensed under CC-BY-SA 4.0.",
+	                     rights="Copyright (C) 2014-2020 Aleksa Sarai. Licensed under CC-BY-SA 4.0.",
 	                     rights_type="text",
 	                     subtitle="The wild ramblings of Aleksa Sarai.",
 	                     subtitle_type="text",
