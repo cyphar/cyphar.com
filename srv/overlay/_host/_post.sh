@@ -35,3 +35,24 @@ systemctl enable "${services[@]}"
 systemctl restart "${services[@]}"
 # Reload apparmor.d/ profiles.
 systemctl reload apparmor
+
+getent group  tor >/dev/null || groupadd -g 1000000 tor
+getent passwd tor >/dev/null || useradd -u 1000000 -g tor -s/bin/false -d/ tor
+
+getent group  postgres >/dev/null || groupadd -g 1000001 postgres
+getent passwd postgres >/dev/null || useradd -u 1000001 -g postgres -s/bin/false -d/ postgres
+
+getent group  nextcloud >/dev/null || groupadd -g 1000002 nextcloud
+getent passwd nextcloud >/dev/null || useradd -u 1000002 -g nextcloud -s/bin/false -d/ nextcloud
+
+getent group  coturn >/dev/null || groupadd -g 1000003 coturn
+getent passwd coturn >/dev/null || useradd -u 1000003 -g coturn -s/bin/false -d/ coturn
+
+getent group  matrix >/dev/null || groupadd -g 1000004 matrix
+getent passwd matrix >/dev/null || useradd -u 1000004 -g matrix -s/bin/false -d/ matrix
+
+getent group  rtorrent >/dev/null || groupadd -g 1000005 rtorrent
+getent passwd rtorrent >/dev/null || useradd -u 1000005 -g rtorrent -s/bin/false -d/ rtorrent
+
+getent group  jellyfin >/dev/null || groupadd -g 1000006 jellyfin
+getent passwd jellyfin >/dev/null || useradd -u 1000006 -g jellyfin -s/bin/false -d/ jellyfin
