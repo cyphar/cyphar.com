@@ -19,7 +19,7 @@ set -Eeuxo pipefail
 function setup_opensuse() {
 	# Update repos.
 	zypper removerepo openSUSE-Tumbleweed-Non-Oss || :
-	zypper update -y
+	zypper dup -y
 
 	# Install sudo.
 	zypper install -y sudo
