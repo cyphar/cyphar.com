@@ -16,6 +16,7 @@
 # matrix.cyphar.com synapse config.
 
 config:
+  security.nesting: "true"
   security.protection.delete: "true"
   boot.autostart: "true"
   limits.cpu: 2
