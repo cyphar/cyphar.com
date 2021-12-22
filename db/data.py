@@ -232,6 +232,7 @@ REDIRECTS = MagicDict({
 		"linux":         "https://www.kernel.org/",
 		"mkonion":       "https://github.com/cyphar/mkonion",
 		"ninjabot":      "https://github.com/ackwell/ninjabot",
+		"paperback":     "https://github.com/cyphar/paperback",
 		"perfectgift":   "https://github.com/cyphar/perfectgift",
 		"portus":        "https://github.com/SUSE/Portus",
 		"pulltab":       "https://github.com/cyphar/pulltab",

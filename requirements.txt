@@ -4,7 +4,8 @@ pygments
 bleach
 smartypants
 gunicorn
+feedwerk
 
 # We have to use git here because there aren't any proper PyPi builds.
-git+git://github.com/jambonrose/markdown_superscript_extension.git
-git+git://github.com/jambonrose/markdown_subscript_extension.git
+git+https://github.com/jambonrose/markdown_superscript_extension.git
+git+https://github.com/jambonrose/markdown_subscript_extension.git

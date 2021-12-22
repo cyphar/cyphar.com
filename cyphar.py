@@ -21,7 +21,7 @@ import urllib.parse
 
 import flask
 import flask_flatpages
-from werkzeug.contrib import atom
+from feedwerk import atom
 
 import db.data
 from pkg import flatpages_permacode
@@ -77,6 +77,10 @@ def papers():
 	flatpages_markmeta.markthemdown(db.data.PAPERS.coauthored, "description")
 
 	return flask.render_template("papers.html", papers=db.data.PAPERS)
+
+@app.route("/paperback")
+def paperback():
+	return flask.redirect("/src/paperback", code=302)
 
 @app.route("/src/")
 @app.route("/src/<project>")
