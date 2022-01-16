@@ -78,6 +78,10 @@ def papers():
 
 	return flask.render_template("papers.html", papers=db.data.PAPERS)
 
+@app.route("/talks")
+def talks():
+	return flask.redirect("/src/talks", code=302)
+
 @app.route("/paperback")
 def paperback():
 	return flask.redirect("/src/paperback", code=302)
