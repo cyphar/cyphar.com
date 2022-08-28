@@ -18,10 +18,16 @@ set -Eeuxo pipefail
 
 mkdir -p /opt/jellyfin/{data,config,cache,log}
 
-JELLYFIN_VERSION="${1:-10.7.7}"
+JELLYFIN_VERSION="${1:-10.8.4}"
+BACKUP="${BACKUP:-}"
 
 systemctl stop jellyfin
-cp -R /opt/jellyfin "/opt/jellyfin-backup-$(date --iso-8601)"
+if [ -n "$BACKUP" ]
+then
+	pushd /opt
+	tar cvfJ "jellyfin-backup-$(date --iso-8601).tar.xz" jellyfin
+	popd
+fi
 
 pushd /opt/jellyfin
 # Fetch requested jellyfin binaries.
@@ -31,11 +37,12 @@ wget "https://repo.jellyfin.org/releases/server/linux/stable/combined/jellyfin_$
 sha256sum -c "jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz.sha256sum"
 # Extract and update the "bin" symlink.
 tar xvfz "jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz"
-ln -sf "jellyfin_${JELLYFIN_VERSION}" bin
+ln -sfT "jellyfin_${JELLYFIN_VERSION}" bin
 # Clean up
 rm -f "jellyfin_${JELLYFIN_VERSION}.tar.gz*"
 popd
 
-chown -R jellyfin:jellyfin /opt/jellyfin
+chown -R jellyfin:jellyfin "/opt/jellyfin/jellyfin_${JELLYFIN_VERSION}"
+chown jellyfin:jellyfin /opt/jellyfin
 
 systemctl restart jellyfin
