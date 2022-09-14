@@ -21,9 +21,9 @@ apt update && apt upgrade -y
 apt install -y git python3-pip gunicorn3
 
 # Get our sources.
-git clone --branch "master" https://github.com/cyphar/cyphar.com /srv/prod
-git clone --branch "dev"    https://github.com/cyphar/cyphar.com /srv/beta
-git clone                   https://github.com/cyphar/lgtm       /srv/lgtm
+git clone --branch "main" https://github.com/cyphar/cyphar.com /srv/prod
+git clone --branch "dev"  https://github.com/cyphar/cyphar.com /srv/beta
+git clone                 https://github.com/cyphar/lgtm       /srv/lgtm
 
 # Install Python dependencies.
 pip3 install -r /srv/prod/requirements.txt
