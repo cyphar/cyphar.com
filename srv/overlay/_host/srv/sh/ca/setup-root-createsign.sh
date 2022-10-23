@@ -111,7 +111,8 @@ basicConstraints = critical, CA:true
 nameConstraints=critical,permitted;DNS:.dot.cyphar.com,permitted;IP:10.42.0.0/255.255.0.0
 keyUsage = critical, digitalSignature, cRLSign, keyCertSign
 subjectAltName = email:copy
-crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
+#authorityInfoAccess = OCSP;URI:https://ocsp.dot.cyphar.com/root/,OCSP;URI:http://ocsp.dot.cyphar.com/root/
+#crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
 
 [ v3_intermediate_ca ]
 subjectKeyIdentifier = hash
@@ -120,7 +121,8 @@ basicConstraints = critical, CA:true, pathlen:0
 nameConstraints=critical,permitted;DNS:.dot.cyphar.com,permitted;IP:10.42.0.0/255.255.0.0
 keyUsage = critical, digitalSignature, cRLSign, keyCertSign
 subjectAltName = email:copy
-crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
+#authorityInfoAccess = OCSP;URI:https://ocsp.dot.cyphar.com/root/,OCSP;URI:http://ocsp.dot.cyphar.com/root/
+#crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
 
 [ server_cert ]
 ################################################################################
@@ -130,20 +132,21 @@ crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.c
 #       impossible). As such, we need to sign said certificate with the root   #
 #       CA. Such is life.                                                      #
 ################################################################################
-basicConstraints = CA:FALSE
+basicConstraints = critical, CA:FALSE
 nsCertType = server
 nsComment = "INTERNAL dot.cyphar.com Server Certificate"
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid,issuer:always
 keyUsage = critical, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
-crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
+#authorityInfoAccess = OCSP;URI:https://ocsp.dot.cyphar.com/root/,OCSP;URI:http://ocsp.dot.cyphar.com/root/
+#crlDistributionPoints = URI:https://static.cyphar.com/ca/rootca-dot.cyphar.com.crl
 
 [ crl_ext ]
 authorityKeyIdentifier=keyid:always
 
 [ ocsp ]
-basicConstraints = CA:FALSE
+basicConstraints = critical, CA:FALSE
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid,issuer
 keyUsage = critical, digitalSignature
@@ -152,6 +155,8 @@ EOF
 
 pushd root/
 
+# CA key and certificate.
+
 openssl req -config ./openssl.conf \
 	-subj "/C=AU/ST=NSW/O=dot.cyphar.com/CN=INTERNAL dot.cyphar.com Root CA/emailAddress=webmaster@cyphar.com" \
 	-new -newkey "$KEY" -keyout private/rootca-dot.cyphar.com.key -out certreqs/rootca-dot.cyphar.com.req
@@ -159,8 +164,19 @@ openssl req -config ./openssl.conf \
 openssl ca -config ./openssl.conf \
 	-rand_serial -out rootca-dot.cyphar.com.crt -days 10981 -selfsign -extensions v3_ca -infiles certreqs/rootca-dot.cyphar.com.req
 
+# OCSP responder key and certificate.
+#openssl req -config ./openssl.conf \
+#	-subj '/CA=AU/ST=NSW/O=dot.cyphar.com/CN=root.oscp.dot.cyphar.com/emailAddress=webmaster@cyphar.com' \
+#	-addext 'subjectAltName=DNS:oscp.dot.cyphar.com,DNS:root.oscp.dot.cyphar.com' \
+#	-new -newkey rsa:4096 -keyout private/rootca-oscp.dot.cyphar.com -out certreqs/rootca-oscp.dot.cyphar.com.req
+#
+#openssl ca -config ./openssl.conf \
+#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 398 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
+
 # For some reason, while we are recommended to use -rand_serial, there is no
 # equivalent for crlnumber (which is the serial for the CRL).
-echo 1000 > crlnumber
+#echo 1000 > crlnumber
 # Generate a CRL immediately.
-openssl ca -config ./openssl.conf -gencrl -out "crl/rootca-crl.pem"
+#openssl ca -config ./openssl.conf -gencrl -out "crl/rootca-crl.pem"
+
+popd

@@ -16,6 +16,9 @@
 
 set -Eeuxo pipefail
 
+echo "CRLs not supported with this registry setup!" >&2
+exit 1
+
 OUTDIR="${1:-/srv/static/ca}"
 
 for dir in */

@@ -119,30 +119,32 @@ organizationalUnitName_default  =
 emailAddress_default            = webmaster@cyphar.com
 
 [ usr_cert ]
-basicConstraints = CA:FALSE
+basicConstraints = critical, CA:FALSE
 nsCertType = client, email
 nsComment = "INTERNAL dot.cyphar.com Client Certificate"
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid,issuer
 keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = clientAuth, emailProtection
-crlDistributionPoints = URI:https://static.cyphar.com/ca/${INAME}ca-dot.cyphar.com.crl
+#authorityInfoAccess = OCSP;URI:https://ocsp.dot.cyphar.com/${INAME}/,OCSP;URI:http://ocsp.dot.cyphar.com/${INAME}/
+#crlDistributionPoints = URI:https://static.cyphar.com/ca/${INAME}ca-dot.cyphar.com.crl
 
 [ server_cert ]
-basicConstraints = CA:FALSE
+basicConstraints = critical, CA:FALSE
 nsCertType = server
 nsComment = "INTERNAL dot.cyphar.com Server Certificate"
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid,issuer:always
 keyUsage = critical, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
-crlDistributionPoints = URI:https://static.cyphar.com/ca/${INAME}ca-dot.cyphar.com.crl
+#authorityInfoAccess = OCSP;URI:https://ocsp.dot.cyphar.com/${INAME}/,OCSP;URI:http://ocsp.dot.cyphar.com/${INAME}/
+#crlDistributionPoints = URI:https://static.cyphar.com/ca/${INAME}ca-dot.cyphar.com.crl
 
 [ crl_ext ]
 authorityKeyIdentifier=keyid:always
 
 [ ocsp ]
-basicConstraints = CA:FALSE
+basicConstraints = critical, CA:FALSE
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid,issuer
 keyUsage = critical, digitalSignature
@@ -161,11 +163,20 @@ openssl ca -config ./openssl.conf \
 	-rand_serial -out "../${INAME}/${INAME}ca-dot.cyphar.com.crt" -days 3681 -extensions v3_intermediate_ca -infiles "certreqs/${INAME}ca-dot.cyphar.com.req"
 popd
 
+# OCSP responder key and certificate.
+#openssl req -config ./openssl.conf \
+#	-subj "/CA=AU/ST=NSW/O=dot.cyphar.com/CN=$INAME.oscp.dot.cyphar.com/emailAddress=webmaster@cyphar.com" \
+#	-addext "subjectAltName=DNS:oscp.dot.cyphar.com,DNS:$INAME.oscp.dot.cyphar.com" \
+#	-new -newkey rsa:4096 -keyout private/${INAME}-oscp.dot.cyphar.com -out certreqs/${INAME}-oscp.dot.cyphar.com.req
+#
+#openssl ca -config ./openssl.conf \
+#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 398 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
+
 # For some reason, while we are recommended to use -rand_serial, there is no
 # equivalent for crlnumber (which is the serial for the CRL).
-echo 1000 > crlnumber
+#echo 1000 > crlnumber
 # Generate a CRL immediately.
-openssl ca -config ./openssl.conf -gencrl -out "crl/${INAME}ca-crl.pem"
+#openssl ca -config ./openssl.conf -gencrl -out "crl/${INAME}ca-crl.pem"
 popd
 
 # Double-check the certificate works.
