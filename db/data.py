@@ -43,10 +43,6 @@ CONTACTS = [
 		"url": "https://twitter.com/lordcyphar",
 	},
 	{
-		"contact": "Keybase",
-		"url": "https://keybase.io/cyphar",
-	},
-	{
 		"contact": "GitLab",
 		"url": "https://gitlab.com/cyphar",
 	},
