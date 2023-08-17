@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020 Aleksa Sarai <cyphar@cyphar.com>
+# Copyright (C) 2014-2023 Aleksa Sarai <cyphar@cyphar.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -20,8 +20,13 @@ ControlSocket 0
 # Basic hidden service for www.cyphar.com.
 HiddenServiceDir /var/lib/tor/hidden-services/v3.cyphar.com
 HiddenServiceVersion 3
+HiddenServiceSingleHopMode 1
+HiddenServiceNonAnonymousMode 1
 HiddenServicePort 80 unix:/srv/www.sock
 
-HiddenServiceDir /var/lib/tor/hidden-services/v2.cyphar.com
-HiddenServiceVersion 2
+# Keep the old one alive, in case some user has saved the address in the past.
+HiddenServiceDir /var/lib/tor/hidden-services/v3-old.cyphar.com
+HiddenServiceVersion 3
+HiddenServiceSingleHopMode 1
+HiddenServiceNonAnonymousMode 1
 HiddenServicePort 80 unix:/srv/www.sock
