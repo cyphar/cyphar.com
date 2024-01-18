@@ -62,7 +62,7 @@ default_md        = sha256
 
 name_opt          = ca_default
 cert_opt          = ca_default
-default_days      = 395
+default_days      = 36530
 preserve          = no
 
 # Sadly we cannot use match for stateOrProvinceName or organizationName because
@@ -170,7 +170,7 @@ popd
 #	-new -newkey rsa:4096 -keyout private/${INAME}-oscp.dot.cyphar.com -out certreqs/${INAME}-oscp.dot.cyphar.com.req
 #
 #openssl ca -config ./openssl.conf \
-#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 398 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
+#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 36530 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
 
 # For some reason, while we are recommended to use -rand_serial, there is no
 # equivalent for crlnumber (which is the serial for the CRL).

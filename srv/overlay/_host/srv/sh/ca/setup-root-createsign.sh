@@ -171,7 +171,7 @@ openssl ca -config ./openssl.conf \
 #	-new -newkey rsa:4096 -keyout private/rootca-oscp.dot.cyphar.com -out certreqs/rootca-oscp.dot.cyphar.com.req
 #
 #openssl ca -config ./openssl.conf \
-#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 398 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
+#	-rand_serial -out rootca-oscp.dot.cyphar.com.crt -days 36530 -extensions oscp -infiles certreqs/rootca-oscp.dot.cyphar.com.req
 
 # For some reason, while we are recommended to use -rand_serial, there is no
 # equivalent for crlnumber (which is the serial for the CRL).

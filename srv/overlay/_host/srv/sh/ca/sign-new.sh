@@ -35,7 +35,7 @@ openssl req \
 	-new -newkey "$KEY" -keyout "private/$SUBJECT.key" -out "certreqs/$SUBJECT.req"
 
 openssl ca -config ./openssl.conf \
-	-rand_serial -days 398 -extensions server_cert -infiles "certreqs/$SUBJECT.req"
+	-rand_serial -days 36530 -extensions server_cert -infiles "certreqs/$SUBJECT.req"
 popd
 
 echo "New key was stored in $INAME/private/$SUBJECT.key."

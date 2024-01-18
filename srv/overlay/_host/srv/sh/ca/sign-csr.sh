@@ -58,7 +58,7 @@ else
 fi
 
 openssl ca -config ./openssl.conf \
-	-rand_serial -days 398 "${extensions[@]}" -infiles "certreqs/$CSR_NAME"
+	-rand_serial -days 36530 "${extensions[@]}" -infiles "certreqs/$CSR_NAME"
 popd
 
 echo "New certificate can be found in $INAME/newcertsdb."
