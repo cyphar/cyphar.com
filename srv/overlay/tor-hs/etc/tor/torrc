@@ -23,6 +23,7 @@ HiddenServiceVersion 3
 HiddenServiceSingleHopMode 1
 HiddenServiceNonAnonymousMode 1
 HiddenServicePort 80 unix:/srv/www.sock
+HiddenServicePort 443 unix:/srv/host-https.sock
 
 # Keep the old one alive, in case some user has saved the address in the past.
 HiddenServiceDir /var/lib/tor/hidden-services/v3-old.cyphar.com
@@ -30,3 +31,4 @@ HiddenServiceVersion 3
 HiddenServiceSingleHopMode 1
 HiddenServiceNonAnonymousMode 1
 HiddenServicePort 80 unix:/srv/www.sock
+HiddenServicePort 443 unix:/srv/host-https.sock
