@@ -20,7 +20,8 @@ Description=Timer for Scrub ZFS Pool %I
 Requires=zfs.target
 
 [Timer]
-OnCalendar=Sun *-*-* 22:00:00
+OnCalendar=Fri *-*-1..7 20:00:00
+Persistent=true
 
 [Install]
 WantedBy=multi-user.target
