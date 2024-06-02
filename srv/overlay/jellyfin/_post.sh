@@ -16,7 +16,7 @@
 
 set -Eeuxo pipefail
 
-zypper in -y wget tar libicu
+zypper in -y wget tar libicu libfontconfig1
 
 # Create jellyfin user.
 getent group jellyfin >/dev/null || groupadd -g 5000 jellyfin

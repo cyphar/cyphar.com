@@ -18,7 +18,7 @@ set -Eeuxo pipefail
 
 mkdir -p /opt/jellyfin/{data,config,cache,log}
 
-JELLYFIN_VERSION="${1:-10.8.4}"
+JELLYFIN_VERSION="${1:-10.9.4}"
 BACKUP="${BACKUP:-}"
 
 systemctl stop jellyfin
@@ -30,16 +30,23 @@ then
 fi
 
 pushd /opt/jellyfin
+
 # Fetch requested jellyfin binaries.
 rm -f jellyfin_*.tar.gz*
-wget "https://repo.jellyfin.org/releases/server/linux/stable/combined/jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz"
-wget "https://repo.jellyfin.org/releases/server/linux/stable/combined/jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz.sha256sum"
-sha256sum -c "jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz.sha256sum"
+wget "https://repo.jellyfin.org/files/server/linux/latest-stable/amd64/jellyfin_${JELLYFIN_VERSION}-amd64.tar.xz"
+# TODO: Figure out a nice way of getting the hash to verify we downloaded it properly...
+#wget "https://repo.jellyfin.org/releases/server/linux/stable/combined/jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz.sha256sum"
+#sha256sum -c "jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz.sha256sum"
+
 # Extract and update the "bin" symlink.
-tar xvfz "jellyfin_${JELLYFIN_VERSION}_amd64.tar.gz"
-ln -sfT "jellyfin_${JELLYFIN_VERSION}" bin
+subdir="jellyfin_${JELLYFIN_VERSION}"
+mkdir -p "$subdir"
+tar xvf "jellyfin_${JELLYFIN_VERSION}-amd64.tar.xz" -C "$subdir" --strip-components 1
+ln -sfT "$subdir" bin
+
 # Clean up
 rm -f "jellyfin_${JELLYFIN_VERSION}.tar.gz*"
+
 popd
 
 chown -R jellyfin:jellyfin "/opt/jellyfin/jellyfin_${JELLYFIN_VERSION}"
