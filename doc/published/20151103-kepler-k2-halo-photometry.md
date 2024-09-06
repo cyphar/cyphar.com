@@ -1,6 +1,6 @@
 title: Photometry of Contaminated *Kepler* Pixels
 author: Aleksa Sarai
-published:
+published: 2015-11-03 05:45:00
 updated: 2015-11-03 05:45:00
 description: >
   As part of the [Talented Student Program](https://sydney.edu.au/science/tsp),
