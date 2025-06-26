@@ -49,6 +49,9 @@ _RESTIC_REPOSITORY_REMOTE="b2:$B2_BUCKET:$B2_BUCKET_PATH"
 # file and point this to it).
 export RESTIC_PASSWORD_FILE="$SCRIPT_DIRECTORY/.secret/RESTIC_PASSPHRASE"
 
+# Use maximum compression for all operations.
+export RESTIC_COMPRESSION=max
+
 # The directory to use for backups and the tag to apply.
 RESTIC_TAGS="glacier"
 LOCAL_DIR="/store/glacier"
