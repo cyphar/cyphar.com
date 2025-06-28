@@ -16,6 +16,8 @@
 
 set -Eeuxo pipefail
 
+cd /store/glacier/dot.cyphar.com/certificate-authority
+
 echo "CRLs not supported with this registry setup!" >&2
 exit 1
 

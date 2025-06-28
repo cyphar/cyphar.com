@@ -16,6 +16,8 @@
 
 set -Eeuxo pipefail
 
+cd /store/glacier/dot.cyphar.com/certificate-authority
+
 INAME="${1:-i1}"
 
 KEYSIZE="${KEYSIZE:-4096}"

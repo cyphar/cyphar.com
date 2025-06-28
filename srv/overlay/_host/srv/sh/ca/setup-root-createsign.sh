@@ -16,6 +16,8 @@
 
 set -Eeuxo pipefail
 
+cd /store/glacier/dot.cyphar.com/certificate-authority
+
 KEYSIZE="${KEYSIZE:-4096}"
 KEY="${KEY:-rsa:$KEYSIZE}"
 

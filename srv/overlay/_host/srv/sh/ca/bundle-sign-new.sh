@@ -14,7 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+set -Eeuo pipefail
 
 # TODO: Make this nicer.
+
+cd /store/glacier/dot.cyphar.com/certificate-authority
 
 openssl pkcs12 -export -out buttle.dot.cyphar.com.pfx -inkey i1/private/buttle.dot.cyphar.com.key -in i1/newcertsdb/*.pem -certfile <(cat i1/i1ca-dot.cyphar.com.crt)

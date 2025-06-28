@@ -16,6 +16,8 @@
 
 set -Eeuxo pipefail
 
+cd /store/glacier/dot.cyphar.com/certificate-authority
+
 for dir in */
 do
 	dir="${dir%/}"
