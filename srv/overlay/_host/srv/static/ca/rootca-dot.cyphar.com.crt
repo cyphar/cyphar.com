@@ -1,0 +1,134 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            2f:43:4b:75:ba:49:ac:44:6c:80:ce:80:6c:55:e9:11:7c:54:19:c8
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=AU, ST=NSW, O=dot.cyphar.com, CN=INTERNAL dot.cyphar.com Root CA/emailAddress=webmaster@cyphar.com
+        Validity
+            Not Before: Oct 23 06:59:08 2022 GMT
+            Not After : Nov 15 06:59:08 2052 GMT
+        Subject: C=AU, ST=NSW, O=dot.cyphar.com, CN=INTERNAL dot.cyphar.com Root CA/emailAddress=webmaster@cyphar.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (4096 bit)
+                Modulus:
+                    00:d0:fc:4e:88:da:b5:4a:a3:b1:18:57:ea:1d:a4:
+                    8e:d0:b8:c0:de:b7:27:a2:5b:49:c5:6b:52:73:82:
+                    2c:c2:ec:12:c7:93:a7:e8:28:6e:5d:e8:04:af:f3:
+                    63:9f:62:0e:da:0c:62:e2:ed:a9:b8:97:ee:bb:6e:
+                    e4:e8:94:fe:de:57:5b:9e:c8:4b:4c:d7:ee:21:0a:
+                    dd:5a:29:38:97:4b:45:b4:cd:e0:ac:69:b2:ba:d2:
+                    cd:a4:a0:5d:d8:37:1f:3c:c2:11:9d:2e:58:11:81:
+                    ee:1e:1d:90:d2:05:1d:26:b4:e7:c6:b4:b3:66:1b:
+                    49:20:48:44:04:ae:99:59:9f:05:2a:22:de:0e:8a:
+                    65:12:2f:79:c8:8c:e8:85:3e:f9:aa:d6:3f:66:12:
+                    92:d7:c6:8d:8e:40:c5:56:a3:d7:df:f5:9c:ed:15:
+                    15:a8:78:c8:e1:b3:6b:e2:f8:59:ff:f5:38:92:cb:
+                    10:a8:73:a3:2a:e9:0c:7a:ce:a0:13:0e:c0:ab:33:
+                    96:9f:e1:68:f2:45:53:79:5f:ff:a5:db:a3:48:93:
+                    2a:e6:4d:30:4c:8c:46:e4:11:f4:2d:42:ca:b0:94:
+                    63:42:f5:0f:f7:09:61:8b:64:4d:1d:7b:16:27:98:
+                    45:ef:cd:8a:d3:f2:98:24:15:b9:97:80:fb:e5:2c:
+                    c5:69:7f:f9:39:e5:2e:bf:e4:90:ef:06:76:cd:c3:
+                    46:10:41:d6:cc:0d:0a:48:34:d1:a0:66:40:c6:92:
+                    6f:6e:83:aa:aa:c8:3c:29:7f:ad:e6:07:43:62:dc:
+                    cc:9e:a5:4a:b5:dd:e1:c4:91:96:39:f3:45:4c:1a:
+                    84:4d:e9:1e:d8:f7:65:45:8c:ba:32:53:d5:37:d2:
+                    d8:63:a2:11:32:8b:03:b8:5f:dd:9a:b0:33:ec:5d:
+                    ab:32:f4:76:f8:7c:55:9a:a5:95:4b:01:fe:af:a1:
+                    80:84:3c:47:eb:36:66:06:6d:0f:ea:b7:2d:9e:85:
+                    4b:a8:7c:ba:79:2d:a3:b8:00:7c:25:3d:8e:a5:35:
+                    7a:74:40:33:c8:36:7a:ef:53:7d:04:91:37:46:fa:
+                    4d:04:bc:f2:60:61:b0:81:05:40:f8:1e:d4:e9:bf:
+                    5a:21:68:67:d5:96:85:66:9c:66:f4:f7:65:5c:57:
+                    d3:78:2a:2c:82:f1:fb:24:b7:2b:45:4b:4e:7e:28:
+                    43:a4:30:9f:1d:bc:8a:ac:d9:ad:d4:4f:e4:ab:a7:
+                    56:4a:1e:1d:34:15:6f:d0:88:4e:cd:ce:99:62:49:
+                    61:c4:a6:74:a7:63:ec:df:b9:45:d2:a2:ea:7b:c0:
+                    01:78:23:c7:44:86:dd:b8:e9:3c:13:cf:59:cc:dd:
+                    3d:f6:21
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                93:99:F6:78:E9:1E:20:4D:C7:19:38:08:AF:ED:40:AF:B7:8C:49:4F
+            X509v3 Authority Key Identifier: 
+                keyid:93:99:F6:78:E9:1E:20:4D:C7:19:38:08:AF:ED:40:AF:B7:8C:49:4F
+
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Name Constraints: critical
+                Permitted:
+                  DNS:.dot.cyphar.com
+                  IP:10.42.0.0/255.255.0.0
+
+            X509v3 Key Usage: critical
+                Digital Signature, Certificate Sign, CRL Sign
+            X509v3 Subject Alternative Name: 
+                email:webmaster@cyphar.com
+    Signature Algorithm: sha256WithRSAEncryption
+         01:1b:cf:9e:47:4f:a2:fb:1e:82:c8:35:b2:ce:05:94:fb:bb:
+         32:23:6a:f4:91:b1:d7:e5:ab:23:b6:2c:94:ee:71:f2:50:7a:
+         c4:2d:2f:13:93:bd:62:75:1a:bc:c1:3c:aa:96:42:60:0c:db:
+         5c:60:fd:6e:91:bf:3d:93:55:62:30:77:46:76:36:d4:55:79:
+         0d:5f:79:38:5e:95:ed:83:d5:67:4f:77:fb:f1:03:8c:5e:b3:
+         32:86:41:b1:f3:01:88:33:72:db:68:f3:c2:7f:7a:b3:6d:e2:
+         aa:e3:88:59:92:e4:5f:1b:11:93:cd:78:3f:51:3b:7b:da:84:
+         85:6c:27:1c:d2:72:87:3c:f2:e0:0f:11:19:e2:ff:e0:a8:a1:
+         9d:d8:2d:c7:1d:87:7a:2c:41:43:cb:0b:54:67:bd:14:3e:b1:
+         60:ce:e6:93:53:5b:75:e0:b5:4b:f7:61:ba:98:7a:fa:dc:8b:
+         59:c4:30:3d:ff:37:ab:17:22:7a:e0:4f:ce:a5:21:42:03:c2:
+         56:18:0d:7c:36:b4:27:d9:4c:39:da:ac:57:29:79:7d:44:c7:
+         7f:c0:5c:6f:23:fc:48:e9:74:b7:e9:2b:b7:83:13:b5:31:8c:
+         a2:fa:16:7b:3a:a3:89:b3:bb:a8:98:93:4f:dc:81:27:46:60:
+         d8:5c:48:2b:71:70:87:f8:07:b9:05:fe:43:a8:c7:05:07:41:
+         9d:7e:ad:aa:c7:91:77:b9:2e:0e:04:71:49:e5:56:11:b6:54:
+         1e:bc:a4:5c:75:35:75:43:78:7a:8f:0d:0f:bd:38:f1:57:8e:
+         a9:b3:ce:54:a7:e2:c8:75:49:c2:41:89:5e:f6:cf:64:78:d3:
+         ae:0e:19:56:d4:c9:be:86:20:9b:40:93:36:54:4b:61:e2:35:
+         38:17:d7:01:ea:f7:0d:34:8c:3e:0b:06:aa:c0:37:19:f4:5f:
+         e1:de:26:a6:66:ef:62:38:e4:60:17:94:b9:54:93:42:f3:52:
+         97:20:dc:1b:45:a4:b0:37:49:d1:b1:24:99:3e:1b:41:d6:2e:
+         81:00:47:62:22:7d:fe:c1:d6:44:8c:81:80:40:34:60:11:79:
+         f2:49:96:48:ec:d3:3e:ae:ea:98:87:e7:cc:95:8a:d5:6a:71:
+         80:ae:05:d2:85:b7:04:96:c7:55:56:35:49:a8:07:44:48:58:
+         6a:0d:6b:5f:aa:fc:7a:92:b8:12:ae:63:56:9e:a9:69:8e:74:
+         81:01:84:41:f0:da:e4:3a:d5:1b:e7:34:51:2d:de:d9:38:d9:
+         38:ef:94:19:ff:89:1d:ca:93:69:f4:61:b4:f2:d4:9d:20:c3:
+         c9:41:f8:ce:e5:b8:b3:ab
+-----BEGIN CERTIFICATE-----
+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
+-----END CERTIFICATE-----
