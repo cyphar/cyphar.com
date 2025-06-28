@@ -28,7 +28,7 @@ wget "https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz.md5
 md5sum -c ffmpeg-git-amd64-static.tar.xz.md5
 # Extract and update the ffmpeg binaries in bin.
 tar xvfJ ffmpeg-git-amd64-static.tar.xz
-mv ffmpeg-git-*-static/ff* .
+mv ffmpeg-git-*-static/ffmpeg .
 # Remove everything left over.
 rm -rf ffmpeg-git-* ||:
 popd
