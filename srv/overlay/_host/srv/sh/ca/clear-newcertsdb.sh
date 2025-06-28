@@ -27,7 +27,8 @@ do
 		subject_cn="$(openssl x509 -in "$cert" -noout -subject -nameopt multiline | sed -nE '/\s*commonName\s*=/s/[^=]*=\s*//p')"
 		subject_hash="$(openssl x509 -in "$cert" -noout -subject_hash)"
 		serial="$(openssl x509 -in "$cert" -noout -serial | sed -E 's/^serial=//')"
-		mv -nv "$cert" "certsdb/$subject_cn-$serial-$subject_hash.crt"
+		signdate="$(openssl x509 -in "$cert" -noout -startdate -dateopt iso_8601 | sed -E 's/^notBefore=//')"
+		mv -nv "$cert" "certsdb/$(date --iso-8601=date -d "$signdate")-$subject_cn-$serial-$subject_hash.crt"
 	done
 	popd
 done
