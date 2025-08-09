@@ -21,4 +21,4 @@ Description=ACME Certificate Renewal
 
 [Service]
 ExecStart=/usr/bin/certbot renew
-ExecStartPost=/usr/bin/systemctl reload nginx
+ExecStopPost=/usr/bin/systemctl reload nginx
