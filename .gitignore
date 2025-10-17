@@ -8,3 +8,4 @@
 # Python stuff
 *.pyc
 __pycache__
+/.venv

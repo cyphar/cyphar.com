@@ -16,5 +16,10 @@
 
 set -Eeuxo pipefail
 
+if ! [ -d .venv ]; then
+	python3 -m venv .venv
+	.venv/bin/pip3 install -r requirements.txt
+fi
+
 PORT="${PORT:-5000}"
-exec gunicorn --bind "0.0.0.0:$PORT" --access-logfile - cyphar:app
+exec .venv/bin/gunicorn --bind "0.0.0.0:$PORT" --access-logfile - cyphar:app
