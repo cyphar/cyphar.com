@@ -47,6 +47,12 @@ flatpages_markmeta.init_flatpages(flatpages)
 # Construct flatpages permacode redirects.
 permacode = flatpages_permacode.Permacode(app, flatpages)
 
+class AttrDict(dict):
+	"A dict-like object that allows you to reference keys through attributes using magic."
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.__dict__ = self
+
 @app.before_request
 def set_locale():
 	flask.g.date_format = "%d %B %Y"
@@ -85,6 +91,31 @@ def talks():
 @app.route("/paperback")
 def paperback():
 	return flask.redirect("/src/paperback", code=302)
+
+@app.route("/go-pathrs")
+@app.route("/go-pathrs/")
+@app.route("/go-pathrs/<path:rest>")
+def go_pathrs(rest=None):
+	project = AttrDict({
+		"vcs": "git",
+		"vcs_root": "https://github.com/cyphar/libpathrs",
+		"import_root": "cyphar.com/go-pathrs",
+	})
+	if rest is not None:
+		rest = "/"+rest
+
+	match rest:
+		case "/info/refs":
+			# Redirect to the VCS so that "git clone" works.
+			redirect = project.vcs_root + rest
+			if query := flask.request.query_string.decode("utf-8"):
+				redirect += "?" + query
+			return flask.redirect(redirect, code=302)
+		case "/.ping":
+			return "pong"
+		case suffix:
+			return flask.render_template("go-import.html", project=project, suffix=suffix or "")
+
 
 @app.route("/src/")
 @app.route("/src/<project>")

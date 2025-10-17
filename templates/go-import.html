@@ -1,0 +1,35 @@
+{#
+ # Copyright (C) 2014-2025 Aleksa Sarai <cyphar@cyphar.com>
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU Affero General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU Affero General Public License for more details.
+ #
+ # You should have received a copy of the GNU Affero General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #}
+
+{% extends "layout.html" %}
+{% block meta %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="go-import" content="{{ project.import_root }} {{ project.vcs }} {{ project.vcs_root }}">
+<meta http-equiv="refresh" content="1; url=https://pkg.go.dev/{{ project.import_root }}{{ suffix }}">
+{% endblock %}
+
+{% block title %}go get {{ project.import_root }}{% endblock %}
+{% block description %}Redirect for go get {{ project.import_root }}.{% endblock %}
+{% block body %}
+
+<h2><code>go get {{ project.import_root }}</code></h2>
+
+<p>
+	Redirecting to docs at <a href="https://pkg.go.dev/{{ project.import_root }}{{ suffix }}">pkg.go.dev/{{ project.import_root }}{{ suffix }}</a>...
+</p>
+
+{% endblock %}
