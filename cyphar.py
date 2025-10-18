@@ -98,7 +98,8 @@ def paperback():
 def go_pathrs(rest=None):
 	project = AttrDict({
 		"vcs": "git",
-		"vcs_root": "https://github.com/cyphar/libpathrs",
+		"vcs_root": "https://github.com/cyphar/libpathrs.git",
+		"vcs_subdir": "go-pathrs",
 		"import_root": "cyphar.com/go-pathrs",
 	})
 	if rest is not None:
