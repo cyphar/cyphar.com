@@ -77,7 +77,7 @@ I'm on Matrix with the nick <code>@cyphar:matrix.org</code>, and am <code>cyphar
 <ul class="dots">
 {% for contact in contacts %}
 	{% if contact.url %}
-		<li><a href="{{ contact.url }}">{{ contact.contact }}</a></li>
+		<li><a rel="me" href="{{ contact.url }}">{{ contact.contact }}</a></li>
 	{% else %}
 		<li><a>{{ contact.contact }}</a></li>
 	{% endif %}
