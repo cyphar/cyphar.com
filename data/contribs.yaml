@@ -1,0 +1,47 @@
+# Free-software contributions shown on /code (order is significant).
+# "links" is an ordered list of name -> url pairs (some entries have several).
+- links:
+    - name: Linux
+      url: /src/linux
+  language: C + ASM
+  description: >-
+    A modern (and exceptionally widely used) Unix-like operating system kernel.
+    I implemented the PIDs cgroup controller, which required modification of
+    the `fork(2)` and `clone(2)` paths. In addition, I wrote a [blog
+    post](/blog/post/getting-into-linux-kernel-development) with some
+    recommendations for getting into kernel development.
+- links:
+    - name: Docker
+      url: /src/docker
+  language: Go
+  description: >-
+    The free software application container engine, to which I have contributed
+    several fairly significant patch sets (ranging from security fixes to
+    feature implementations).
+- links:
+    # Sorted alphabetically: libcontainer before runC.
+    - name: libcontainer
+      url: /src/runc
+    - name: runC
+      url: /src/runc
+  language: Go
+  description: >-
+    A reference implementation for [OCI](https://www.opencontainers.org/)
+    container runtimes, and is the runtime that powers Docker containers. I am
+    a maintainer of runC, and have been working on container runtimes for
+    several years.
+- links:
+    - name: Portus
+      url: /src/portus
+  language: Ruby
+  description: >-
+    Authorization service and frontend for the Docker registry, which supports
+    self-hosting and has many of the features of the Docker Hub.
+- links:
+    - name: Team Win Recovery Project
+      url: /src/twrp
+  language: C++
+  description: >-
+    A free software custom recovery for Android-based devices, the only such
+    recovery which supports disk encryption. I implemented CyanogenMod-style
+    NxN pattern decryption for TWR NxN pattern decryption for TWRP.

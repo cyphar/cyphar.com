@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+<h2>
+	<a href="{{ "blog/" | relURL }}">&laquo;</a>
+	{{ partial "title-rich.html" . }}
+	<p class="floatright">
+		<small>{{ .Params.author }}</small>
+	</p>
+	<p>
+		<p class="floatleft">
+		{{ range (.GetTerms "tags").ByTitle }}
+			<a href="{{ .RelPermalink }}"><code>{{ .Title }}</code></a>
+		{{ end }}
+		</p>
+		<p class="floatright">
+			<small>{{ .Date.Format "02 January 2006" }}</small>
+		</p>
+
+		<br>
+	</p>
+</h2>
+
+{{ .Content }}
+
+{{/* Disclaim that these are my own opinions. */}}
+<small>
+	<p>Unless otherwise stated, all of the opinions in the above post are solely
+	my own and do not necessary represent the views of anyone else.
+	This post is released under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0 license</a>.</p>
+</small>
+
+{{/* Shamelessly plug the feed. */}}
+<small>
+	<p>Want to keep up to date with my posts?</p>
+	<p>You can subscribe to the <a href="{{ "blog/index.xml" | relURL }}">RSS Feed</a>.</p>
+</small>
+
+{{ end }}

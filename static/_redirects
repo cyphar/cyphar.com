@@ -1,0 +1,70 @@
+# Vanity redirects for source/binary/shortcut paths (302).
+
+# /src/<project> and /src/<project>/<rest> -> upstream source repos.
+/src/copper/*  https://github.com/cyphar/copper/:splat  302
+/src/copper    https://github.com/cyphar/copper  302
+/src/cypharcom/*  https://github.com/cyphar/cyphar.com/:splat  302
+/src/cypharcom    https://github.com/cyphar/cyphar.com  302
+/src/docker/*  https://github.com/docker/docker/:splat  302
+/src/docker    https://github.com/docker/docker  302
+/src/docker-rebase/*  https://github.com/cyphar/docker-rebase/:splat  302
+/src/docker-rebase    https://github.com/cyphar/docker-rebase  302
+/src/epyc/*  https://github.com/cyphar/epyc/:splat  302
+/src/epyc    https://github.com/cyphar/epyc  302
+/src/keplerk2-halo/*  https://github.com/cyphar/keplerk2-halo/:splat  302
+/src/keplerk2-halo    https://github.com/cyphar/keplerk2-halo  302
+/src/linux/*  https://www.kernel.org//:splat  302
+/src/linux    https://www.kernel.org/  302
+/src/mkonion/*  https://github.com/cyphar/mkonion/:splat  302
+/src/mkonion    https://github.com/cyphar/mkonion  302
+/src/ninjabot/*  https://github.com/ackwell/ninjabot/:splat  302
+/src/ninjabot    https://github.com/ackwell/ninjabot  302
+/src/paperback/*  https://github.com/cyphar/paperback/:splat  302
+/src/paperback    https://github.com/cyphar/paperback  302
+/src/perfectgift/*  https://github.com/cyphar/perfectgift/:splat  302
+/src/perfectgift    https://github.com/cyphar/perfectgift  302
+/src/portus/*  https://github.com/SUSE/Portus/:splat  302
+/src/portus    https://github.com/SUSE/Portus  302
+/src/pulltab/*  https://github.com/cyphar/pulltab/:splat  302
+/src/pulltab    https://github.com/cyphar/pulltab  302
+/src/rawline/*  https://github.com/cyphar/rawline/:splat  302
+/src/rawline    https://github.com/cyphar/rawline  302
+/src/redone/*  https://github.com/cyphar/redone/:splat  302
+/src/redone    https://github.com/cyphar/redone  302
+/src/remainroot/*  https://github.com/cyphar/umoci/:splat  302
+/src/remainroot    https://github.com/cyphar/umoci  302
+/src/runc/*  https://github.com/opencontainers/runc/:splat  302
+/src/runc    https://github.com/opencontainers/runc  302
+/src/sched/*  https://github.com/cyphar/sched/:splat  302
+/src/sched    https://github.com/cyphar/sched  302
+/src/synge/*  https://github.com/cyphar/synge/:splat  302
+/src/synge    https://github.com/cyphar/synge  302
+/src/ttu/*  https://github.com/cyphar/ttu/:splat  302
+/src/ttu    https://github.com/cyphar/ttu  302
+/src/twrp/*  https://twrp.me//:splat  302
+/src/twrp    https://twrp.me/  302
+/src/umoci/*  https://github.com/cyphar/umoci/:splat  302
+/src/umoci    https://github.com/cyphar/umoci  302
+/src/talks/*  https://github.com/cyphar/talks/:splat  302
+/src/talks    https://github.com/cyphar/talks  302
+/src/talk/*  https://github.com/cyphar/talks/tree/main/:splat  302
+/src/talk    https://github.com/cyphar/talks/tree/main  302
+
+# /bin/<name> -> hosted scripts.
+/bin/voicemail    https://scripts.cyphar.com/voicemail  302
+
+# Shortcuts.
+/talks       https://github.com/cyphar/talks  302
+/paperback   https://github.com/cyphar/paperback  302
+
+# Pagination compatibility: bare /blog/2 -> the real pagination URL.
+/blog/2      /blog/page/2/  301
+
+# /home is an alternative inbound path for the home page.
+/home        /  301
+
+# Bare /src and /bin roots.
+/src/   https://github.com/cyphar  302
+/src    https://github.com/cyphar  302
+/bin/   https://scripts.cyphar.com/  302
+/bin    https://scripts.cyphar.com/  302

@@ -1,0 +1,9 @@
+{{- /*
+  Rich page title for headings. Titles may contain markdown, but we only want
+  <em>/<strong> to survive (e.g. `code` in a title renders as plain text):
+  render markdown, drop the <p> wrapper and any <code>, revert smart typography,
+  and return HTML (so it is not escaped).
+*/ -}}
+{{- $h := .Title | markdownify -}}
+{{- $h = $h | replaceRE "</?p>" "" | replaceRE "</?code>" "" -}}
+{{- return (partial "desmart" $h | safeHTML) -}}

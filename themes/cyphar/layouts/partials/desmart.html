@@ -1,0 +1,10 @@
+{{- /*
+  Revert Goldmark's typographer entities (smart quotes/dashes/ellipsis) back to
+  plain ASCII. Goldmark's typographer is global; we use this for titles and
+  descriptions, where we want plain punctuation rather than smart punctuation.
+
+  Takes a string, RETURNS a string (via `return`, so the value is not
+  HTML-escaped here -- the caller decides whether to escape or mark as safe).
+*/ -}}
+{{- $s := . | replaceRE "&hellip;" "..." | replaceRE "&mdash;" "---" | replaceRE "&ndash;" "--" | replaceRE "&rsquo;" "'" | replaceRE "&lsquo;" "'" | replaceRE "&rdquo;" "\"" | replaceRE "&ldquo;" "\"" | replaceRE "&quot;" "\"" -}}
+{{- return $s -}}

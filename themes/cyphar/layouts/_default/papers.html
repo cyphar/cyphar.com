@@ -1,0 +1,35 @@
+{{ define "main" }}
+
+{{/* The "Authored" section is intentionally omitted (no authored papers yet). */}}
+
+<h2 id="coauthored">Coauthored</h2>
+<p>In addition to doing my own research and writing my own papers, I've also
+collaborated with other researchers to produce papers on which I am a coauthor.</p>
+
+<dl>
+{{ range hugo.Data.papers.coauthored }}
+	<dt>
+		{{ if .url }}
+			<a href="{{ .url }}">{{ .title }}</a>
+		{{ else }}
+			<a>{{ .title }}</a>
+		{{ end }}
+
+		<p>
+			{{ if .field }}
+				<small>{{ .year }} | {{ .field }}</small>
+			{{ end }}
+		</p>
+	</dt>
+
+	{{ if .description }}
+	<dd>
+		<p>
+			{{ partial "md.html" .description }}
+		</p>
+	</dd>
+	{{ end }}
+{{ end }}
+</dl>
+
+{{ end }}

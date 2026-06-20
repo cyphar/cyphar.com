@@ -1,0 +1,18 @@
+# Papers shown on /papers.
+# "authored" is intentionally empty (the Authored section is hidden).
+authored: []
+coauthored:
+  - title: Photometry of very bright stars with Kepler and K2 smear data
+    year: 2015
+    field: Astrophysics
+    url: http://arxiv.org/abs/1510.00008
+    description: >-
+      This paper came about due to research I was working on within the
+      asteroseismology group at the University of Sydney. After working on
+      figuring out how to do analysis of targets inside the *Kepler* K2 field,
+      a couple of techniques were being worked on -- the one outlined in this
+      paper being one of them. [Benjamin
+      Pope](http://www-astro.physics.ox.ac.uk/~popeb/) and [Tim
+      White](http://www.astro.physik.uni-goettingen.de/~twhite/) did most of
+      the work refining this technique and applying it, my own research uses a
+      very different technique.

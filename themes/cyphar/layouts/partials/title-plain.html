@@ -1,0 +1,6 @@
+{{- /*
+  Plain-text page title (for <title> and meta). Renders any markdown in the
+  title, strips all tags, and reverts smart typography. Returns a string so the
+  caller's context (Go html/template) escapes it exactly once.
+*/ -}}
+{{- return (partial "desmart" (.Title | markdownify | plainify)) -}}

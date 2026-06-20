@@ -1,0 +1,42 @@
+# Security acknowledgements shown on /security (order is significant).
+- name: Optus Voicemail Exploit
+  vuln: Information Disclosure
+  url: https://shubh.am/how-i-bypassed-2-factor-authentication-on-google-yahoo-linkedin-and-many-others/
+  description: >-
+    I assisted Shubham Shah in discovering (and testing) the Optus voicemail
+    PIN bypass exploit. Due to a broken trust model, a forged caller ID would
+    allow an attacker to bypass the PIN protection of voicemail and have full
+    access to the victim's voicemail control panel. I also created the [web
+    application](/bin/voicemail) used to test if a user's phone number is
+    vulnerable.
+- name: Microsoft (Online Services)
+  vuln: Coldfusion Exploit (Root Access)
+  url: http://technet.microsoft.com/en-us/security/cc308575#0214
+  description: >-
+    Due to an outdated version of Coldfusion installed on a Microsoft MSN
+    server, I was able to bypass the administrative login and gain
+    administrative access. This would allow me to schedule tasks to run as a
+    privileged user, such as reverse shells, create users, etc.
+- name: Grok Learning
+  vuln: Sandbox Bypass
+  url: https://groklearning.com/security
+  description: >-
+    Due to a misconfiguration in the testing machine's firewall, the sandbox
+    could access the internet. This allowed for the disclosure of test data (as
+    well as possible exploitation vectors).
+- name: Medium
+  vuln: Information Disclosure
+  url: https://medium.com/humans.txt
+  description: >-
+    Due to a vulnerable version of OpenSSL, Medium's servers were vulnerable to
+    the [Heartbleed OpenSSL bug](http://heartbleed.com/), allowing up to 64kb
+    of server memory to be disclosed to a hacker (possibly leaking private
+    keys, users' passwords and POST data, etc).
+- name: Altervista
+  vuln: Information Disclosure
+  url: https://en.altervista.org/credits.php
+  description: >-
+    Due to a vulnerable version of OpenSSL, Altervista's control panel was
+    vulnerable to the [Heartbleed OpenSSL bug](http://heartbleed.com/),
+    allowing up to 64kb of server memory to be disclosed to a hacker (possibly
+    leaking private keys, users' passwords and POST data, etc).

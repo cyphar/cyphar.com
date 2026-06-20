@@ -1,0 +1,61 @@
+baseURL = "https://www.cyphar.com/"
+locale = "en"
+title = "Cyphar"
+theme = "cyphar"
+
+# We ship our own static/robots.txt, so don't let Hugo generate one.
+enableRobotsTXT = false
+
+# Term titles must stay verbatim ("free software", not "Free Software").
+capitalizeListTitles = false
+
+# We only want per-tag term pages (/blog/tag/<tag>/), not a /blog/tag/ index, so
+# disable the taxonomy-list kind. Individual term pages (the "term" kind) are
+# still generated.
+disableKinds = ["taxonomy"]
+
+# Defaults for the <meta> tags (overridable per page via front-matter).
+[params]
+  description = "The wild ramblings of Aleksa Sarai (aka Cyphar). A Free Software Developer, Security Researcher, GNU/Linux and Science Enthusiast."
+  keywords = "aleksa sarai,aleksa,sarai,cyphar,free software,developer,programmer,gnu,gnu/linux,linux,security,science"
+  author = "Aleksa Sarai"
+
+# Tags are the only taxonomy (no author or category listings).
+[taxonomies]
+  tag = "tags"
+
+# Posts per page in the blog listing.
+[pagination]
+  pagerSize = 10
+
+# Permalink scheme for posts and tag term pages.
+[permalinks]
+  [permalinks.page]
+    blog = "/blog/post/:contentbasename/"
+  [permalinks.term]
+    tags = "/blog/tag/:slug/"
+
+# A single RSS feed for the blog (/blog/index.xml); no home or per-term feeds.
+[outputs]
+  home = ["HTML"]
+  section = ["HTML", "RSS"]
+  term = ["HTML"]
+
+# The production build runs `hugo --minify`. Keep HTML comments so the AGPL
+# notice emitted at the top of every page (see baseof.html) survives minifying.
+[minify]
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepComments = true
+
+[markup]
+  [markup.goldmark.renderer]
+    # Posts contain raw HTML (e.g. <sup>), which Goldmark drops unless unsafe.
+    unsafe = true
+  [markup.goldmark.extensions]
+    # Smart quotes/dashes/ellipses.
+    typographer = true
+  [markup.highlight]
+    # Don't let Hugo (Chroma) highlight server-side; the site highlights code
+    # client-side with Prism, so emit plain <code class="language-X"> blocks.
+    codeFences = false
