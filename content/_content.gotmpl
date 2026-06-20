@@ -1,0 +1,34 @@
+{{- /*
+  - Copyright (C) 2014-2026 Aleksa Sarai <cyphar@cyphar.com>
+  -
+  - This program is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU Affero General Public License as published by
+  - the Free Software Foundation, either version 3 of the License, or
+  - (at your option) any later version.
+  -
+  - This program is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU Affero General Public License for more details.
+  -
+  - You should have received a copy of the GNU Affero General Public License
+  - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  - */ -}}
+
+{{- /* This content adapter lets us generate one meta page per Go module
+       specified in data/govanity.yaml (making it the single source of truth).
+
+       Each page uses the "govanity" layout which fills in the right meta tags
+       and redirects. The coresponding /_redirects proxying (needed to handle
+       subpackage redirects and meta tags) is generated separately from the
+       same data (see themes/cyphar/layouts/index.redirects). */ -}}
+
+{{- range $e := hugo.Data.govanity -}}
+  {{- $.AddPage (dict
+      "path" (strings.TrimPrefix "cyphar.com/" $e.import)
+      "kind" "page"
+      "title" (printf "go get %s" $e.import)
+      "layout" "govanity"
+      "params" $e
+  ) -}}
+{{- end -}}

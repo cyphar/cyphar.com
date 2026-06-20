@@ -36,17 +36,36 @@ disableKinds = ["taxonomy"]
     tags = "/blog/tag/:slug/"
 
 # A single RSS feed for the blog (/blog/index.xml); no home or per-term feeds.
+# The home page also emits the generated /_redirects (see below).
 [outputs]
-  home = ["HTML"]
+  home = ["HTML", "redirects"]
   section = ["HTML", "RSS"]
   term = ["HTML"]
 
+# Generate an extensionless /_redirects file from data (data/govanity.yaml +
+# data/redirects.yaml) via layouts/index.redirects.txt. The empty-suffix media
+# type is what makes the output file have no extension.
+[mediaTypes."text/redirects"]
+  suffixes = []
+  delimiter = ""
+
+[outputFormats.redirects]
+  mediaType = "text/redirects"
+  baseName = "_redirects"
+  isPlainText = true
+  notAlternative = true
+
 # The production build runs `hugo --minify`. Keep HTML comments so the AGPL
 # notice emitted at the top of every page (see baseof.html) survives minifying.
+# Keep attribute quotes because `go get` parses the vanity go-import pages
+# with a lax *XML* parser (not HTML): unquoted values may only contain
+# [a-zA-Z0-9_:-], so a minified src=/js/... aborts the parse ("expected /> in
+# element") before it ever reaches the go-import <meta> tag.
 [minify]
   [minify.tdewolff]
     [minify.tdewolff.html]
       keepComments = true
+      keepQuotes = true
 
 [markup]
   [markup.goldmark.renderer]
