@@ -1,0 +1,79 @@
+<!doctype html>
+{{/* Go's html/template strips HTML comments, so emit the AGPL notice (and the
+     IE conditional below) as safe strings to keep them in the output. */}}
+{{ `<!--
+Copyright (C) 2014-2025 Aleksa Sarai <cyphar@cyphar.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->` | safeHTML }}
+<html lang="en">
+
+<head>
+<title>{{ block "title" . }}{{ partial "title-plain.html" . }}{{ end }} | Cyphar</title>
+<script type="text/javascript" src="{{ "js/instant-page.js" | relURL }}"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="{{ partial "description.html" . }}" />
+<meta name="keywords" content="{{ site.Params.keywords }}" />
+<meta name="author" content="{{ site.Params.author }}" />
+<link rel="stylesheet" type="text/css" href="{{ "css/reset.css" | relURL }}" />
+<link rel="stylesheet" type="text/css" href="{{ "css/general.css" | relURL }}" />
+<link rel="alternate" type="application/rss+xml" href="{{ "blog/index.xml" | relURL }}" />
+{{ `<!--[if !IE 7]>
+	<style type="text/css">
+		.wrapper {
+			display: table;
+			height: 100%;
+		}
+	</style>
+<![endif]-->` | safeHTML }}
+<script type="text/javascript" src="{{ "js/highlight.js" | relURL }}"></script>
+{{ block "head" . }}{{ end }}
+</head>
+<body>
+		<div class="wrapper">
+			<header class="navbar">
+				<h1 class="mono">
+					<span class="path">~</span>
+					<span class="prompt">%</span>
+					<span class="command">./<a href="{{ "/" | relURL }}" class="no-underline">cyphar</a>.sh</span><span class="cursor">_</span>
+				</h1>
+				<nav>
+					<a href="{{ "/" | relURL }}">Home</a>
+					<a href="{{ "/blog/" | relURL }}">Blog</a>
+					<a href="{{ "/code/" | relURL }}">Code</a>
+					<a href="{{ "/security/" | relURL }}">Security</a>
+					<a href="{{ "/papers/" | relURL }}">Papers</a>
+				</nav>
+			</header>
+
+			<img src="{{ "img/profile.jpg" | relURL }}" id="profile-image" width=200 height=200 />
+
+			<article class="main">
+				{{ block "main" . }}{{ end }}
+			</article>
+	</div>
+
+	<footer class="pagefooter">
+		<p>
+			<a href="{{ "/" | relURL }}">Home</a> |
+			<a href="{{ "/blog/" | relURL }}">Blog</a> |
+			<a href="{{ "/code/" | relURL }}">Code</a> |
+			<a href="{{ "/security/" | relURL }}">Security</a> |
+			<a href="{{ "/papers/" | relURL }}">Papers</a>
+		</p>
+		<p>Copyright &copy; Aleksa Sarai 2014-2025. This website is free software and is licensed under the GNU AGPLv3+. <a href="{{ "/src/cypharcom" | relURL }}">Source code</a>.</p>
+	</footer>
+</body>
+</html>

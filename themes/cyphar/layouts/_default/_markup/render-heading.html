@@ -1,0 +1,8 @@
+{{- /*
+  Tidy heading anchor IDs. Goldmark's GitHub-style IDs keep consecutive and
+  trailing hyphens where runs of punctuation were removed (e.g. "But ... why?"
+  -> "but--why"); collapse runs of "-" and strip leading/trailing "-" so the
+  anchors are clean single-hyphen slugs ("but-why").
+*/ -}}
+{{- $id := .Anchor | replaceRE `-+` "-" | replaceRE `^-|-$` "" -}}
+<h{{ .Level }} id="{{ $id }}">{{ .Text }}</h{{ .Level }}>

@@ -1,0 +1,15 @@
+{{- /*
+  The <meta name="description"> content.
+   * blog posts   -> short_description (falling back to description), rendered
+                     to plain text;
+   * code/...     -> the page's front-matter description;
+   * everything   -> the site-wide default.
+  Returns a string so the caller's attribute context escapes it exactly once.
+*/ -}}
+{{- $desc := site.Params.description -}}
+{{- with .Description }}{{ $desc = . }}{{ end -}}
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $sd := .Params.short_description | default .Params.description -}}
+  {{- $desc = partial "desmart" ($sd | markdownify | plainify) -}}
+{{- end -}}
+{{- return $desc -}}

@@ -1,0 +1,60 @@
+# Personal projects shown on /code (order is significant).
+- name: umoci
+  language: Go
+  url: /src/umoci
+  description: >-
+    Free software tool to create and modify Open Container Initiative images,
+    without needing to understand how such images are structured internally. I
+    wrote a [blog post](/blog/post/umoci-new-oci-image-tool) about this new
+    project.
+- name: remainroot
+  language: Go + C
+  url: /src/remainroot
+  description: >-
+    A set of shims to allow unmodified programs to run nicely in [rootless
+    containers](/blog/post/rootless-containers-with-runc).
+- name: mkonion
+  language: Go
+  url: /src/mkonion
+  description: >-
+    Small, simple and self-contained tool to create a Tor onion address for an
+    existing container without restarts or modification of the container. I use
+    this to manage the [onion link for this
+    website](http://dqzsjhefvopcfbn5.onion/).
+- name: redone
+  language: Python
+  url: /src/redone
+  description: >-
+    A 'correct' implementation of regular expression matching and substitution
+    using finite state automata.
+- name: rawline
+  language: C
+  url: /src/rawline
+  description: >-
+    The small and self-contained line-editing library. Written in less than
+    1000 lines of ANSI C and can easily be included in any project.
+- name: keplerk2-halo
+  language: Python + Shell
+  url: /src/keplerk2-halo
+  description: >-
+    All of the scripts written and used during my research project into
+    Asteroseismology at the Univeristy of Sydney, as well as some document and
+    reports on my findings using these scripts.
+- name: epyc
+  language: Python
+  url: /src/epyc
+  description: >-
+    A Python templating language like Jinja (written for
+    [perfectgift](/src/perfectgift)).
+- name: synge
+  language: C
+  url: /src/synge
+  description: >-
+    Very powerful scientific calculation engine. Supports variables,
+    short-cutting conditions and recursive expressions.
+- name: sched
+  language: C
+  url: /src/sched
+  description: >-
+    A simple toy scheduler for the Arduino, which currently doesn't support
+    preemptive scheduling.

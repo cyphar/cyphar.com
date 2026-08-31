@@ -1,0 +1,20 @@
+# Security competitions shown on /security (order is significant).
+# The PHDays entry has no rank.
+- name: K17 CTF - 2013
+  rank: 4th Overall
+  url: https://ctf.k17.org/scores
+  description: >-
+    A competition which contained challenges pertaining to web applications,
+    reverse engineering and exploitation, cryptography, network and memory
+    forensics and Unix exploitation. I was mostly involved in the reverse
+    engineering, cryptography and unix exploitation aspects of the competition
+    and assisted the members working on the web application.
+- name: PHDays CTF IV Quals - 2014
+  url: http://quals.phdays.ru/
+  description: >-
+    This competition contained a grab-bag of many different aspects of
+    information security, the most interesting of which was a MMORPG for the
+    contestants (where hacking the game was rewarded with CTF points). I was
+    mostly involved in the escaping of sandboxes and information gathering
+    aspects of the competition. I also assisted team members working on the
+    cryptography challenges.

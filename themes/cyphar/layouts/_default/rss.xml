@@ -1,0 +1,30 @@
+{{- /* Atom-feed replacement: a single RSS 2.0 feed for the blog. */ -}}
+{{- $pages := first 15 .Pages -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cyphar's Blog</title>
+    <link>{{ .Permalink }}</link>
+    <description>The wild ramblings of Aleksa Sarai.</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    <copyright>Copyright (C) 2014-2025 Aleksa Sarai. Licensed under CC-BY-SA 4.0.</copyright>
+    {{- with index $pages 0 }}
+    <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
+    {{- range $pages }}
+    <item>
+      <title>{{ partial "title-plain.html" . }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <author>{{ .Params.author }}</author>
+      <guid>{{ .Permalink }}</guid>
+      {{- range (.GetTerms "tags").ByTitle }}
+      <category>{{ .Title }}</category>
+      {{- end }}
+      <description>{{ partial "md.html" .Params.description | html }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

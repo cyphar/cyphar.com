@@ -1,0 +1,10 @@
+name = "Cyphar"
+license = "AGPL-3.0-or-later"
+licenselink = "https://github.com/cyphar/cyphar.com/blob/main/COPYING"
+description = "Custom theme for cyphar.com."
+homepage = "https://www.cyphar.com/"
+min_version = "0.146.0"
+
+[author]
+  name = "Aleksa Sarai"
+  homepage = "https://www.cyphar.com/"

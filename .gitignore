@@ -2,10 +2,8 @@
 *.swo
 *.swp
 
-# Database files
-*.db
-
-# Python stuff
-*.pyc
-__pycache__
-/.venv
+# Hugo build output and caches
+/public/
+/resources/_gen/
+.hugo_build.lock
+/.hugo_cache/

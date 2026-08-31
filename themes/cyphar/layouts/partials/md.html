@@ -1,0 +1,7 @@
+{{- /*
+  Render an inline markdown fragment (project/post descriptions, etc.) to HTML:
+  full markdown (links, <em>, <code>) without smart typography, wrapped in <p>.
+  (Hugo's markdownify drops the <p> for single-paragraph input, so we re-add it.)
+*/ -}}
+{{- $h := partial "desmart" (. | markdownify) -}}
+{{- return (printf "<p>%s</p>" $h | safeHTML) -}}

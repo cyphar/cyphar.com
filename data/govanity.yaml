@@ -1,0 +1,14 @@
+# Go vanity import modules served under cyphar.com.
+#
+# Each entry produces (1) a meta page at /<import-minus-domain>/ carrying the
+# go-import/go-source tags, and (2) a proxy line in the generated _redirects so
+# the same page answers every sub-path of the module.
+#
+#   import:  the vanity module path (the go-import "import-prefix")
+#   vcs:     version control system (git)
+#   repo:    the real repository ("repo-root"); go talks to this host directly
+#   subdir:  optional -- the module lives in this subdir of the repo (Go 1.25 tag)
+- import: cyphar.com/go-pathrs
+  vcs: git
+  repo: https://github.com/cyphar/libpathrs
+  subdir: go-pathrs
