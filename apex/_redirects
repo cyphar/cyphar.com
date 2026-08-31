@@ -1,0 +1,48 @@
+# Copyright (C) 2014-2026 Aleksa Sarai <cyphar@cyphar.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# The apex "cyphar.com" project is a tiny second Cloudflare Pages project (this
+# directory, verbatim, with no build step) whose only jobs are:
+#
+#  1. Serving the /.well-known/* files checked in here;
+#  2. Bouncing the rest of /.well-known/* to dot.cyphar.com;
+#  3. Redirecting everything else to www.cyphar.com.
+#
+# Pages _redirects cannot match on hostname, which is why this cannot live in
+# the www project's _redirects (it would loop).
+
+# Masking: every file checked into apex/.well-known/ needs a matching
+# self-rewrite (200) rule here, because redirects beat assets on Pages and the
+# /.well-known/* splat below would otherwise shadow them. KEEP IN SYNC with
+# the directory contents (scripts/check-apex.sh enforces this). These
+# files must be served -- not redirected -- because browsers require every hop
+# of a redirect chain to pass the CORS check, but 3xx responses here carry no
+# _headers (and so no Access-Control-Allow-Origin).
+
+# Mask any /.well-known/ rules we want to publish from the CF Pages. Redirects
+# are handled before serving assets so these rules need to be first to mask the
+# later catch-all rules.
+/.well-known/matrix/client  /.well-known/matrix/client  200
+/.well-known/matrix/server  /.well-known/matrix/server  200
+
+# ACME challenges go to dot.cyphar.com. Cloudflare does force HTTPS before we
+# get to this redirect but the ACME HTTP-01 validator is okay with that.
+/.well-known/acme-challenge/*  http://dot.cyphar.com/.well-known/acme-challenge/:splat  302
+
+# Anything else under /.well-known/* falls through to dot.cyphar.com.
+/.well-known/*  https://dot.cyphar.com/.well-known/:splat  302
+
+# And everything else goes to www.cyphar.com.
+/*  https://www.cyphar.com/:splat  302

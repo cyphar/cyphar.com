@@ -1,0 +1,30 @@
+# Copyright (C) 2014-2026 Aleksa Sarai <cyphar@cyphar.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Security headers for the whole site, which only apply to 200 pages.
+# cyphar.com is a fairly dumb static site and makes no foreign requests, so the
+# CSP is deny-by-default.
+#
+# HSTS is set here (so it stays in version control) but that means you must not
+# enable it in the Cloudflare dashboard -- duplicate headers get joined with
+# commas which produces an invalid HSTS header.
+/*
+  Content-Security-Policy: base-uri 'none'; default-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self'; font-src 'self'; img-src 'self'; style-src 'self'
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: no-referrer, strict-origin-when-cross-origin
+  X-Download-Options: noopen
+  X-Permitted-Cross-Domain-Policies: none

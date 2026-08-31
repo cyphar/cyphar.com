@@ -32,3 +32,19 @@ shortcuts:
   - from: /home
     to: /
     code: 301
+  # The canonical .well-known host is apex cyphar.com -- the same logic as
+  # apex/_redirects, one hop earlier (and what the box's nginx did before the
+  # Cloudflare migration). ACME challenges go straight to the box over plain
+  # http via the DNS-only dot.cyphar.com record; Let's Encrypt's HTTP-01
+  # validator follows up to 10 redirects and does not validate certificates
+  # on https hops. NOTE: the acme-challenge rule must stay above the
+  # /.well-known/* splat (first match wins).
+  - from: "/.well-known/acme-challenge/*"
+    to: "http://dot.cyphar.com/.well-known/acme-challenge/:splat"
+    code: 302
+  # Everything else under .well-known is answered by the apex project, which
+  # masks the checked-in files (with CORS headers) and bounces the rest to
+  # the box.
+  - from: "/.well-known/*"
+    to: "https://cyphar.com/.well-known/:splat"
+    code: 302
